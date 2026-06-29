@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBZ JCC Leyenda - Álbum Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ 
+    <!-- MENÚ DE NAVEGACIÓN GLOBAL FIJO -->
+    <nav class="nav-global-sistema">
+        <button class="btn-pestana-global activa" id="pestana-album" onclick="navegarSeccionGlobal('album')">📖 ÁLBUM</button>
+        <button class="btn-pestana-global" id="pestana-mazos" onclick="navegarSeccionGlobal('mazos')">🎴 MIS MAZOS</button>
+        <button class="btn-pestana-global" id="pestana-pvp" onclick="navegarSeccionGlobal('pvp')">⚔️ JUGAR LOCAL</button>
+    </nav>
+ 
+    <!-- SECCIÓN 1: ÁLBUM PRINCIPAL -->
+    <div id="contenedor-seccion-album" class="bloque-global-visible">
+        <main id="pantalla-seleccion" class="seccion-activa">
+            <header class="main-header">
+                <h1>DBZ LEYENDA</h1>
+                <p>Colección Completa de 0 a 950 Cartas — Modo Público</p>
+            </header>
+            <div class="contenedor-cajas" id="bloque-cajas"></div>
+        </main>
+ 
+        <section id="pantalla-album" class="seccion-oculta">
+            <div class="barre-navegacion">
+                <button class="btn-volver" onclick="volverASelec()">← Cambiar Caja</button>
+                <h2 id="album-titulo">Caja Activa</h2>
+                <div class="filtros-album">
+                    <input type="number" id="busqueda-num" placeholder="Buscar N°..." oninput="filtrarCartas()">
+                    <button class="btn-filtro activo" id="f-todas" onclick="cambiarFiltro('todas')">Todas</button>
+                    <button class="btn-filtro" id="f-obtenidas" onclick="cambiarFiltro('obtenidas')">Obtenidas</button>
+                    <button class="btn-filtro" id="f-faltantes" onclick="cambiarFiltro('faltantes')">Faltantes</button>
+                </div>
+            </div>
+            <div class="grilla-cartas" id="grilla-cartas"></div>
+        </section>
+    </div>
+ 
+    <!-- SECCIÓN 2: GESTOR Y EDITOR DE MAZOS -->
+    <div id="contenedor-seccion-mazos" class="bloque-global-oculto">
+        <div class="seccion-principal-mazos">
+            <div class="panel-lista-mazos">
+                <h3>Tus Barajas</h3>
+                <button class="btn-guardar-stats" onclick="crearMazoNuevoFlujo()">➕ Crear Mazo</button>
+                <div id="lista-mazos-links-contenedor"></div>
+            </div>
+            <div class="workspace-editor-mazo" id="panel-editor-mazo">
+                <p style="color: var(--txt-muted); text-align: center; margin: auto;">Selecciona o crea un mazo del panel izquierdo para comenzar.</p>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- SECCIÓN 3: ARENA DE JUEGO PVP -->
+    <div id="contenedor-seccion-pvp" class="bloque-global-oculto">
+        <div class="arena-combate-contenedor">
+            <div id="pvp-configuracion-inicial">
+                <h2>Duelo Versus Local</h2>
+                <div class="config-seleccion-mazos">
+                    <div class="input-grupo-mini">
+                        <label>Jugador 1:</label>
+                        <select id="select-pvp-mazo-j1"></select>
+                    </div>
+                    <div class="input-grupo-mini">
+                        <label>Jugador 2:</label>
+                        <select id="select-pvp-mazo-j2"></select>
+                    </div>
+                    <div class="input-grupo-mini">
+                        <label>Energía inicial:</label>
+                        <select id="select-pvp-energia">
+                            <option value="200">200 (partida rápida)</option>
+                            <option value="500" selected>500</option>
+                            <option value="1000">1000 (partida larga)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-guardar-stats" onclick="iniciarCombatePVPLocal()">🔥 Iniciar Batalla</button>
+            </div>
+ 
+            <div id="pvp-pantalla-tablero" class="seccion-oculta">
+                <div class="marcador-vidas-pvp">
+                    <div class="marcador-hp">J1: <span id="hp-display-j1">500</span> HP</div>
+                    <div id="texto-alerta-turno-actual">TURNO JUGADOR 1</div>
+                    <div class="marcador-hp">J2: <span id="hp-display-j2">500</span> HP</div>
+                </div>
+ 
+                <div id="texto-fase-actual" style="text-align:center; font-weight:bold; margin:6px 0; color: var(--amarilla, #ffce00);">FASE: ACCIÓN</div>
+ 
+                <div class="campo-batalla-rejilla">
+                    <div class="campo-mitad">
+                        <h4>Ataques bajados — J1</h4>
+                        <div class="fila-cartas-mesa" id="campo-cartas-j1"></div>
+                    </div>
+                    <div class="campo-mitad">
+                        <h4>Ataques bajados — J2</h4>
+                        <div class="fila-cartas-mesa" id="campo-cartas-j2"></div>
+                    </div>
+                </div>
+ 
+                <div class="campo-batalla-rejilla">
+                    <div class="campo-mitad">
+                        <h4>Defensa preparada — J1</h4>
+                        <div class="fila-cartas-mesa" id="defensa-cartas-j1"></div>
+                    </div>
+                    <div class="campo-mitad">
+                        <h4>Defensa preparada — J2</h4>
+                        <div class="fila-cartas-mesa" id="defensa-cartas-j2"></div>
+                    </div>
+                </div>
+ 
+                <div class="controles-arena-botones">
+                    <button class="btn-guardar-stats" onclick="resolverDueloMesa()">⚔️ Resolver Ataques</button>
+                    <button class="btn-guardar-stats" style="background:#7a1fa2;" onclick="usarAtaqueEsferasDelDragon()">🐉 7 Esferas (100 dmg)</button>
+                    <button class="btn-guardar-stats" style="background:#111;" onclick="pasarTurnoCombateLocal()">➡️ Pasar Turno</button>
+                </div>
+                <p style="text-align:center; font-size:12px; color:var(--txt-muted);">Tocá una carta de Ataque en tu mano para bajarla. Si es del rival y le tocó defenderse, toca una carta de Ataque suya para usarla como defensa. Instantáneas y Modificadoras se juegan tocándolas también.</p>
+ 
+                <div class="zona-mano-activa-visor">
+                    <h3>Mano — Jugador <span id="indicador-jugador-mano">1</span>:</h3>
+                    <div class="grilla-cartas-mano" id="mano-jugador-activa"></div>
+                </div>
+ 
+                <div class="zona-mano-activa-visor">
+                    <h3>📜 Bitácora de Batalla</h3>
+                    <div id="log-batalla-pvp" style="max-height:140px; overflow-y:auto; font-size:12px; line-height:1.5; background:#000; color:#0f0; padding:8px; border-radius:6px; font-family:monospace;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- MODAL DE SELECCIÓN RÁPIDA (esferas, defensa, modificadora a aplicar) -->
+    <div id="modal-eleccion-pvp" class="modal-oculto">
+        <div class="modal-contenido" style="max-width:480px;">
+            <button class="btn-cerrar-modal" onclick="cerrarModalEleccionPVP()">×</button>
+            <h3 id="modal-eleccion-titulo">Elegí una opción</h3>
+            <div id="modal-eleccion-opciones" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;"></div>
+        </div>
+    </div>
+ 
+    <!-- MODAL DETALLE DE CARTA CON INTEGRACIÓN DE COLA DE ENVIOS -->
+    <div id="modal-carta" class="modal-oculto">
+        <div class="modal-contenido">
+            <button class="btn-cerrar-modal" onclick="cerrarModal()">×</button>
+            <div class="contenedor-vista-carta">
+                <div class="carta-3d-contenedor" onclick="voltearCartaElemento()">
+                    <div class="carta-3d" id="carta-3d">
+                        <div class="cara frente">
+                            <img id="modal-img-frente" src="" alt="Frente">
+                            <div class="placeholder-foto">📸 Sin Imagen</div>
+                        </div>
+                        <div class="cara atras">
+                            <img id="modal-img-atras" src="" alt="Atrás">
+                            <div class="placeholder-foto">📸 Sin Dorso</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="indicador-giro">🔄 Toca para girar</p>
+            </div>
+ 
+            <div class="formulario-juego">
+                <h3 id="modal-titulo-carta">Nombre Carta</h3>
+                <div class="controles-repetidas">
+                    <span>Cantidad en posesión:</span>
+                    <div class="selector-numero">
+                        <button onclick="cambiarRepetidas(-1)">-</button>
+                        <span id="contador-repetidas">0</span>
+                        <button onclick="cambiarRepetidas(1)">+</button>
+                    </div>
+                </div>
+ 
+                <!-- SELECTOR DIRECTO DE ENVÍO A MAZOS INTERNOS -->
+                <div id="bloque-agregar-a-mazo-modal" class="formulario-stats seccion-oculta">
+                    <h4>Añadir a tus Barajas</h4>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="select-mazo-directo-modal" style="flex:1; background:#000; color:#fff; border:1px solid #222; padding:5px; border-radius:4px;"></select>
+                        <button onclick="enviarCartaAMazoDesdeModal()" style="background:var(--amarilla); color:#000; font-weight:bold; border:none; padding:5px 10px; cursor:pointer; border-radius:4px;">Agregar</button>
+                    </div>
+                </div>
+ 
+                <div class="formulario-stats">
+                    <h4>Atributos Originales de Juego</h4>
+                    <div class="fila-inputs">
+                        <div class="input-grupo-mini"><label>Tipo</label><select id="mod-tipo"><option value="Ataque">Ataque</option><option value="Esfera">Esfera</option><option value="Modificadora">Modificadora</option><option value="Instantanea">Instantánea</option><option value="Especial">Especial</option></select></div>
+                        <div class="input-grupo-mini"><label>ATK</label><input type="number" id="mod-atk" value="0"></div>
+                        <div class="input-grupo-mini"><label>DEF</label><input type="number" id="mod-def" value="0"></div>
+                        <div class="input-grupo-mini"><label>Esfera N°</label><input type="number" id="mod-esfera" value="0"></div>
+                    </div>
+                    <button class="btn-guardar-stats" onclick="guardarDatosCombate()">💾 Guardar Atributos</button>
+                </div>
+ 
+                <div class="controles-carga">
+                    <div class="input-grupo"><label>Frente</label><input type="file" accept="image/*" onchange="procesarFoto(event, 'frente')"></div>
+                    <div class="input-grupo"><label>Dorso</label><input type="file" accept="image/*" onchange="procesarFoto(event, 'atras')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="game-engine.js"></script>
+    <script src="app.js"></script>
+    <!-- MODO DESARROLLO: descomentá la línea de abajo para que el álbum se
+         autocomplete con todas las cartas que ya están cargadas en
+         cartas_db.json (útil para armar mazos y jugar PVP de prueba sin
+         subir fotos). Para publicar la versión real (álbum vacío, cada uno
+         sube sus propias fotos), dejá esta línea comentada o eliminala. -->
+    <!-- <script src="hack.js"></script> -->
+</body>
+</html>
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBZ JCC Leyenda - Álbum Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ 
+    <!-- MENÚ DE NAVEGACIÓN GLOBAL FIJO -->
+    <nav class="nav-global-sistema">
+        <button class="btn-pestana-global activa" id="pestana-album" onclick="navegarSeccionGlobal('album')">📖 ÁLBUM</button>
+        <button class="btn-pestana-global" id="pestana-mazos" onclick="navegarSeccionGlobal('mazos')">🎴 MIS MAZOS</button>
+        <button class="btn-pestana-global" id="pestana-pvp" onclick="navegarSeccionGlobal('pvp')">⚔️ JUGAR LOCAL</button>
+    </nav>
+ 
+    <!-- SECCIÓN 1: ÁLBUM PRINCIPAL -->
+    <div id="contenedor-seccion-album" class="bloque-global-visible">
+        <main id="pantalla-seleccion" class="seccion-activa">
+            <header class="main-header">
+                <h1>DBZ LEYENDA</h1>
+                <p>Colección Completa de 0 a 950 Cartas — Modo Público</p>
+            </header>
+            <div class="contenedor-cajas" id="bloque-cajas"></div>
+        </main>
+ 
+        <section id="pantalla-album" class="seccion-oculta">
+            <div class="barre-navegacion">
+                <button class="btn-volver" onclick="volverASelec()">← Cambiar Caja</button>
+                <h2 id="album-titulo">Caja Activa</h2>
+                <div class="filtros-album">
+                    <input type="number" id="busqueda-num" placeholder="Buscar N°..." oninput="filtrarCartas()">
+                    <button class="btn-filtro activo" id="f-todas" onclick="cambiarFiltro('todas')">Todas</button>
+                    <button class="btn-filtro" id="f-obtenidas" onclick="cambiarFiltro('obtenidas')">Obtenidas</button>
+                    <button class="btn-filtro" id="f-faltantes" onclick="cambiarFiltro('faltantes')">Faltantes</button>
+                </div>
+            </div>
+            <div class="grilla-cartas" id="grilla-cartas"></div>
+        </section>
+    </div>
+ 
+    <!-- SECCIÓN 2: GESTOR Y EDITOR DE MAZOS -->
+    <div id="contenedor-seccion-mazos" class="bloque-global-oculto">
+        <div class="seccion-principal-mazos">
+            <div class="panel-lista-mazos">
+                <h3>Tus Barajas</h3>
+                <button class="btn-guardar-stats" onclick="crearMazoNuevoFlujo()">➕ Crear Mazo</button>
+                <div id="lista-mazos-links-contenedor"></div>
+            </div>
+            <div class="workspace-editor-mazo" id="panel-editor-mazo">
+                <p style="color: var(--txt-muted); text-align: center; margin: auto;">Selecciona o crea un mazo del panel izquierdo para comenzar.</p>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- SECCIÓN 3: ARENA DE JUEGO PVP -->
+    <div id="contenedor-seccion-pvp" class="bloque-global-oculto">
+        <div class="arena-combate-contenedor">
+            <div id="pvp-configuracion-inicial">
+                <h2>Duelo Versus Local</h2>
+                <div class="config-seleccion-mazos">
+                    <div class="input-grupo-mini">
+                        <label>Jugador 1:</label>
+                        <select id="select-pvp-mazo-j1"></select>
+                    </div>
+                    <div class="input-grupo-mini">
+                        <label>Jugador 2:</label>
+                        <select id="select-pvp-mazo-j2"></select>
+                    </div>
+                    <div class="input-grupo-mini">
+                        <label>Energía inicial:</label>
+                        <select id="select-pvp-energia">
+                            <option value="200">200 (partida rápida)</option>
+                            <option value="500" selected>500</option>
+                            <option value="1000">1000 (partida larga)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-guardar-stats" onclick="iniciarCombatePVPLocal()">🔥 Iniciar Batalla</button>
+            </div>
+ 
+            <div id="pvp-pantalla-tablero" class="seccion-oculta">
+                <div class="marcador-vidas-pvp">
+                    <div class="marcador-hp">J1: <span id="hp-display-j1">500</span> HP</div>
+                    <div id="texto-alerta-turno-actual">TURNO JUGADOR 1</div>
+                    <div class="marcador-hp">J2: <span id="hp-display-j2">500</span> HP</div>
+                </div>
+ 
+                <div id="texto-fase-actual" style="text-align:center; font-weight:bold; margin:6px 0; color: var(--amarilla, #ffce00);">FASE: ACCIÓN</div>
+ 
+                <div class="campo-batalla-rejilla">
+                    <div class="campo-mitad">
+                        <h4>Ataques bajados — J1</h4>
+                        <div class="fila-cartas-mesa" id="campo-cartas-j1"></div>
+                    </div>
+                    <div class="campo-mitad">
+                        <h4>Ataques bajados — J2</h4>
+                        <div class="fila-cartas-mesa" id="campo-cartas-j2"></div>
+                    </div>
+                </div>
+ 
+                <div class="campo-batalla-rejilla">
+                    <div class="campo-mitad">
+                        <h4>Defensa preparada — J1</h4>
+                        <div class="fila-cartas-mesa" id="defensa-cartas-j1"></div>
+                    </div>
+                    <div class="campo-mitad">
+                        <h4>Defensa preparada — J2</h4>
+                        <div class="fila-cartas-mesa" id="defensa-cartas-j2"></div>
+                    </div>
+                </div>
+ 
+                <div class="controles-arena-botones">
+                    <button class="btn-guardar-stats" onclick="resolverDueloMesa()">⚔️ Resolver Ataques</button>
+                    <button class="btn-guardar-stats" style="background:#7a1fa2;" onclick="usarAtaqueEsferasDelDragon()">🐉 7 Esferas (100 dmg)</button>
+                    <button class="btn-guardar-stats" style="background:#111;" onclick="pasarTurnoCombateLocal()">➡️ Pasar Turno</button>
+                </div>
+                <p style="text-align:center; font-size:12px; color:var(--txt-muted);">Tocá una carta de Ataque en tu mano para bajarla. Si es del rival y le tocó defenderse, toca una carta de Ataque suya para usarla como defensa. Instantáneas y Modificadoras se juegan tocándolas también.</p>
+ 
+                <div class="zona-mano-activa-visor">
+                    <h3>Mano — Jugador <span id="indicador-jugador-mano">1</span>:</h3>
+                    <div class="grilla-cartas-mano" id="mano-jugador-activa"></div>
+                </div>
+ 
+                <div class="zona-mano-activa-visor">
+                    <h3>📜 Bitácora de Batalla</h3>
+                    <div id="log-batalla-pvp" style="max-height:140px; overflow-y:auto; font-size:12px; line-height:1.5; background:#000; color:#0f0; padding:8px; border-radius:6px; font-family:monospace;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- MODAL DE SELECCIÓN RÁPIDA (esferas, defensa, modificadora a aplicar) -->
+    <div id="modal-eleccion-pvp" class="modal-oculto">
+        <div class="modal-contenido" style="max-width:480px;">
+            <button class="btn-cerrar-modal" onclick="cerrarModalEleccionPVP()">×</button>
+            <h3 id="modal-eleccion-titulo">Elegí una opción</h3>
+            <div id="modal-eleccion-opciones" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;"></div>
+        </div>
+    </div>
+ 
+    <!-- MODAL DETALLE DE CARTA CON INTEGRACIÓN DE COLA DE ENVIOS -->
+    <div id="modal-carta" class="modal-oculto">
+        <div class="modal-contenido">
+            <button class="btn-cerrar-modal" onclick="cerrarModal()">×</button>
+            <div class="contenedor-vista-carta">
+                <div class="carta-3d-contenedor" onclick="voltearCartaElemento()">
+                    <div class="carta-3d" id="carta-3d">
+                        <div class="cara frente">
+                            <img id="modal-img-frente" src="" alt="Frente">
+                            <div class="placeholder-foto">📸 Sin Imagen</div>
+                        </div>
+                        <div class="cara atras">
+                            <img id="modal-img-atras" src="" alt="Atrás">
+                            <div class="placeholder-foto">📸 Sin Dorso</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="indicador-giro">🔄 Toca para girar</p>
+            </div>
+ 
+            <div class="formulario-juego">
+                <h3 id="modal-titulo-carta">Nombre Carta</h3>
+                <div class="controles-repetidas">
+                    <span>Cantidad en posesión:</span>
+                    <div class="selector-numero">
+                        <button onclick="cambiarRepetidas(-1)">-</button>
+                        <span id="contador-repetidas">0</span>
+                        <button onclick="cambiarRepetidas(1)">+</button>
+                    </div>
+                </div>
+ 
+                <!-- SELECTOR DIRECTO DE ENVÍO A MAZOS INTERNOS -->
+                <div id="bloque-agregar-a-mazo-modal" class="formulario-stats seccion-oculta">
+                    <h4>Añadir a tus Barajas</h4>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="select-mazo-directo-modal" style="flex:1; background:#000; color:#fff; border:1px solid #222; padding:5px; border-radius:4px;"></select>
+                        <button onclick="enviarCartaAMazoDesdeModal()" style="background:var(--amarilla); color:#000; font-weight:bold; border:none; padding:5px 10px; cursor:pointer; border-radius:4px;">Agregar</button>
+                    </div>
+                </div>
+ 
+                <div class="formulario-stats">
+                    <h4>Atributos Originales de Juego</h4>
+                    <div class="fila-inputs">
+                        <div class="input-grupo-mini"><label>Tipo</label><select id="mod-tipo"><option value="Ataque">Ataque</option><option value="Esfera">Esfera</option><option value="Modificadora">Modificadora</option><option value="Instantanea">Instantánea</option><option value="Especial">Especial</option></select></div>
+                        <div class="input-grupo-mini"><label>ATK</label><input type="number" id="mod-atk" value="0"></div>
+                        <div class="input-grupo-mini"><label>DEF</label><input type="number" id="mod-def" value="0"></div>
+                        <div class="input-grupo-mini"><label>Esfera N°</label><input type="number" id="mod-esfera" value="0"></div>
+                    </div>
+                    <button class="btn-guardar-stats" onclick="guardarDatosCombate()">💾 Guardar Atributos</button>
+                </div>
+ 
+                <div class="controles-carga">
+                    <div class="input-grupo"><label>Frente</label><input type="file" accept="image/*" onchange="procesarFoto(event, 'frente')"></div>
+                    <div class="input-grupo"><label>Dorso</label><input type="file" accept="image/*" onchange="procesarFoto(event, 'atras')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="game-engine.js"></script>
+    <script src="app.js"></script>
+    <!-- MODO DESARROLLO: descomentá la línea de abajo para que el álbum se
+         autocomplete con todas las cartas que ya están cargadas en
+         cartas_db.json (útil para armar mazos y jugar PVP de prueba sin
+         subir fotos). Para publicar la versión real (álbum vacío, cada uno
+         sube sus propias fotos), dejá esta línea comentada o eliminala. -->
+    <script src="hack.js"></script>
+</body>
+</html>
+ 

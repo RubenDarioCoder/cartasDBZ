@@ -1,0 +1,317 @@
+/* ==========================================================================
+   1. ESTILOS BASE Y VARIABLES DE COLOR ORIGINALES
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-dark: #0b0c10;
+    --bg-card: #141722;
+    --txt-main: #ffffff;
+    --txt-muted: #7e8594;
+    
+    --naranja: #ff6a00;
+    --azul: #0088ff;
+    --verde: #00cc66;
+    --roja: #ff3333;
+    --amarilla: #ffcc00;
+    --violeta: #9d4edd;
+    --negra: #3a3a3a;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--txt-main);
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    padding-top: 70px; /* Separación fija para la barra superior */
+    overflow-x: hidden;
+}
+
+/* Controladores de visibilidad de secciones */
+.seccion-oculta { display: none !important; }
+.seccion-activa { display: block; animation: fadeIn 0.2s ease; }
+.bloque-global-oculto { display: none !important; }
+.bloque-global-visible { display: block; }
+.modal-oculto { display: none !important; }
+
+/* ==========================================================================
+   2. MENÚ SUPERIOR FIJO GLOBAL (NAVBAR)
+   ========================================================================== */
+.nav-global-sistema {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 55px;
+    background: #11131c;
+    border-bottom: 2px solid #1f2330;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    z-index: 99999;
+}
+
+.btn-pestana-global {
+    background: transparent;
+    border: none;
+    color: var(--txt-muted);
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+@media (min-width: 480px) {
+    .btn-pestana-global {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        letter-spacing: 1px;
+    }
+}
+
+.btn-pestana-global.activa, .btn-pestana-global:hover {
+    color: var(--amarilla);
+    border-bottom-color: var(--amarilla);
+}
+
+/* ==========================================================================
+   3. ÁLBUM: SELECTOR DE CAJAS Y FOLIOS ORIGINALES
+   ========================================================================== */
+.main-header {
+    text-align: center;
+    padding: 20px 15px;
+}
+.main-header h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #fff, var(--amarilla));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@media (min-width: 768px) {
+    .main-header { padding: 30px 20px; }
+    .main-header h1 { font-size: 2.8rem; }
+}
+.main-header p { color: var(--txt-muted); margin-top: 5px; font-size: 0.85rem; }
+
+.contenedor-cajas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tarjeta-caja {
+    background-color: var(--bg-card);
+    border: 2px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+.tarjeta-caja:hover { transform: translateY(-4px); }
+.tarjeta-caja::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; }
+.tarjeta-caja.naranja::before { background: var(--naranja); }
+.tarjeta-caja.azul::before { background: var(--azul); }
+.tarjeta-caja.verde::before { background: var(--verde); }
+.tarjeta-caja.roja::before { background: var(--roja); }
+.tarjeta-caja.amarilla::before { background: var(--amarilla); }
+.tarjeta-caja.violeta::before { background: var(--violeta); }
+.tarjeta-caja.negra::before { background: var(--negra); }
+
+.tarjeta-caja h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.tarjeta-caja p { font-size: 0.85rem; color: var(--txt-muted); }
+
+/* BARRA DE NAVEGACIÓN DE FOLIOS */
+.barre-navegacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 15px auto;
+    padding: 0 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.btn-volver {
+    background: #1f2330; border: 1px solid rgba(255,255,255,0.1);
+    color: #fff; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+}
+.filtros-album { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.filtros-album input { background: #000; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 6px; border-radius: 4px; width: 85px; font-size: 0.85rem; }
+.btn-filtro { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--txt-muted); padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+.btn-filtro.activo { background: var(--amarilla); color: #000; border-color: var(--amarilla); font-weight: bold; }
+
+.grilla-cartas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+@media (min-width: 480px) {
+    .grilla-cartas { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; }
+}
+
+.carta-slot {
+    aspect-ratio: 2 / 3; background-color: #000; border: 2px solid #1f2330; border-radius: 8px;
+    position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center; overflow: hidden;
+}
+.carta-slot.obtenida { border-color: var(--amarilla); }
+.carta-slot img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================================================
+   4. GESTOR DE MAZOS (RESPONSIVO ADAPTABLE PARA MÓVILES)
+   ========================================================================== */
+.seccion-principal-mazos {
+    display: flex;
+    flex-direction: column; /* Apilado vertical por defecto en celular */
+    gap: 15px;
+    max-width: 1200px;
+    margin: 15px auto;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .seccion-principal-mazos {
+        display: grid;
+        grid-template-columns: 260px 1fr; /* Columnas en PC */
+        gap: 20px;
+        height: calc(100vh - 140px);
+    }
+}
+
+.panel-lista-mazos {
+    background: var(--bg-card); border-radius: 12px; padding: 15px;
+    display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(255,255,255,0.05);
+}
+.workspace-editor-mazo {
+    background: var(--bg-card); border-radius: 12px; padding: 15px;
+    display: flex; flex-direction: column; gap: 15px; border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+}
+
+.rejilla-columnas-editor {
+    display: grid;
+    grid-template-columns: 1fr; /* Columna única en móviles para evitar colapso */
+    gap: 15px;
+}
+@media (min-width: 576px) {
+    .rejilla-columnas-editor {
+        grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas medianas/grandes */
+    }
+}
+
+.bloque-pool {
+    background: #000; border: 1px solid #1f2330; border-radius: 8px;
+    padding: 12px; display: flex; flex-direction: column; gap: 10px; min-height: 220px;
+}
+.contenedor-sub-pool {
+    overflow-y: auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 6px;
+    max-height: 300px;
+}
+
+/* ==========================================================================
+   5. VENTANA MODAL ADAPTADA ESTRICTAMENTE AL MOTO E7 PLUS (<360px)
+   ========================================================================== */
+#modal-carta {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); z-index: 99999;
+    display: flex; justify-content: center; align-items: center; 
+    padding: 8px; /* Margen de resguardo periférico */
+}
+
+.modal-contenido {
+    background-color: var(--bg-card); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; 
+    width: 100%; 
+    max-width: 335px; /* Ancho seguro absoluto para pantallas compactas de 360px */
+    padding: 12px; 
+    display: flex; 
+    flex-direction: column; /* Columna limpia de arriba hacia abajo */
+    gap: 12px; 
+    position: relative; 
+    max-height: 94vh; 
+    overflow-y: auto; /* Desplazamiento interno vertical si la pantalla es corta */
+}
+
+/* Cambio a visualización horizontal fluida en PC/Tablets */
+@media (min-width: 768px) {
+    .modal-contenido {
+        max-width: 660px;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+.btn-cerrar-modal {
+    position: absolute; top: 8px; right: 12px;
+    background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; z-index: 10;
+}
+
+.contenedor-vista-carta { 
+    width: 100%; max-width: 130px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; 
+}
+.carta-3d-contenedor { width: 120px; height: 180px; perspective: 1000px; }
+.carta-3d { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.4s; }
+.carta-3d.volteada { transform: rotateY(180deg); }
+.cara { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px; background: #000; display: flex; justify-content: center; align-items: center; border: 1px solid #1f2330; }
+.cara.atras { transform: rotateY(180deg); }
+.cara img { width: 100%; height: 100%; object-fit: cover; }
+.placeholder-foto { position: absolute; color: var(--txt-muted); font-size: 9px; font-weight: bold; }
+.indicador-giro { font-size: 9px; color: var(--txt-muted); margin-top: 4px; }
+
+/* AJUSTES INTERNOS DEL FORMULARIO DEL MODAL */
+.formulario-juego { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.formulario-juego h3 { font-size: 1.05rem; color: var(--amarilla); text-align: center; line-height: 1.2; padding: 0 10px; word-wrap: break-word; }
+.controles-repetidas { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; font-size: 12px; }
+.selector-numero { display: flex; align-items: center; gap: 10px; }
+.selector-numero button { background: #25293a; border: none; color: #fff; width: 26px; height: 26px; border-radius: 4px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+.formulario-stats { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; }
+.formulario-stats h4 { font-size: 0.75rem; color: var(--amarilla); text-transform: uppercase; margin-bottom: 6px; }
+.fila-inputs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; } /* Distribución compacta 2x2 */
+.input-grupo-mini { display: flex; flex-direction: column; }
+.input-grupo-mini label { font-size: 9px; color: var(--txt-muted); margin-bottom: 2px; }
+.input-grupo-mini input, .input-grupo-mini select { background: #000; border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px; border-radius: 5px; color: #fff; font-size: 12px; width: 100%; }
+
+.btn-guardar-stats { background: #25293a; border: 1px solid var(--amarilla); color: #fff; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px; width: 100%; margin-top: 4px; }
+.controles-carga { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 10px; }
+.input-grupo { display: flex; flex-direction: column; gap: 2px; }
+.input-grupo label { font-size: 10px; color: var(--txt-muted); font-weight: bold; }
+.input-grupo input { font-size: 11px; color: var(--txt-muted); width: 100%; }
+
+/* ==========================================================================
+   6. ARENA PVP (CAMPO Versus)
+   ========================================================================== */
+.arena-combate-contenedor { max-width: 1000px; margin: 15px auto; padding: 0 15px; }
+.config-seleccion-mazos { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+@media (min-width: 480px) { .config-seleccion-mazos { flex-direction: row; } }
+
+.marcador-vidas-pvp { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 12px 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #1f2330; font-size: 0.9rem; }
+.marcador-hp { font-size: 1.1rem; font-weight: bold; color: var(--amarilla); }
+.campo-batalla-rejilla { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 15px; }
+@media (min-width: 600px) { .campo-batalla-rejilla { grid-template-columns: 1fr 1fr; } }
+.campo-mitad { background: var(--bg-card); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); min-height: 140px; }
+.fila-cartas-mesa { display: flex; gap: 6px; flex-wrap: wrap; }
+.controles-arena-botones { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
+.zona-mano-activa-visor { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; }
+.grilla-cartas-mano { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; min-height: 110px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
