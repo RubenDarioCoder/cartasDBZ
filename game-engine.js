@@ -304,6 +304,12 @@ const DBZEngine = (() => {
             ctx.log(aplicado ? `${ctx.spec.nombre}: x3/x3 aplicado al ataque elegido.` : `${ctx.spec.nombre}: hace falta elegir un ataque en mesa para aplicar el multiplicador.`);
         },
 
+        // "ATAQUE DEMOLEDOR" (#592): x1/x2 sobre CELL JUNIOR ya bajado.
+        MULTIPLICAR_OBJETIVO_X1_X2: (estado, ctx) => {
+            const aplicado = ctx.modificarObjetivo(1, 2, true);
+            ctx.log(aplicado ? `${ctx.spec.nombre}: x1/x2 aplicado al ataque elegido.` : `${ctx.spec.nombre}: hace falta elegir un ataque en mesa para aplicar el multiplicador.`);
+        },
+
         // "MANO ABIERTA" (#76): EXCEPCIÓN a la regla general del manual. Si
         // al defender, tu DEF supera el ATK rival, el rival debe descontar
         // la diferencia de SU energía (en vez de no pasar nada, como dicta
@@ -353,6 +359,443 @@ const DBZEngine = (() => {
                 propio.mano.push(num);
                 ctx.log(`${ctx.spec.nombre}: recuperaste a tu mano la última carta de ataque jugada.`);
             }
+        },
+
+        // -------------------- NUEVAS (Caja Cell / Mr. Satan) ----------------
+
+        // "CINTURON DE CAMPEONES" (#554, permanente): mano de 8 en vez de 7.
+        // El efecto de turno que aplica limiteMano=8 lo hace procesarPermanentes
+        // usando CINTURON_TURNO; al jugarla solo se logea.
+        CINTURON_DE_CAMPEONES: (estado, ctx) => {
+            ctx.log(`${ctx.spec.nombre}: ahora podés tener 8 cartas en mano mientras esté en mesa.`);
+        },
+        CINTURON_DE_CAMPEONES_TURNO: (estado, ctx) => {
+            estado[ctx.jugadorId].condiciones.limiteMano = 8;
+            ctx.log(`${ctx.spec.nombre} (permanente): límite de mano = 8 este turno.`);
+        },
+
+        // "SORPRESA TOTAL" (#559): rival no puede atacar el próximo turno.
+        RIVAL_NO_PUEDE_ATACAR: (estado, ctx) => {
+            estado[ctx.jugadorId].bonusTurno.rivalNoPuedeAtacarProximoTurno = true;
+            ctx.log(`${ctx.spec.nombre}: tu rival no podrá atacar en su próximo turno.`);
+        },
+
+        // "GOLPE FATAL" (#566): destruye una permanente rival O causa 50 dmg.
+        // La UI debe ofrecer la elección; el motor por defecto prefiere destruir
+        // permanente si hay alguna, si no causa daño directo.
+        GOLPE_FATAL: (estado, ctx) => {
+            const oponente = estado[ctx.oponenteId];
+            if (oponente.permanentes.length > 0) {
+                const num = ctx.engine.destruirPermanente(estado, ctx.oponenteId);
+                const s = ctx.engine.specOf(num);
+                ctx.log(`${ctx.spec.nombre}: destruiste la carta permanente "${s ? s.nombre : num}" del rival.`);
+            } else {
+                oponente.energia = Math.max(0, oponente.energia - 50);
+                ctx.log(`${ctx.spec.nombre}: el rival no tenía permanentes, le causaste 50 pts de daño directo.`);
+            }
+        },
+
+        // "CARA A CARA" (#570): durante ESTE turno no se pueden usar
+        // modificadoras, instantáneas ni permanentes (las validaciones
+        // dentro de modificarAtaque/jugarInstantanea/jugarEspecial lo leen).
+        CARA_A_CARA: (estado, ctx) => {
+            estado[ctx.jugadorId].bonusTurno.caraACara = true;
+            estado[ctx.oponenteId].bonusTurno.caraACara = true;
+            ctx.log(`${ctx.spec.nombre}: este turno no se pueden usar modificadoras, instantáneas ni permanentes.`);
+        },
+
+        // "QUITA AIRE" (#573): usada como defensa, el rival no podrá atacar
+        // el próximo turno. Se activa al bajarla (modificarDefensa o al
+        // declarar defensa con esta carta).
+        QUITA_AIRE: (estado, ctx) => {
+            estado[ctx.jugadorId].bonusTurno.rivalNoPuedeAtacarProximoTurno = true;
+            ctx.log(`${ctx.spec.nombre}: tu rival no podrá atacar en su próximo turno.`);
+        },
+
+        // "DOLOR DE PANZA" (#581): si el rival no se defiende en su turno,
+        // vos recuperás 300 pts al inicio de tu siguiente turno.
+        // Se guarda en el jugador que la jugó; faseRobo la evalúa cuando
+        // vuelve a ser su turno chequeando si el rival se defendió.
+        DOLOR_DE_PANZA: (estado, ctx) => {
+            estado[ctx.jugadorId]._dolorDePanzaActivo = true;
+            ctx.log(`${ctx.spec.nombre}: si tu rival no se defiende, recuperarás 300 pts en tu próximo turno.`);
+        },
+
+        // "EL REMEDIO DE SATAN" (#582): si no atacás en este turno recuperás
+        // 100 pts. También quita la condición DOLOR DE PANZA del rival.
+        REMEDIO_DE_SATAN: (estado, ctx) => {
+            estado[ctx.jugadorId]._remedioSatan = true;
+            // Quitar DOLOR DE PANZA del rival (del jugador que lo aplicó)
+            estado[ctx.oponenteId]._dolorDePanzaActivo = false;
+            ctx.log(`${ctx.spec.nombre}: si no atacás este turno, recuperarás 100 pts. Se quitó el Dolor de Panza del rival.`);
+        },
+
+        // "BURLA DIABOLICA" (#593, permanente): cada turno penaliza -0/-50
+        // al ataque que elija el rival que la tiene. Efecto de turno.
+        BURLA_DIABOLICA_TURNO: (estado, ctx) => {
+            // Aplica -50 de DEF al primer ataque rival bajado (si hay)
+            const rival = estado[ctx.jugadorId === 'j1' ? 'j2' : 'j1'];
+            if (rival.campoAtaque.length > 0) {
+                rival.campoAtaque[0]._bonusInstantDef = (rival.campoAtaque[0]._bonusInstantDef || 0) - 50;
+                ctx.log(`BURLA DIABOLICA (permanente): -50 DEF aplicado al primer ataque rival.`);
+            }
+        },
+
+        // "PIZZA" (#551): baja ataques del grupo Mr. Satan sin usar esferas.
+        // En el motor se modela como que "exime del costo de esfera" a las
+        // cartas del grupo cuando esta carta está en juego. Por ahora se
+        // implementa como efecto narrativo + marca de estado para la UI.
+        PIZZA: (estado, ctx) => {
+            estado[ctx.jugadorId]._pizzaActiva = true;
+            ctx.log(`${ctx.spec.nombre}: podés bajar ataques Mr. Satan sin esferas este turno.`);
+        },
+
+        // "EL GRAN SATAN" (#555): combo con PIROSHKI (#552) + CALONI (#553)
+        // → rival no puede defenderse (amplía el combo a 3 cartas).
+        EL_GRAN_SATAN: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            const specOf = ctx.engine.specOf;
+            const tienePiroshki = j.campoAtaque.some(e => specOf(e.ataqueNum)?.numero === 552);
+            const tieneCaloni = j.campoAtaque.some(e => specOf(e.ataqueNum)?.numero === 553);
+            if (tienePiroshki && tieneCaloni) {
+                j.bonusTurno.rivalNoPuedeDefenderse = true;
+                ctx.log(`${ctx.spec.nombre}: con PIROSHKI y CALONI en mesa, ¡el rival no puede defenderse!`);
+            } else {
+                ctx.log(`${ctx.spec.nombre}: necesitás PIROSHKI y EL APUESTO CALONI en mesa para activar el efecto.`);
+            }
+        },
+
+        // "MEGATON DESTRUCTOR" (#556): x3/x3 sobre PIROSHKI. Se aplica
+        // como modificador combo con efectoId en modificarAtaque.
+        // (el multiplicador ya está en el JSON como multAtk:3/multDef:3 + comboCon:[552])
+
+        // "LA TRANQUILIDAD DE CELL" (#562): +60/+60 a CELL PERFECTO pero
+        // descartás toda tu mano. El bonus va por multiplicador/combo en el
+        // JSON; el descarte de mano lo implementa este efecto.
+        LA_TRANQUILIDAD: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            const manoAntes = j.mano.length;
+            j.descarte.push(...j.mano);
+            j.mano = [];
+            ctx.log(`${ctx.spec.nombre}: descartaste ${manoAntes} cartas de tu mano.`);
+        },
+
+        // "ENCUENTRO DE COLOSOS" (#563): solo se pueden bajar cartas de
+        // Cell o Goku este turno. Efecto narrativo (sin catálogo de personajes
+        // modelado todavía, igual que otras cartas de filtro por personaje).
+        ENCUENTRO_DE_COLOSOS: (estado, ctx) => {
+            ctx.log(`${ctx.spec.nombre}: este turno solo se pueden bajar cartas de Cell y de Goku (aplicar manualmente).`);
+        },
+
+        // "ESTUDIANDO MOVIMIENTOS" (#574): ver las primeras 20 cartas del
+        // mazo rival. No podés atacar este turno.
+        ESTUDIAR_MOVIMIENTOS: (estado, ctx) => {
+            ctx.mostrarMazoRival = true;
+            estado.ataquesBloqueadosEsteTurno = true;
+            ctx.log(`${ctx.spec.nombre}: viste las primeras 20 cartas del mazo rival. No podés atacar este turno.`);
+        },
+
+        // "QUIETO AHI" (#568): anula un ataque (instantánea, igual que DETENER).
+        QUIETO_AHI: (estado, ctx) => {
+            estado.bloqueoAtaquePendiente = true;
+            ctx.log(`${ctx.spec.nombre}: ¡el próximo ataque será bloqueado por completo!`);
+        },
+
+        // "ATAQUE DEMOLEDOR" (#592): x1/x2 sobre CELL JUNIOR.
+        // Se aplica vía combo+multiplicador en el JSON, no necesita efecto extra.
+
+        // "MULTIPLICACION" (#572): defender 2 ataques a la vez (suma sus ATK
+        // y los enfrenta contra UNA sola defensa). Se marca como condición
+        // del defensor; resolverAtaques la consume.
+        MULTIPLICACION: (estado, ctx) => {
+            estado[ctx.jugadorId].condiciones.defendioDobleAtaque = false; // reset
+            estado[ctx.jugadorId]._multiplicacionActiva = true;
+            ctx.log(`${ctx.spec.nombre}: podés defender hasta 2 ataques con esta carta como defensa combinada.`);
+        },
+
+        // "ATAQUE VELOZ" (#571): puede usarse en el turno del adversario
+        // como ataque sorpresa. La UI lo habilita cuando el rival está
+        // resolviendo su turno; el motor lo procesa igual que un ataque
+        // normal (ya que declararAtaque no valida de quién es el turno).
+        ATAQUE_VELOZ: (estado, ctx) => {
+            ctx.log(`${ctx.spec.nombre}: ataque realizado en el turno del adversario.`);
+        },
+
+        // -------------------- NUEVAS (última tanda) -------------------------
+
+        // "PREPARADOS LISTOS" (#594, permanente): +0/+50 DEF a TODOS los
+        // ataques propios en mesa mientras la carta permanezca activa.
+        PREPARADOS_LISTOS_TURNO: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            if (j.campoAtaque.length > 0) {
+                j.campoAtaque.forEach(e => { e._bonusInstantDef = (e._bonusInstantDef || 0) + 50; });
+                ctx.log(`PREPARADOS LISTOS: +50 DEF a cada ataque en mesa.`);
+            }
+        },
+
+        // "HUMILLANDO" (#601): este ataque no puede ser bloqueado por
+        // instantáneas como DETENER / NEUTRALIZACION / ATRAPADO.
+        HUMILLANDO: (estado, ctx) => {
+            estado._ataqueNoBloqueableActivo = true;
+            ctx.log(`${ctx.spec.nombre}: este ataque no puede ser bloqueado.`);
+        },
+
+        // "TE ARREPENTIRAS" (#610): descartás hasta 4 cartas propias
+        // y robás hasta 4 del mazo.
+        TE_ARREPENTIRAS: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            const nDesc = Math.min(4, j.mano.length);
+            for (let i = 0; i < nDesc; i++) j.descarte.push(j.mano.shift());
+            const nRoba = Math.min(4, j.mazo.length);
+            for (let i = 0; i < nRoba; i++) j.mano.push(j.mazo.pop());
+            ctx.log(`${ctx.spec.nombre}: descartaste ${nDesc} y robaste ${nRoba} cartas.`);
+        },
+
+        // "NO TE CONFIES" (#614): el rival descarta 3 cartas (elegís vos)
+        // y roba 3 nuevas. Simplificado: descarta las 3 primeras de su mano.
+        NO_TE_CONFIES: (estado, ctx) => {
+            const rival = estado[ctx.oponenteId];
+            const nDesc = Math.min(3, rival.mano.length);
+            for (let i = 0; i < nDesc; i++) rival.descarte.push(rival.mano.shift());
+            const nRoba = Math.min(3, rival.mazo.length);
+            for (let i = 0; i < nRoba; i++) rival.mano.push(rival.mazo.pop());
+            ctx.log(`${ctx.spec.nombre}: rival descartó ${nDesc} y robó ${nRoba} cartas.`);
+        },
+
+        // "DEBILIDAD" (#616, permanente): al inicio de cada turno propio,
+        // marca el primer ataque rival en mesa para que su DEF quede a la
+        // mitad en la resolución. resolverAtaques chequea _debilidadActiva.
+        DEBILIDAD_TURNO: (estado, ctx) => {
+            const rivalId = ctx.jugadorId === 'j1' ? 'j2' : 'j1';
+            const rival = estado[rivalId];
+            if (rival.campoAtaque.length > 0) {
+                rival.campoAtaque[0]._debilidadActiva = true;
+                ctx.log(`DEBILIDAD: la DEF del primer ataque rival quedará reducida a la mitad.`);
+            }
+        },
+
+        // ============================================================
+        // EFECTOS NUEVAS CARTAS (Caja otro mundo / Torneo)
+        // ============================================================
+
+        // "YA LO HICE" (#621) + SATAN LO HIZO (#622) + SALVADOS (#623) + SOY EL MEJOR (#625):
+        // Bajar las 4 cartas juntas con solo 2 esferas = ganás la partida.
+        // El motor busca las 3 compañeras en la MANO del jugador, las consume
+        // y setea el ganador. Si no están todas en mano, efecto nulo.
+        WIN_COMBO_SATAN: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            const necesarias = [622, 623, 625];
+            const idxs = necesarias.map(n => j.mano.indexOf(n));
+            const tieneTodasEnMano = idxs.every(i => i >= 0);
+            if (tieneTodasEnMano) {
+                // Consumir las 3 cartas de mano (de atrás para no desfasar índices)
+                idxs.sort((a, b) => b - a).forEach(i => j.descarte.push(j.mano.splice(i, 1)[0]));
+                estado.ganador = estado.turnoJugador;
+                ctx.log(`¡¡¡ COMBO MR. SATAN !!! Jugador ${estado.turnoJugador} baja YA LO HICE + SATAN LO HIZO + SALVADOS + SOY EL MEJOR y GANA LA PARTIDA.`);
+            } else {
+                const faltantes = necesarias.filter((n, i) => idxs[i] < 0).join(', ');
+                ctx.log(`${ctx.spec.nombre}: faltan cartas en mano: #${faltantes}. Necesitás las 4 para ganar.`);
+            }
+        },
+
+        // "MALDITO KAKAROTO" (#619): rival muestra mano y envía 1 carta
+        // de Goku de vuelta a su mazo (buscada por nombre).
+        MALDITO_KAKAROTO: (estado, ctx) => {
+            ctx.mostrarManoRival = true;
+            const oponente = estado[ctx.oponenteId];
+            const specOf = ctx.engine.specOf;
+            const idxGoku = oponente.mano.findIndex(n => {
+                const s = specOf(n);
+                return s && s.nombre && s.nombre.toUpperCase().includes('GOKU');
+            });
+            if (idxGoku >= 0) {
+                const [num] = oponente.mano.splice(idxGoku, 1);
+                // Insertar al fondo del mazo y mezclar
+                oponente.mazo.unshift(num);
+                for (let i = oponente.mazo.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [oponente.mazo[i], oponente.mazo[j]] = [oponente.mazo[j], oponente.mazo[i]];
+                }
+                ctx.log(`${ctx.spec.nombre}: devolviste una carta de Goku al mazo rival y lo mezclaste.`);
+            } else {
+                ctx.log(`${ctx.spec.nombre}: el rival no tenía cartas de Goku en mano.`);
+            }
+        },
+
+        // "NO LO PUEDO CREER" (#628): busca hasta 2 cartas de A-18 en tu mazo.
+        BUSCAR_A18_EN_MAZO: (estado, ctx) => {
+            const propio = estado[ctx.jugadorId];
+            const specOf = ctx.engine.specOf;
+            let encontradas = 0;
+            const nuevaMazo = [];
+            for (const num of propio.mazo) {
+                const s = specOf(num);
+                if (encontradas < 2 && s && s.nombre && s.nombre.toUpperCase().includes('A-18')) {
+                    propio.mano.push(num);
+                    encontradas++;
+                } else {
+                    nuevaMazo.push(num);
+                }
+            }
+            propio.mazo = nuevaMazo;
+            ctx.log(`${ctx.spec.nombre}: buscaste ${encontradas} carta(s) de A-18 en tu mazo.`);
+        },
+
+        // "PIDE UN DESEO" (#630): por cada esfera extra bajada devolvés 1
+        // carta del cementerio a tu mano. La UI maneja cuántas esferas se
+        // bajan; el motor recupera 1 carta por defecto (simplificado).
+        PIDE_UN_DESEO: (estado, ctx) => {
+            const propio = estado[ctx.jugadorId];
+            if (propio.descarte.length > 0) {
+                propio.mano.push(propio.descarte.pop());
+                ctx.log(`${ctx.spec.nombre}: recuperaste 1 carta del cementerio. Bajá más esferas para recuperar más.`);
+            } else {
+                ctx.log(`${ctx.spec.nombre}: el cementerio está vacío.`);
+            }
+        },
+
+        // "HORA DE DESAYUNO" (#632, permanente): recupera 50 pts por cada
+        // carta descartada (máx 1 descarte activable por turno).
+        // Por simplicidad, recupera 50 fijo al inicio de cada turno propio.
+        HORA_DESAYUNO_TURNO: (estado, ctx) => {
+            ctx.curar(50);
+            ctx.log(`HORA DE DESAYUNO: recuperaste 50 pts.`);
+        },
+
+        // "INTIMIDACION" (#652, permanente): el rival no puede bajar
+        // permanentes mientras esta carta esté en mesa.
+        INTIMIDACION_TURNO: (estado, ctx) => {
+            const rivalId = ctx.jugadorId === 'j1' ? 'j2' : 'j1';
+            estado[rivalId].condiciones.bloqueadoPermanentes = true;
+            ctx.log(`INTIMIDACION: el rival no puede bajar permanentes este turno.`);
+        },
+
+        // "FURIA DIVINA" (#654): ver mano rival y descartar 1 carta de
+        // ataque/defensa. Simplificado: descarta la primera carta de Ataque
+        // de la mano rival.
+        FURIA_DIVINA: (estado, ctx) => {
+            ctx.mostrarManoRival = true;
+            const oponente = estado[ctx.oponenteId];
+            const specOf = ctx.engine.specOf;
+            const idx = oponente.mano.findIndex(n => specOf(n)?.tipo === TIPOS.ATAQUE);
+            if (idx >= 0) {
+                const [num] = oponente.mano.splice(idx, 1);
+                oponente.descarte.push(num);
+                ctx.log(`${ctx.spec.nombre}: viste la mano rival y descartaste una carta de ataque suya.`);
+            } else {
+                ctx.log(`${ctx.spec.nombre}: el rival no tenía cartas de ataque en mano.`);
+            }
+        },
+
+        // "APERITIVO A LO GOKU" (#658): recupera 100 + 50 por cada esfera
+        // extra bajada. Aquí implementamos el base de 100 (sin esferas extra).
+        APERITIVO_GOKU: (estado, ctx) => {
+            ctx.curar(100);
+            ctx.log(`${ctx.spec.nombre}: recuperaste 100 pts. Bajá esferas extra para recuperar +50 c/u (usá hackCrearMazoDePrueba en UI).`);
+        },
+
+        // "ESO ES DEMASIADO" (#673, permanente): si alguien realiza un ataque
+        // de más de 200 pts, debe descartar 2 cartas. Se chequea en resolverAtaques
+        // consultando si hay permanente activo.
+        ESO_ES_DEMASIADO_TURNO: (estado, ctx) => {
+            estado._esoEsDemasiadoActivo = ctx.jugadorId;
+            ctx.log(`ESO ES DEMASIADO: activo. Ataques de más de 200 pts forzarán descartar 2 cartas.`);
+        },
+
+        // "VICTORIA" (#678): si el rival no te daña en su turno, recuperás
+        // 100 pts. No podés atacar este turno.
+        VICTORIA: (estado, ctx) => {
+            estado[ctx.jugadorId]._victoriaActiva = true;
+            estado.ataquesBloqueadosEsteTurno = true;
+            ctx.log(`${ctx.spec.nombre}: no podés atacar. Si el rival no te daña, recuperarás 100 pts al inicio de tu turno.`);
+        },
+
+        // "LAS REGLAS DICEN" (#679, instantánea): todas las cartas bajadas
+        // este turno vuelven al mazo del jugador que las bajó y no se
+        // computan daños. Cancela el turno completo de ataques.
+        LAS_REGLAS_DICEN: (estado, ctx) => {
+            const atacanteId = estado.turnoJugador === 1 ? 'j1' : 'j2';
+            const atacante = estado[atacanteId];
+            // Devolver todos los ataques en mesa al mazo del atacante
+            atacante.campoAtaque.forEach(e => {
+                atacante.mazo.push(e.ataqueNum);
+                if (e.esferaNum) atacante.mazo.push(e.esferaNum);
+                (e.modificadores || []).forEach(m => {
+                    atacante.mazo.push(m.num);
+                    if (m.esferaNum) atacante.mazo.push(m.esferaNum);
+                });
+            });
+            atacante.campoAtaque = [];
+            // Devolver defensa al mazo del defensor
+            const defensorId = atacanteId === 'j1' ? 'j2' : 'j1';
+            const defensor = estado[defensorId];
+            if (defensor.campoDefensa) {
+                defensor.mazo.push(defensor.campoDefensa.defensaNum);
+                if (defensor.campoDefensa.esferaNum) defensor.mazo.push(defensor.campoDefensa.esferaNum);
+                defensor.campoDefensa = null;
+            }
+            estado.bloqueoAtaquePendiente = false;
+            estado.anulacionPendiente = null;
+            ctx.log(`${ctx.spec.nombre}: todas las cartas del turno vuelven al mazo. No se computan daños.`);
+        },
+
+        // ============================================================
+        // EFECTOS DEL BATCH 39-86 + 159
+        // ============================================================
+
+        // RECUPERAR_25: añade 25 pts (BESO DE DRAGON #71)
+        RECUPERAR_25: (estado, ctx) => { ctx.curar(25); },
+
+        // MODIFICAR_OBJETIVO_20_40: +20 ATK / +40 DEF (MUSCULOS DE ACERO #74)
+        MODIFICAR_OBJETIVO_20_40: (estado, ctx) => {
+            const aplicado = ctx.modificarObjetivo(20, 40, false);
+            ctx.log(aplicado ? `${ctx.spec.nombre}: +20/+40 aplicado al ataque elegido.`
+                             : `${ctx.spec.nombre}: elegí un ataque en mesa.`);
+        },
+
+        // MODIFICAR_OBJETIVO_80_0: +80 ATK / +0 DEF (INDESTRUCTIBLE #67)
+        MODIFICAR_OBJETIVO_80_0: (estado, ctx) => {
+            const aplicado = ctx.modificarObjetivo(80, 0, false);
+            ctx.log(aplicado ? `${ctx.spec.nombre}: +80/+0 aplicado al ataque elegido.`
+                             : `${ctx.spec.nombre}: elegí un ataque en mesa.`);
+        },
+
+        // KNOCK_OUT (#48): descarta hasta 6 y roba la misma cantidad.
+        // No puede atacar este turno (ataquesBloqueadosEsteTurno).
+        KNOCK_OUT: (estado, ctx) => {
+            const j = estado[ctx.jugadorId];
+            const nDesc = Math.min(6, j.mano.length);
+            for (let i = 0; i < nDesc; i++) j.descarte.push(j.mano.shift());
+            const nRoba = Math.min(nDesc, j.mazo.length);
+            for (let i = 0; i < nRoba; i++) j.mano.push(j.mazo.pop());
+            estado.ataquesBloqueadosEsteTurno = true;
+            ctx.log(`${ctx.spec.nombre}: descartaste ${nDesc} y robaste ${nRoba}. No podés atacar este turno.`);
+        },
+
+        // COMPARTIR_ESFERA_GRATIS (#50): el próximo ataque que bajes este
+        // turno no necesita esfera. Se marca en el estado del jugador.
+        COMPARTIR_ESFERA_GRATIS: (estado, ctx) => {
+            estado[ctx.jugadorId]._proximoAtaqueSinEsfera = true;
+            ctx.log(`${ctx.spec.nombre}: tu próximo ataque de este turno no necesita esfera.`);
+        },
+
+        // LA_GRAN_IDEA_DE_BUU (#58): rival descarta toda su mano y roba 3.
+        LA_GRAN_IDEA_DE_BUU: (estado, ctx) => {
+            const rival = estado[ctx.oponenteId];
+            const nDesc = rival.mano.length;
+            rival.descarte.push(...rival.mano);
+            rival.mano = [];
+            const nRoba = Math.min(3, rival.mazo.length);
+            for (let i = 0; i < nRoba; i++) rival.mano.push(rival.mazo.pop());
+            ctx.log(`${ctx.spec.nombre}: rival descartó ${nDesc} cartas y robó ${nRoba}.`);
+        },
+
+        // MIRADA_MAESTRA (#75): ves las 10 primeras cartas de tu mazo y
+        // las reordenás a gusto. El motor las mezcla aleatoriamente por
+        // defecto (no hay interacción drag&drop todavía); se logea como
+        // efecto informativo hasta que la UI soporte el reordenamiento.
+        MIRADA_MAESTRA: (estado, ctx) => {
+            ctx.log(`${ctx.spec.nombre}: miraste las 10 cartas de tu mazo. Reordenalas a gusto (por ahora sin UI de arrastre).`);
         }
     };
 
@@ -365,18 +808,28 @@ const DBZEngine = (() => {
         return {
             energia: energiaInicial,
             energiaMax: energiaInicial,
-            mazo,                 // array de números de carta, boca abajo (tope = .pop())
+            mazo,
             mano: [],
             descarte: [],
-            campoAtaque: [],      // [{ataqueNum, esferaNum, modificadores:[{num, esferaNum}]}]
-            campoDefensa: null,   // {defensaNum, esferaNum, modificadores:[...]}
-            permanentes: [],      // [{num}] cartas "(PERMANENTE)" activas en mesa
-            bonusTurno: {         // se resetea cada vez que ESTE jugador empieza turno
+            campoAtaque: [],
+            campoDefensa: null,
+            permanentes: [],
+            bonusTurno: {
                 rivalNoPuedeDefenderse: false,
                 rivalDefensaMitad: false,
-                defensaPerforadoraPropia: false
+                defensaPerforadoraPropia: false,
+                // Nuevas mecánicas:
+                caraACara: false,            // bloquea modificadoras/inst/permanentes este turno
+                rivalNoPuedeAtacarProximoTurno: false, // QUITA AIRE / SORPRESA TOTAL
             },
-            cartasJugadasEsteTurno: [] // evita repetir una misma carta (no-esfera) en el turno
+            // Condiciones persistentes (entre turnos, no se limpian en bonusTurno):
+            condiciones: {
+                dolorDePanza: false,
+                limiteMano: 7,
+                defendioDobleAtaque: false,
+                bloqueadoPermanentes: false, // INTIMIDACION
+            },
+            cartasJugadasEsteTurno: []
         };
     }
 
@@ -478,26 +931,66 @@ const DBZEngine = (() => {
     // ACCIONES PRINCIPALES
     // ----------------------------------------------------------------------
 
-    // Robar cartas hasta tener 7 (inicio de turno)
     function faseRobo(estado) {
         const jugadorId = idJugador(estado, estado.turnoJugador);
         const j = jugadorActivo(estado);
-        while (j.mano.length < 7 && j.mazo.length > 0) {
+        const rival = jugadorRival(estado);
+
+        // QUITA AIRE / SORPRESA TOTAL
+        if (rival.bonusTurno.rivalNoPuedeAtacarProximoTurno) {
+            estado.ataquesBloqueadosEsteTurno = true;
+            rival.bonusTurno.rivalNoPuedeAtacarProximoTurno = false;
+            log(estado, `Jugador ${estado.turnoJugador} no puede realizar ataques este turno.`);
+        } else {
+            estado.ataquesBloqueadosEsteTurno = false;
+        }
+
+        // VICTORIA (#678): al inicio de mi turno, si el rival no me dañó
+        // en su turno anterior, recupero 100 pts.
+        if (j._victoriaActiva) {
+            j._victoriaActiva = false;
+            if (!j._recibioDanioTurnoAnterior) {
+                const antes = j.energia;
+                j.energia = Math.min(j.energiaMax, j.energia + 100);
+                log(estado, `VICTORIA: el rival no te dañó, recuperaste ${j.energia - antes} pts.`);
+            }
+        }
+        j._recibioDanioTurnoAnterior = false;
+
+        // DOLOR DE PANZA: cuando vuelve a ser mi turno, chequeo si el rival
+        // se defendió durante su turno. Si no lo hizo, recupero 300 pts.
+        if (j._dolorDePanzaActivo) {
+            j._dolorDePanzaActivo = false;
+            if (!rival._seDefendioTurnoAnterior) {
+                const antes = j.energia;
+                j.energia = Math.min(j.energiaMax, j.energia + 300);
+                log(estado, `DOLOR DE PANZA: el rival no se defendió, jugador ${estado.turnoJugador} recupera ${j.energia - antes} pts.`);
+            }
+        }
+        rival._seDefendioTurnoAnterior = false;
+
+        estado.faseTurno = "accion";
+        estado.bajoCartaEsteTurno = false;
+        j.cartasJugadasEsteTurno = [];
+
+        // Resetear limiteMano a 7 y luego procesar permanentes ANTES de
+        // robar (así CINTURON DE CAMPEONES sube el límite a 8 y el robo
+        // de cartas ya lo respeta en este mismo turno).
+        j.condiciones.limiteMano = 7;
+        j.condiciones.bloqueadoPermanentes = false; // se reactiva si INTIMIDACION está en mesa
+        procesarPermanentes(estado, jugadorId);
+
+        while (j.mano.length < j.condiciones.limiteMano && j.mazo.length > 0) {
             j.mano.push(j.mazo.pop());
         }
-        if (j.mazo.length === 0 && j.mano.length < 7) {
-            // Mazo vacío: reciclar pila de descarte (regla "CUANDO SE ACABA EL MAZO")
+        if (j.mazo.length === 0 && j.mano.length < j.condiciones.limiteMano) {
             if (j.descarte.length > 0) {
                 j.mazo = shuffle([...j.descarte]);
                 j.descarte = [];
                 log(estado, `Jugador ${estado.turnoJugador} recicló su pila de descarte (se quedó sin cartas).`);
-                while (j.mano.length < 7 && j.mazo.length > 0) j.mano.push(j.mazo.pop());
+                while (j.mano.length < j.condiciones.limiteMano && j.mazo.length > 0) j.mano.push(j.mazo.pop());
             }
         }
-        estado.faseTurno = "accion";
-        estado.bajoCartaEsteTurno = false;
-        j.cartasJugadasEsteTurno = [];
-        procesarPermanentes(estado, jugadorId);
     }
 
     // Intentar declarar un ataque: idxAtaqueEnMano + idxEsferaEnMano
@@ -512,6 +1005,7 @@ const DBZEngine = (() => {
         if (spec.tipo === TIPOS.MODIFICADORA) return { ok: false, error: "Usá 'Modificar ataque', no 'Atacar', para esta carta." };
         if (spec.tipo === TIPOS.INSTANTANEA) return { ok: false, error: "Las instantáneas se juegan en el turno rival." };
         if (!puedeJugarseEsteTurno(j, numAtaque, spec)) return { ok: false, error: "Ya jugaste esta carta este turno." };
+        if (estado.ataquesBloqueadosEsteTurno) return { ok: false, error: "No podés atacar este turno (efecto de QUITA AIRE / SORPRESA TOTAL)." };
 
         const esferaReq = spec.esferaNecesaria || 0;
         let idxEsfera = -1;
@@ -547,6 +1041,10 @@ const DBZEngine = (() => {
         const specOf = specOfFactory(estado);
         const entrada = j.campoAtaque[idxCampoAtaque];
         if (!entrada) return { ok: false, error: "No hay ataque en ese slot." };
+        if (estado[idJugador(estado, estado.turnoJugador)].bonusTurno.caraACara ||
+            estado[idRival(estado.turnoJugador)].bonusTurno.caraACara) {
+            return { ok: false, error: "CARA A CARA: no se pueden usar modificadoras este turno." };
+        }
 
         const numMod = j.mano[idxModificadoraEnMano];
         const spec = specOf(numMod);
@@ -660,6 +1158,35 @@ const DBZEngine = (() => {
             return { ok: false, error: "No bajaste ningún ataque todavía." };
         }
 
+        // MULTIPLICACION (#572): si el defensor tiene esta carta activa y
+        // hay una defensa preparada, suma el ATK de TODOS los ataques del
+        // rival y los enfrenta de una vez contra la DEF de la defensa.
+        // El sobrante de DEF no daña al atacante (regla general); el
+        // sobrante de ATK sí daña al defensor (como siempre).
+        if (defensor._multiplicacionActiva && defensor.campoDefensa && atacante.campoAtaque.length > 1) {
+            defensor._multiplicacionActiva = false;
+            const atkTotal = atacante.campoAtaque.reduce((sum, e) => sum + totalDeEntrada(estado, e).atk, 0);
+            const { def } = totalDeEntrada(estado, { ...defensor.campoDefensa, ataqueNum: defensor.campoDefensa.defensaNum });
+            const danio = Math.max(0, atkTotal - def);
+            log(estado, `MULTIPLICACION: ATK total ${atkTotal} vs DEF ${def} → daño combinado ${danio}.`);
+            if (danio > 0) defensor.energia = Math.max(0, defensor.energia - danio);
+            // Descartar todo al cementerio
+            atacante.campoAtaque.forEach(e => {
+                atacante.descarte.push(e.ataqueNum);
+                if (e.esferaNum) atacante.descarte.push(e.esferaNum);
+                (e.modificadores || []).forEach(m => { atacante.descarte.push(m.num); if (m.esferaNum) atacante.descarte.push(m.esferaNum); });
+            });
+            atacante.campoAtaque = [];
+            defensor.descarte.push(defensor.campoDefensa.defensaNum);
+            if (defensor.campoDefensa.esferaNum) defensor.descarte.push(defensor.campoDefensa.esferaNum);
+            (defensor.campoDefensa.modificadores || []).forEach(m => { defensor.descarte.push(m.num); if (m.esferaNum) defensor.descarte.push(m.esferaNum); });
+            defensor.campoDefensa = null;
+            atacante.bonusTurno = { rivalNoPuedeDefenderse: false, rivalDefensaMitad: false, defensaPerforadoraPropia: false, caraACara: false, rivalNoPuedeAtacarProximoTurno: false };
+            revisarFinDePartida(estado);
+            return { ok: true };
+        }
+        if (defensor._multiplicacionActiva) defensor._multiplicacionActiva = false; // consumir si solo hay 1 ataque
+
         atacante.campoAtaque.forEach(entrada => {
             const { atk } = totalDeEntrada(estado, entrada);
             const specAtaque = specOf(entrada.ataqueNum);
@@ -685,30 +1212,38 @@ const DBZEngine = (() => {
             let fueBloqueado = false;
 
             // Anulación de ataque por umbral, declarada por una instantánea
-            // jugada en respuesta ANTES de resolver (ej: "ATRAPADO: anula un
-            // ataque menor o igual a 80 puntos"). Se consume una sola vez.
+            // jugada en respuesta. HUMILLANDO lo cancela si está activo.
             if (estado.anulacionPendiente) {
-                const { umbral, incluyeIgual } = estado.anulacionPendiente;
-                const cumple = incluyeIgual ? atk <= umbral : atk < umbral;
-                if (cumple) {
-                    danio = 0;
-                    fueBloqueado = true;
-                    log(estado, `¡El ataque de "${specAtaque?.nombre}" (${atk} pts) fue anulado por la instantánea jugada en respuesta!`);
+                if (estado._ataqueNoBloqueableActivo) {
+                    log(estado, `¡${specAtaque?.nombre} tiene HUMILLANDO activo: la anulación no tiene efecto!`);
+                    estado.anulacionPendiente = null;
+                } else {
+                    const { umbral, incluyeIgual } = estado.anulacionPendiente;
+                    const cumple = incluyeIgual ? atk <= umbral : atk < umbral;
+                    if (cumple) {
+                        danio = 0;
+                        fueBloqueado = true;
+                        log(estado, `¡El ataque de "${specAtaque?.nombre}" (${atk} pts) fue anulado!`);
+                    }
+                    estado.anulacionPendiente = null;
                 }
-                estado.anulacionPendiente = null;
             }
 
-            // Anulación de ataque por umbral fijo definida por el propio
-            // efectoId del ataque (poco común, pero soportado igual).
-            if (!fueBloqueado && ctx.anularSiAtaqueMenorA > 0 && atk <= ctx.anularSiAtaqueMenorA) {
+            if (!fueBloqueado && ctx.anularSiAtaqueMenorA > 0 && atk <= ctx.anularSiAtaqueMenorA && !estado._ataqueNoBloqueableActivo) {
                 danio = 0;
                 fueBloqueado = true;
-                log(estado, `¡El ataque de "${specAtaque?.nombre}" (${atk} pts) fue anulado por ser menor o igual a ${ctx.anularSiAtaqueMenorA}!`);
+                log(estado, `¡El ataque de "${specAtaque?.nombre}" (${atk} pts) fue anulado!`);
             }
 
-            // Defensa preparada por el rival (bajada con declararDefensa),
-            // salvo que el atacante haya impuesto "rival no puede
-            // defenderse este turno" (ej: "CON LA GUARDIA BAJA").
+            // DEBILIDAD: si el atacante marcó su propia entrada como debilitada,
+            // la DEF de ese ataque se reduce a la mitad antes de calcular el daño.
+            if (entrada._debilidadActiva) {
+                delete entrada._debilidadActiva;
+                const { def: defAtk } = totalDeEntrada(estado, entrada);
+                entrada._bonusInstantDef = (entrada._bonusInstantDef || 0) - Math.floor(defAtk / 2);
+                log(estado, `DEBILIDAD: la DEF del ataque se redujo a la mitad.`);
+            }
+
             if (!fueBloqueado && defensor.campoDefensa && !atacante.bonusTurno.rivalNoPuedeDefenderse) {
                 let { def } = totalDeEntrada(estado, { ...defensor.campoDefensa, ataqueNum: defensor.campoDefensa.defensaNum });
                 if (atacante.bonusTurno.rivalDefensaMitad) {
@@ -718,32 +1253,43 @@ const DBZEngine = (() => {
                 danio = Math.max(0, atk - def);
                 log(estado, `Defensa rival absorbe ${Math.min(atk, def)} pts.`);
 
-                // EXCEPCIÓN "MANO ABIERTA": si la defensa del rival supera
-                // el ataque, la diferencia se le descuenta a QUIEN ATACÓ
-                // (en vez de no pasar nada, como dicta la regla general).
                 if (def > atk && defensor.bonusTurno.defensaPerforadoraPropia) {
                     const sobrante = def - atk;
                     atacante.energia = Math.max(0, atacante.energia - sobrante);
-                    log(estado, `¡"Mano Abierta": tu defensa superó el ataque, el atacante pierde ${sobrante} pts!`);
+                    log(estado, `¡"Mano Abierta": el atacante pierde ${sobrante} pts!`);
                     defensor.bonusTurno.defensaPerforadoraPropia = false;
                 }
             } else if (!fueBloqueado && defensor.campoDefensa && atacante.bonusTurno.rivalNoPuedeDefenderse) {
-                log(estado, `El rival no puede defenderse este turno: su defensa preparada no tiene efecto.`);
+                log(estado, `El rival no puede defenderse este turno.`);
             }
 
-            if (estado.bloqueoAtaquePendiente) {
+            if (estado.bloqueoAtaquePendiente && !estado._ataqueNoBloqueableActivo) {
                 danio = 0;
                 fueBloqueado = true;
                 estado.bloqueoAtaquePendiente = false;
-                log(estado, `¡El ataque de "${specAtaque?.nombre}" fue bloqueado por completo!`);
+                log(estado, `¡El ataque de "${specAtaque?.nombre}" fue bloqueado!`);
+            } else if (estado.bloqueoAtaquePendiente && estado._ataqueNoBloqueableActivo) {
+                log(estado, `¡${specAtaque?.nombre} tiene HUMILLANDO: el bloqueo no tiene efecto!`);
+                estado.bloqueoAtaquePendiente = false;
             } else if (ctx.anularDanioYRedirigir) {
                 atacante.energia = Math.max(0, atacante.energia - atk);
                 log(estado, `¡El ataque de ${specAtaque?.nombre} se redirige y daña a su propio jugador en ${atk} pts!`);
                 danio = 0;
             }
 
+            estado._ataqueNoBloqueableActivo = false; // consumir por ataque
+
+            // ESO ES DEMASIADO (#673, permanente): si el ataque supera 200
+            // pts, el atacante debe descartar 2 cartas.
+            if (estado._esoEsDemasiadoActivo && atk > 200) {
+                const nDesc = Math.min(2, atacante.mano.length);
+                for (let i = 0; i < nDesc; i++) atacante.descarte.push(atacante.mano.shift());
+                log(estado, `ESO ES DEMASIADO: ataque de ${atk} pts, atacante descartó ${nDesc} cartas.`);
+            }
+
             if (danio > 0) {
                 defensor.energia = Math.max(0, defensor.energia - danio);
+                defensor._recibioDanioTurnoAnterior = true;
                 log(estado, `${specAtaque?.nombre || 'Ataque'} inflige ${danio} pts de daño.`);
             } else if (!ctx.anularDanioYRedirigir && !fueBloqueado) {
                 log(estado, `${specAtaque?.nombre || 'Ataque'} fue absorbido por completo.`);
@@ -752,7 +1298,13 @@ const DBZEngine = (() => {
 
         // Los bonus de turno del atacante se limpian tras resolver (sólo
         // valen "durante este turno", según el texto de cada carta).
-        atacante.bonusTurno = { rivalNoPuedeDefenderse: false, rivalDefensaMitad: false };
+        atacante.bonusTurno = {
+            rivalNoPuedeDefenderse: false,
+            rivalDefensaMitad: false,
+            defensaPerforadoraPropia: false,
+            caraACara: false,
+            rivalNoPuedeAtacarProximoTurno: false,
+        };
 
         // Las cartas usadas van al cementerio (descarte) de cada uno
         atacante.campoAtaque.forEach(e => {
@@ -805,6 +1357,7 @@ const DBZEngine = (() => {
         const numEsfera = esferaReq > 0 ? sacados[idxEsfera] : null;
 
         j.campoDefensa = { defensaNum: num, esferaNum: numEsfera, modificadores: [] };
+        j._seDefendioTurnoAnterior = true;
         log(estado, `Jugador defensor preparó "${spec.nombre}" (DEF ${spec.defensa}).`);
         return { ok: true };
     }
@@ -905,6 +1458,9 @@ const DBZEngine = (() => {
         const num = j.mano[idxEnMano];
         const spec = specOf(num);
         if (!spec || spec.tipo !== TIPOS.INSTANTANEA) return { ok: false, error: "Esa carta no es instantánea." };
+        if (estado.j1.bonusTurno.caraACara || estado.j2.bonusTurno.caraACara) {
+            return { ok: false, error: "CARA A CARA: no se pueden usar instantáneas este turno." };
+        }
 
         const esferaReq = spec.esferaNecesaria || 0;
         let idxEsfera = -1;
@@ -960,6 +1516,10 @@ const DBZEngine = (() => {
         const spec = specOf(num);
         if (!spec || spec.tipo !== TIPOS.ESPECIAL) return { ok: false, error: "Esa carta no es de tipo Especial." };
         if (!puedeJugarseEsteTurno(j, num, spec)) return { ok: false, error: "Ya jugaste esta carta este turno." };
+        // INTIMIDACION (#652): el rival bloqueó permanentes este turno
+        if (spec.permanente && jugadorActivo(estado).condiciones.bloqueadoPermanentes) {
+            return { ok: false, error: "INTIMIDACION: tu rival tiene una carta permanente que te impide bajar permanentes este turno." };
+        }
 
         const esferaReq = spec.esferaNecesaria || 0;
         let idxEsfera = -1;
@@ -1053,11 +1613,27 @@ const DBZEngine = (() => {
     }
 
     function pasarTurno(estado) {
+        const jugadorId = idJugador(estado, estado.turnoJugador);
+        const j = estado[jugadorId];
+
+        // REMEDIO DE SATAN: si el jugador no atacó este turno y tenía el
+        // efecto activo (bajó la carta pero no atacó), recupera 100 pts.
+        if (j._remedioSatan) {
+            j._remedioSatan = false;
+            if (!estado.bajoCartaEsteTurno || j.campoAtaque.length === 0) {
+                const antes = j.energia;
+                j.energia = Math.min(j.energiaMax, j.energia + 100);
+                log(estado, `EL REMEDIO DE SATAN: recuperaste ${j.energia - antes} pts por no atacar.`);
+            }
+        }
+
         if (!estado.bajoCartaEsteTurno) {
             descartarHasta5(estado);
             log(estado, `Jugador ${estado.turnoJugador} no jugó cartas: descartó hasta quedar con 5.`);
         }
-        // Limpia cualquier defensa no usada (no debería quedar, por las dudas)
+
+        // Limpiar estado temporal del turno
+        j._pizzaActiva = false;
         estado.turnoJugador = estado.turnoJugador === 1 ? 2 : 1;
         estado.faseTurno = "robo";
         faseRobo(estado);

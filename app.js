@@ -1,14 +1,16 @@
 // app.js - DBZ Leyenda (Cromeros / Flashgondor)
 
 const coleccionAlbum = {};
+
+// RANGOS DE CAJAS: "carpeta" es el nombre de la subcarpeta en cartas/
+// "fondo" es el archivo en fondos/
+// Los rangos son los números OFICIALES de las cartas físicas de cada caja.
 const rangosCajas = [
-    { id: "caja_1", titulo: "Serie 1: Caja Naranja (Goku)", desde: 1, hasta: 176, css: "naranja" },
-    { id: "caja_2", titulo: "Serie 2: Caja Azul (Piccolo)", desde: 177, hasta: 265, css: "azul" },
-    { id: "caja_3", titulo: "Serie 3: Caja Verde (Vegeta)", desde: 266, hasta: 401, css: "verde" },
-    { id: "caja_4", titulo: "Serie 4: Caja Roja (Gohan)", desde: 402, hasta: 543, css: "roja" },
-    { id: "caja_5", titulo: "Serie 5: Caja Amarilla (Goku SSJ2)", desde: 544, hasta: 679, css: "amarilla" },
-    { id: "caja_6", titulo: "Serie 6: Caja Violeta (Trunks)", desde: 680, hasta: 815, css: "violeta" },
-    { id: "caja_7", titulo: "Serie 7: Caja Negra (Majin Buu)", desde: 816, hasta: 950, css: "negra" }
+    { id: "caja_1", titulo: "Serie 1 — Caja Goku",       desde: 1,   hasta: 176, css: "naranja",  carpeta: "caja1", fondo: "fondos/caja1.png" },
+    { id: "caja_2", titulo: "Serie 2 — Caja Piccolo",    desde: 177, hasta: 265, css: "azul",     carpeta: "caja2", fondo: "fondos/caja2.png" },
+    { id: "caja_3", titulo: "Serie 3 — Caja Vegeta",     desde: 266, hasta: 401, css: "verde",    carpeta: "caja3", fondo: "fondos/caja3.png" },
+    { id: "caja_4", titulo: "Serie 4 — Caja Gohan",      desde: 402, hasta: 543, css: "roja",     carpeta: "caja4", fondo: "fondos/caja4.png" },
+    { id: "caja_5", titulo: "Serie 5 — Caja Cell",       desde: 544, hasta: 699, css: "amarilla", carpeta: "caja5", fondo: "fondos/caja5.png" },
 ];
 
 let cajaActiva = null;
@@ -47,16 +49,45 @@ async function cargarBaseDatosCartas() {
     } catch (e) { console.log("Pool cargado."); }
 }
 
+// Devuelve la ruta relativa de la imagen de frente de una carta dado su número.
+// Busca en la carpeta de la caja que corresponde al rango de ese número.
+// Si la carta tiene una foto subida manualmente (imgFrente en base64), esa tiene prioridad.
+function rutaImagenCarta(numero) {
+    const carta = buscarCartaEnMemoria(numero);
+    if (carta && carta.imgFrente) return carta.imgFrente; // foto subida manualmente
+    const caja = rangosCajas.find(c => numero >= c.desde && numero <= c.hasta);
+    if (caja) return `cartas/${caja.carpeta}/${numero}.jpg`;
+    return null;
+}
+
+// Devuelve la ruta del dorso universal.
+function rutaDorsoCarta() {
+    return 'cartas/dorso/dorso.jpg';
+}
+
 function renderizarMenuCajas() {
     const contenedor = document.getElementById("bloque-cajas");
     contenedor.innerHTML = "";
     Object.values(coleccionAlbum).forEach(caja => {
+        const rangoCaja = rangosCajas.find(r => r.id === caja.id);
         const div = document.createElement("div");
         div.className = `tarjeta-caja ${caja.cssClass}`;
         const total = caja.hasta - caja.desde + 1;
         const obtenidas = Object.values(caja.cartas).filter(c => c.obtenida || c.repetidas > 0).length;
 
-        div.innerHTML = `<h3>${caja.titulo}</h3><p>N° ${caja.desde} al ${caja.hasta}</p><div class="contador-completado">${obtenidas} / ${total} Obtenidas</div>`;
+        // Fondo de imagen de la caja
+        if (rangoCaja && rangoCaja.fondo) {
+            div.style.backgroundImage = `url('${rangoCaja.fondo}')`;
+            div.style.backgroundSize = 'cover';
+            div.style.backgroundPosition = 'center';
+        }
+
+        div.innerHTML = `
+            <div class="tarjeta-caja-overlay">
+                <h3>${caja.titulo}</h3>
+                <p>N° ${caja.desde} al ${caja.hasta}</p>
+                <div class="contador-completado">${obtenidas} / ${total} obtenidas</div>
+            </div>`;
         div.onclick = () => {
             cajaActiva = caja;
             document.getElementById("pantalla-seleccion").className = "seccion-oculta";
@@ -85,14 +116,23 @@ function refrescarGrilla() {
         slot.className = `carta-slot ${estaObtenida ? 'obtenida' : ''}`;
         slot.onclick = () => abrirModalFicha(carta.numero);
 
-        if (carta.imgFrente) {
-            slot.innerHTML = `<img src="${carta.imgFrente}">`;
+        const ruta = rutaImagenCarta(carta.numero);
+        if (ruta) {
+            const img = document.createElement("img");
+            img.src = ruta;
+            img.alt = match ? match.nombre : `#${carta.numero}`;
+            // Si la imagen no existe en disco, mostrar el dorso como placeholder
+            img.onerror = function() {
+                this.src = rutaDorsoCarta();
+                this.onerror = null; // evitar loop si tampoco existe el dorso
+            };
+            slot.appendChild(img);
         } else {
             slot.innerHTML = `<span class="sin-foto-lbl">${match ? match.nombre : 'N° ' + carta.numero}</span>`;
         }
         slot.innerHTML += `<span class="numero-flotante">#${carta.numero}</span>`;
         if (carta.repetidas > 0) slot.innerHTML += `<span class="repetidas-tag">x${carta.repetidas}</span>`;
-        
+
         grilla.appendChild(slot);
     });
 }
@@ -110,8 +150,9 @@ function abrirModalFicha(numero) {
     document.getElementById("mod-def").value = match ? match.defensa : carta.def;
     document.getElementById("mod-esfera").value = match ? match.esferaNecesaria : carta.esfera;
 
-    document.getElementById("modal-img-frente").src = carta.imgFrente || "";
-    document.getElementById("modal-img-atras").src = carta.imgAtras || "";
+    document.getElementById("modal-img-frente").src = rutaImagenCarta(numero) || "";
+    document.getElementById("modal-img-frente").onerror = function() { this.src = rutaDorsoCarta(); this.onerror = null; };
+    document.getElementById("modal-img-atras").src = carta.imgAtras || rutaDorsoCarta();
 
     // PANEL DE ENVÍO DIRECTO DESDE EL MODAL A MAZOS EXISTENTES
     const bloqueMazo = document.getElementById("bloque-agregar-a-mazo-modal");
@@ -223,20 +264,27 @@ function renderizarListasMazo(mazo) {
     mazo.cartas.forEach((num, idx) => {
         const div = document.createElement("div"); div.className = "mini-cromo-slot";
         div.onclick = () => { mazo.cartas.splice(idx, 1); guardarEnLocalStorage(); construirSeccionMisMazos(); };
-        const f = buscarCartaEnMemoria(num).imgFrente;
-        div.innerHTML = f ? `<img src="${f}">` : `<div style="font-size:8px; padding:4px; color:var(--txt-muted); text-align:center;">#${num}</div>`;
+        const ruta = rutaImagenCarta(num);
+        if (ruta) {
+            div.innerHTML = `<img src="${ruta}" onerror="this.src='${rutaDorsoCarta()}';this.onerror=null;">`;
+        } else {
+            div.innerHTML = `<div style="font-size:8px; padding:4px; color:var(--txt-muted); text-align:center;">#${num}</div>`;
+        }
         cajaAdd.appendChild(div);
     });
 
     const cajaInv = document.getElementById("pool-inventario");
     cajaInv.innerHTML = "";
-
-    // PÁGINA PÚBLICA INTEGRAL: Cualquier carta en tu JSON de especificaciones está disponible para simular de inmediato
     mazoPoolEspecificaciones.forEach(spec => {
         const div = document.createElement("div"); div.className = "mini-cromo-slot";
         div.onclick = () => { mazo.cartas.push(spec.numero); guardarEnLocalStorage(); construirSeccionMisMazos(); };
-        const f = buscarCartaEnMemoria(spec.numero).imgFrente;
-        div.innerHTML = f ? `<img src="${f}">` : `<div style="font-size:7px; color:#555; text-align:center; padding:3px;">${spec.nombre}</div><span class="num-id">#${spec.numero}</span>`;
+        const ruta = rutaImagenCarta(spec.numero);
+        if (ruta) {
+            div.innerHTML = `<img src="${ruta}" onerror="this.src='${rutaDorsoCarta()}';this.onerror=null;">`;
+        } else {
+            div.innerHTML = `<div style="font-size:7px; color:#555; text-align:center; padding:3px;">${spec.nombre}</div>`;
+        }
+        div.innerHTML += `<span class="numero-flotante" style="font-size:9px;">#${spec.numero}</span>`;
         cajaInv.appendChild(div);
     });
 }
@@ -309,9 +357,8 @@ function iniciarCombatePVPLocal() {
 function specDe(num) { return mazoPoolEspecificaciones.find(c => c.numero === num); }
 
 function nombreVisualCarta(num) {
-    const carta = buscarCartaEnMemoria(num);
     const spec = specDe(num);
-    return { img: carta ? carta.imgFrente : null, nombre: spec ? spec.nombre : `#${num}` };
+    return { img: rutaImagenCarta(num), nombre: spec ? spec.nombre : `#${num}` };
 }
 
 function actualizarInterfazTableroPVP() {
@@ -434,7 +481,7 @@ function manejarClickCartaEnMano(idx, num, spec) {
         // mesa (propio o rival). Se reconocen por su efectoId y, si hay
         // algún ataque en mesa (de cualquiera de los dos jugadores), se le
         // pide al jugador elegir cuál antes de resolver el efecto.
-        const REQUIERE_OBJETIVO = ["MODIFICAR_OBJETIVO_0_40", "MODIFICAR_OBJETIVO_20_0", "MODIFICAR_OBJETIVO_20_20", "MODIFICAR_OBJETIVO_MENOS20_MENOS20", "MULTIPLICAR_OBJETIVO_X3"];
+        const REQUIERE_OBJETIVO = ["MODIFICAR_OBJETIVO_0_40", "MODIFICAR_OBJETIVO_20_0", "MODIFICAR_OBJETIVO_20_20", "MODIFICAR_OBJETIVO_MENOS20_MENOS20", "MULTIPLICAR_OBJETIVO_X3", "MULTIPLICAR_OBJETIVO_X1_X2"];
         if (REQUIERE_OBJETIVO.includes(spec.efectoId)) {
             const hayAtaquesEnMesa = estado.j1.campoAtaque.length > 0 || estado.j2.campoAtaque.length > 0;
             if (!hayAtaquesEnMesa) return alert("No hay ningún ataque en mesa todavía para aplicarle esta carta.");
