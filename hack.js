@@ -1,44 +1,4 @@
-// ==========================================================================
-// hack.js — Utilidad de DESARROLLO/TESTING para "DBZ Leyenda"
-// ==========================================================================
-// Este archivo NO se carga automáticamente desde index.html. Es una
-// herramienta de consola para poblar tu álbum local con TODAS las cartas
-// que existan en cartas_db.json, marcándolas como "obtenidas" (sin imagen,
-// mostrando el nombre como placeholder), para poder armar mazos y jugar
-// partidas de prueba sin tener que subir 900 fotos a mano.
-//
-// CÓMO USARLO:
-//   1) Abrí la app en el navegador (index.html ya cargado normalmente).
-//   2) Abrí la consola del navegador (F12 → pestaña "Console").
-//   3) Pegá el contenido de este archivo y presioná Enter, o cargalo así:
-//        const s = document.createElement('script');
-//        s.src = 'hack.js';
-//        document.body.appendChild(s);
-//   4) Llamá a una de estas funciones según lo que necesites:
-//
-//        hackPoblarAlbumCompleto()
-//          → Marca como obtenida 1 copia de CADA carta de cartas_db.json.
-//
-//        hackPoblarAlbumCompleto(3)
-//          → Igual, pero con 3 copias de cada carta (útil para armar mazos
-//            de 40+ sin que falten repetidas).
-//
-//        hackVaciarAlbum()
-//          → Revierte todo: pone el álbum en blanco otra vez (como recién
-//            instalado). Útil para volver al álbum vacío original donde
-//            cada uno sube su propia foto.
-//
-//        hackCrearMazoDePrueba("Mazo Test", 40)
-//          → Crea automáticamente un mazo legal (>=40 cartas) usando las
-//            cartas disponibles en cartas_db.json, listo para jugar PVP
-//            sin tener que arrastrar cartas una por una en el editor.
-//
-// IMPORTANTE: esto solo toca tu localStorage local (clave
-// "coleccionAlbum_Publico" / "estructuraMazos_Publico"), nunca modifica
-// cartas_db.json. Cada usuario real de la página seguirá viendo su álbum
-// vacío y subiendo sus propias fotos normalmente; este script es solo para
-// vos, mientras desarrollás y probás el motor de juego.
-// ==========================================================================
+
 
 function hackPoblarAlbumCompleto(copias = 1) {
     if (typeof coleccionAlbum === "undefined" || typeof mazoPoolEspecificaciones === "undefined") {
