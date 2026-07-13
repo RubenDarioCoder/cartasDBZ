@@ -98,7 +98,7 @@
       "defensa": 0,
       "esferaNecesaria": 7,
       "texto": "LOS PUNTOS DE ATAQUE DE TU ADVERSARUI SE VUELVEN EN SU CONTRA SIN DAÑARTE. NO SIRVE CONTRA EL ATAQUE DE LAS 7 ESFERAS,",
-      "efectoId": "POR_DEFECTO"
+      "efectoId": "DEVOLVER_ATAQUE"
     },
     {
       "numero": 11,
@@ -193,7 +193,7 @@
     {
       "numero": 20,
       "nombre": "ANDROIDE A-18",
-      "tipo": "Modificadora",
+      "tipo": "Ataque",
       "ataque": 30,
       "defensa": 40,
       "esferaNecesaria": 2,
@@ -204,7 +204,7 @@
     {
       "numero": 21,
       "nombre": "ANDROIDE A-17",
-      "tipo": "Modificadora",
+      "tipo": "Ataque",
       "ataque": 30,
       "defensa": 50,
       "esferaNecesaria": 4,
@@ -215,7 +215,7 @@
     {
       "numero": 22,
       "nombre": "ANDROIDE A-16",
-      "tipo": "Modificadora",
+      "tipo": "Ataque",
       "ataque": 30,
       "defensa": 60,
       "esferaNecesaria": 5,
@@ -240,7 +240,7 @@
       "ataque": 20,
       "defensa": 30,
       "esferaNecesaria": 2,
-      "texto": "CELL NO DUDARA EN DESTRUIR A QUIEN SEA NECESARIO PARA ABSORBER SU ENERGIA Y HACERSE ASI MAS PODEROSO",
+      "texto": "CELL NULO DUDARA EN DESTRUIR A QUIEN SEA NECESARIO PARA ABSORBER SU ENERGIA Y HACERSE ASI MAS PODEROSO",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -384,54 +384,54 @@
       "efectoId": "DESCARTAR_TODAS_ESFERAS_RIVAL"
     },
     {
+      "numero": 39,
       "nombre": "LUCHA DE COLOSOS",
       "tipo": "Ataque",
       "ataque": 10,
       "defensa": 50,
       "esferaNecesaria": 1,
       "texto": "GOKU Y CELL SE ENFRENTAN EN UNA BATALLA SIN IGUAL.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 39
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 40,
       "nombre": "KAME HAME HA NIVEL 2",
       "tipo": "Ataque",
       "ataque": 20,
       "defensa": 70,
       "esferaNecesaria": 3,
       "texto": "ESTA ES UNA DE LAS MAS POTENTES TECNICAS UTILIZADAS POR GOKU Y SU FAMILIA.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 40
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 41,
       "nombre": "EMBESTIDA",
       "tipo": "Ataque",
       "ataque": 20,
       "defensa": 50,
       "esferaNecesaria": 1,
       "texto": "ESTE ATAQUE NO PUEDE SER BLOQUEADO.",
-      "efectoId": "HUMILLANDO",
-      "numero": 41
+      "efectoId": "HUMILLANDO"
     },
     {
+      "numero": 42,
       "nombre": "GOHAN SUPER SAIYAN",
       "tipo": "Ataque",
       "ataque": 10,
       "defensa": 40,
       "esferaNecesaria": 2,
       "texto": "EL PODEROSO GOHAN ALCANZO EL NIVEL DE SUPER SAIYAN A CORTA EDAD PARA SORPRESA DE GOKU Y VEGETA.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 42
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 43,
       "nombre": "EL PODER DE SHENRON",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 1,
-      "texto": "BUSCA EN TU PILA DE DESCARTE UNA CARTA DE ATAQUE QUE QUIERAS VOLVER A TU MANO Y LUEGO DESCARTA OTRA.",
-      "efectoId": "RECUPERAR_DEL_DESCARTE",
-      "numero": 43
+      "texto": "BUSCA EN TU PILA DE DESCARTE UNA CARTA DE ATAQUE QUE QUIERAS VOLVER A TU MANO LUEGO DESCARTA OTRA.",
+      "efectoId": "RECUPERAR_DEL_DESCARTE"
     },
     {
       "numero": 44,
@@ -444,24 +444,24 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 45,
       "nombre": "EL PODER DE GOHAN",
       "tipo": "Ataque",
       "ataque": 40,
       "defensa": 30,
       "esferaNecesaria": 2,
       "texto": "GRACIAS A HORAS DE ENTRENAMIENTO EN LA CAPSULA DEL TIEMPO JUNTO A GOKU, GOHAN ALCANZA MUCHISIMO PODER.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 45
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 46,
       "nombre": "TECNICAS MIXTAS",
       "tipo": "Modificadora",
       "ataque": 20,
       "defensa": 20,
       "esferaNecesaria": 3,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +20 +20.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 46
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 47,
@@ -474,34 +474,34 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 48,
       "nombre": "KNOCK OUT",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "DESCARTA HASTA 6 CARTAS DE TU MANO Y ROBA DE TU MAZO LA MISMA CANTIDAD. NO PUEDES ATACAR EN ESTE TURNO.",
-      "efectoId": "KNOCK_OUT",
-      "numero": 48
+      "efectoId": "KNOCK_OUT"
     },
     {
+      "numero": 49,
       "nombre": "RAYOS DE ENERGIA",
       "tipo": "Ataque",
       "ataque": 30,
       "defensa": 20,
       "esferaNecesaria": 1,
       "texto": "VEGETA LANZA UN TERRIBLE ATAQUE UTILIZANDO SU ENERGIA.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 49
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 50,
       "nombre": "COMPARTIR ESFERA",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "GRACIAS A ESTA CARTA, PUEDES BAJAR CUALQUIER ATAQUE (SOLO 1) SIN NECESIDAD DE GASTAR OTRA ESFERA.",
-      "efectoId": "COMPARTIR_ESFERA_GRATIS",
-      "numero": 50
+      "efectoId": "COMPARTIR_ESFERA_GRATIS"
     },
     {
       "numero": 51,
@@ -534,14 +534,14 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 54,
       "nombre": "FUERZA DESCOMUNAL",
       "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 40,
       "esferaNecesaria": 3,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +0 +40.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 54
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 55,
@@ -554,44 +554,44 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 56,
       "nombre": "ALIMENTO VITAL",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 4,
       "texto": "RECUPERA 50 PUNTOS DE TU CONTADOR DE ENERGIA.",
-      "efectoId": "RECUPERAR_50",
-      "numero": 56
+      "efectoId": "RECUPERAR_50"
     },
     {
+      "numero": 57,
       "nombre": "KAME HAME HA NIVEL 3",
       "tipo": "Ataque",
       "ataque": 40,
       "defensa": 90,
       "esferaNecesaria": 6,
       "texto": "ESTA BOLA DE ENERGIA DESTRUIRA TODO LO QUE ESTE EN SU CAMINO.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 57
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 58,
       "nombre": "LA GRAN IDEA DE BUU",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 1,
-      "texto": "TU CONTRINCANTE DEBE DESCARTAR TODAS LAS CARTAS DE SU MANO Y LEVANTAR SOLO 3.",
-      "efectoId": "LA_GRAN_IDEA_DE_BUU",
-      "numero": 58
+      "texto": "TU CONTRINCANTE DEBE DESCARTAR TODAS LAS CARTAS DE SU MANO Y LEVANTA SOLO 3.",
+      "efectoId": "LA_GRAN_IDEA_DE_BUUS"
     },
     {
+      "numero": 59,
       "nombre": "PELIGRO INMINENTE",
       "tipo": "Instantanea",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 2,
       "texto": "GRACIAS AL RADAR TE ANTICIPAS A TU ENEMIGO. SU FUERZA DE ATAQUE DISMINUYE A LA MITAD.",
-      "efectoId": "DEFENSA_RIVAL_MITAD",
-      "numero": 59
+      "efectoId": "DEFENSA_RIVAL_MITAD"
     },
     {
       "numero": 60,
@@ -604,14 +604,14 @@
       "efectoId": "SIN_DEFENSA_RIVAL"
     },
     {
+      "numero": 61,
       "nombre": "LA FURIA DE SHENRON",
       "tipo": "Ataque",
       "ataque": 100,
       "defensa": 100,
       "esferaNecesaria": 4,
       "texto": "NO ES BUENO DESPERTAR AL DRAGON SIN UN BUEN MOTIVO.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 61
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 62,
@@ -624,24 +624,24 @@
       "efectoId": "DEFENSA_RIVAL_MITAD"
     },
     {
+      "numero": 63,
       "nombre": "REGENERACION",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "AÑADE 50 PUNTOS A TU CONTADOR DE ENERGIA.",
-      "efectoId": "RECUPERAR_50",
-      "numero": 63
+      "efectoId": "RECUPERAR_50"
     },
     {
+      "numero": 64,
       "nombre": "PATADA DE BURRO",
       "tipo": "Ataque",
       "ataque": 60,
       "defensa": 20,
       "esferaNecesaria": 7,
       "texto": "SI AL DEFENDER, TU DEFENSA ES MAYOR QUE EL ATAQUE DE TU ENEMIGO, ESTE DEBE DESCONTAR LA DIFERENCIA DE SU ENERGIA.",
-      "efectoId": "DEFENSA_PERFORADORA",
-      "numero": 64
+      "efectoId": "DEFENSA_PERFORADORA"
     },
     {
       "numero": 65,
@@ -654,24 +654,24 @@
       "efectoId": "MODIFICAR_OBJETIVO_20_20"
     },
     {
+      "numero": 66,
       "nombre": "LA NUBE DE GOKU",
       "tipo": "Modificadora",
       "ataque": 40,
       "defensa": 0,
       "esferaNecesaria": 2,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +40 +0.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 66
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 67,
       "nombre": "INDESTRUCTIBLE",
       "tipo": "Instantanea",
       "ataque": 80,
       "defensa": 0,
       "esferaNecesaria": 3,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +80 +0.",
-      "efectoId": "MODIFICAR_OBJETIVO_80_0",
-      "numero": 67
+      "efectoId": "MODIFICAR_OBJETIVO_80_0"
     },
     {
       "numero": 68,
@@ -684,74 +684,74 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 69,
       "nombre": "REACCION RAPIDA",
       "tipo": "Ataque",
       "ataque": 80,
       "defensa": 20,
       "esferaNecesaria": 5,
       "texto": "SI AL DEFENDER TU DEFENSA ES MAYOR QUE EL ATAQUE DE TU ENEMIGO, ESTE DEBE DESCONTAR LA DIFERENCIA DE SU ENERGIA.",
-      "efectoId": "DEFENSA_PERFORADORA",
-      "numero": 69
+      "efectoId": "DEFENSA_PERFORADORA"
     },
     {
+      "numero": 70,
       "nombre": "ESTRATEGIA",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "BUSCA 3 CARTAS EN TU CEMENTERIO Y DEVUELVELAS A TU MANO. DESCARTA 3 Y MEZCLA BIEN.",
-      "efectoId": "RECUPERAR_3_DEL_DESCARTE",
-      "numero": 70
+      "efectoId": "RECUPERAR_3_DEL_DESCARTE"
     },
     {
+      "numero": 71,
       "nombre": "BESO DE DRAGON",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "AÑADE 25 PUNTOS A TU CONTADOR DE ENERGIA",
-      "efectoId": "RECUPERAR_25",
-      "numero": 71
+      "efectoId": "RECUPERAR_25"
     },
     {
+      "numero": 72,
       "nombre": "SUPER VELOCIDAD",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 1,
       "texto": "TU ADVERSARIO NO PUEDE DEFENDERSE DE LAS ATAQUES QUE BAJES JUNTO A ESTA CARTA.",
-      "efectoId": "SIN_DEFENSA_RIVAL",
-      "numero": 72
+      "efectoId": "SIN_DEFENSA_RIVAL"
     },
     {
+      "numero": 73,
       "nombre": "LA GARRA DEL TIGRE",
       "tipo": "Ataque",
       "ataque": 70,
       "defensa": 10,
       "esferaNecesaria": 2,
       "texto": "LOS PODEROSOS DEDOS DE GOKU SON COMO TERRIBLES GARRAS DE ACERO.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 73
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 74,
       "nombre": "MUSCULOS DE ACERO",
       "tipo": "Instantanea",
       "ataque": 20,
       "defensa": 40,
       "esferaNecesaria": 3,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +20 +40.",
-      "efectoId": "MODIFICAR_OBJETIVO_20_40",
-      "numero": 74
+      "efectoId": "MODIFICAR_OBJETIVO_20_40"
     },
     {
+      "numero": 75,
       "nombre": "MIRADA MAESTRA",
       "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 4,
       "texto": "LEVANTA 10 CARTAS DE TU MAZO, ACOMODALAS A TU GUSTO Y VUELVELAS AL MAZO. SOLO TU DEBES VER LAS.",
-      "efectoId": "MIRADA_MAESTRA",
-      "numero": 75
+      "efectoId": "MIRADA_MAESTRA"
     },
     {
       "numero": 76,
@@ -764,14 +764,14 @@
       "efectoId": "DEFENSA_PERFORADORA"
     },
     {
+      "numero": 77,
       "nombre": "ESQUIVAR",
       "tipo": "Instantanea",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "LOS ATAQUES DE TU ADVERSARIO NO TE HACEN DAÑO EN ESTE TURNO.",
-      "efectoId": "ANULAR_TOTAL_SIN_EXCEPCION",
-      "numero": 77
+      "efectoId": "ANULAR_TOTAL_SIN_EXCEPCION"
     },
     {
       "numero": 78,
@@ -784,14 +784,24 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 79,
       "nombre": "YAJIROBE",
       "tipo": "Ataque",
       "ataque": 40,
       "defensa": 20,
       "esferaNecesaria": 1,
       "texto": "YAJIROBE NO DUDARIA JAMAS EN CAMBIAR CUALQUIER LUCHA POR UNA BUENA COMIDA.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 79
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 80,
+      "nombre": "DETENER",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "BLOQUEA UN ATAQUE.",
+      "efectoId": "DETENER"
     },
     {
       "numero": 81,
@@ -814,44 +824,154 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 83,
       "nombre": "ANIQUILACION",
       "tipo": "Instantanea",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 4,
       "texto": "DESTRUYE UN PERSONAJE QUE HAYA SIDO BAJADO PARA ATACARTE.",
-      "efectoId": "BLOQUEAR_ATAQUE",
-      "numero": 83
+      "efectoId": "BLOQUEAR_ATAQUE"
     },
     {
+      "numero": 84,
       "nombre": "ESPECTROS BUU",
       "tipo": "Ataque",
       "ataque": 50,
       "defensa": 60,
       "esferaNecesaria": 4,
       "texto": "LOS FANTASMAS DE MAJIN BUU PUEDEN SER REALMENTE MOLESTOS.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 84
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 85,
       "nombre": "LLAVE AL CUELLO",
       "tipo": "Ataque",
       "ataque": 10,
       "defensa": 80,
       "esferaNecesaria": 4,
       "texto": "EL PODEROSO MR. SATAN HA CAIDO EN LOS BRAZOS DE LA TEMIBLE ANDROIDE A-18.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 85
+      "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 86,
       "nombre": "PATADA VOLADORA",
       "tipo": "Ataque",
       "ataque": 50,
       "defensa": 50,
       "esferaNecesaria": 1,
       "texto": "VIDEL APLICA UNA FUERTE PATADA A LA MANDIBULA DE SU CONTRINCANTE.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 86
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 87,
+      "nombre": "BUU EL INSACIABLE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "ANULA EL ATAQUE DE UNA CARTA. ESA CARTA DEBE SER DESCARTADA. AGREGA LOS PUNTOS DE DEFENSA DE DICHA CARTA A TU ENERGIA.",
+      "efectoId": "BUU_EL_INSACIABLE"
+    },
+    {
+      "numero": 88,
+      "nombre": "KAIOH SHIN",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 50,
+      "esferaNecesaria": 4,
+      "texto": "SI PELEAS CONTRA BUU, MODIFICA LOS VALORES DE ESTA CARTA EN X2 X2.",
+      "efectoId": "KAIOH_SHIN"
+    },
+    {
+      "numero": 89,
+      "nombre": "EL LADO OSCURO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "SI PELEAS CONTRA GOKU MODIFICA ESTA CARTA EN X2 X2.",
+      "efectoId": "EL_LADO_OSCURO"
+    },
+    {
+      "numero": 90,
+      "nombre": "SUPER SAIYAN 3",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 90,
+      "esferaNecesaria": 4,
+      "texto": "GOKU LOGRA EL TERCER NIVEL DE SUPER SAIYAN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 91,
+      "nombre": "EXTREME MAJIN BUU",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "TU ADVERSARIO DEBE MOSTRARTE SU MANO PARA QUE ELIJAS UN PERSONAJE Y LO DESCARTE.",
+      "efectoId": "EXTREME_MAJIN_BUU"
+    },
+    {
+      "numero": 92,
+      "nombre": "ENERGIA SUPERIOR",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 20,
+      "esferaNecesaria": 5,
+      "texto": "GRACIAS A UNA GRAN CONCENTRACION VEGETA PUEDE DETENER CASI CUALQUIER ATAQUE.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 93,
+      "nombre": "NUEVO COMIENZO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 80,
+      "esferaNecesaria": 1,
+      "texto": "MAJIN BUU VUELVE A LA VIDA PERO ESTA VEZ COMO UN NIÑO Y SERA ALUMNO DE GOKU.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 94,
+      "nombre": "A VER, A VER",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "TU ADVERSARIO DEBE MOSTRARTE SU MANO. ELIGE HASTA 3 CARTAS PARA QUE DESCARTE LUEGO LEVANTA IGUAL CANTIDAD",
+      "efectoId": "A_VER_A_VER"
+    },
+    {
+      "numero": 95,
+      "nombre": "CODAZO",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "MAJIN BUU APLICA UN TREMENDO CODAZO A LA CARA DE GOKU.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 96,
+      "nombre": "EL PODER DE GOHAN",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 60,
+      "esferaNecesaria": 3,
+      "texto": "GOHAN NO NECESITA NUBES PARA VOLAR.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 97,
+      "nombre": "PATADA",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "LOS SAIYAJIN POSEEN INCREIBLES DOTES PARA LA BATALLA, GRAN AGILIDAD Y VELOCIDAD.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 98,
@@ -861,6 +981,56 @@
       "defensa": 20,
       "esferaNecesaria": 6,
       "texto": "GOKU APLICA UN TREMENDO GOLPE DE CODO A LA NUCA DE MAJIN BUU.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 99,
+      "nombre": "TENSHINHAN",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "A PESAR DE HABER SIDO ENEMIGOS AL PRINCIPIO TENSHINHAN SE CONVIRTIO EN UN GRAN AMIGO DE GOKU.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 100,
+      "nombre": "NEUTRALIZACION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "CUALQUIER ATAQUE ENEMIGO ES NEUTRALIZADO (SOLO UN ATAQUE)",
+      "efectoId": "NEUTRALIZACION"
+    },
+    {
+      "numero": 101,
+      "nombre": "ESCUDO DE VAPOR",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "EL ATAQUE DE TU ENEMIGO SE REDUCE A LA MITAD Y TU ADVERSARIO SUFRE 50 PUNTOS DE DAÑO.",
+      "efectoId": "ESCUDO_DE_VAPOR"
+    },
+    {
+      "numero": 102,
+      "nombre": "VENGANZA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "ENVIA DIRECTAMENTE AL MAZO DE DESCARTE UNA CARTA QUE TU ADVERSARIO HAYA BAJADO. NO RECIBES DAÑO.",
+      "efectoId": "VENGANZA"
+    },
+    {
+      "numero": 103,
+      "nombre": "NO ME DETENDRAN",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "FREEZER NO DESCANSARA NUNCA EN SU INTENTO POR DESTRUIR A GOKU Y A TODOS LOS QUE SE LE OPONGAN.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -874,14 +1044,94 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 105,
+      "nombre": "REMATE SAIYAN",
+      "tipo": "Ataque",
+      "ataque": 10,
+      "defensa": 80,
+      "esferaNecesaria": 4,
+      "texto": "SOLO PUEDES UTILIZAR ESTE ATAQUE IF LO COMBINAS CON OTRO. NUNCA PUEDES USARLO COMO UNICO ATAQUE.",
+      "efectoId": "REMATE_SAIYAN"
+    },
+    {
       "numero": 106,
-      "nombre": "GARRA DEL GRAGON",
+      "nombre": "GARRA DEL DRAGON",
       "tipo": "Modificadora",
       "ataque": 100,
       "defensa": 100,
       "esferaNecesaria": 6,
       "texto": "PUEDE DEFENDER DE 2 ATAQUES A LA VEZ. TU ADVERSARIO DEBE SUMAR LOS PUNTOS DE ATAQUE DE SUS ATAQUES.",
       "efectoId": "GARRA_DEL_DRAGON"
+    },
+    {
+      "numero": 107,
+      "nombre": "SUPER SAIYAMAN",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 70,
+      "esferaNecesaria": 5,
+      "texto": "OCULTO TRAS UN DISFRAZ, GOHAN LUCHA CONTRA LA DELINCUENCIA EN SATAN CITY.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 108,
+      "nombre": "DENDE",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 50,
+      "esferaNecesaria": 1,
+      "texto": "DENDE POSEE EL DON DE LA CURACION Y PUEDE HABLAR CON EL GRAN DRAGON. RECUPERA 50 PUNTOS DE ENERGIA.",
+      "efectoId": "DENDE"
+    },
+    {
+      "numero": 109,
+      "nombre": "BABIDI",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "BLOQUEA UN ATAQUE MENOR A 70 PUNTOS",
+      "efectoId": "BABIDI"
+    },
+    {
+      "numero": 110,
+      "nombre": "EGOS ENFRENTADOS",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "SI TU ADVERSARIO REALIZA DOS ATAQUES, ESAS DOS CARTAS LUCHAN ENTRE SI SIN CAUSARTE DAÑO.",
+      "efectoId": "EGOS_ENFRENTADOS"
+    },
+    {
+      "numero": 111,
+      "nombre": "PONIENDO ORDEN",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "GOKU LE APLICA UN TERRIBLE GOLPE DE PUÑO EN EL ROSTRO A VEGETA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 112,
+      "nombre": "PARA EL CACHETAZO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 70,
+      "esferaNecesaria": 4,
+      "texto": "GOKU LE DA UNA IMPRESIONANTE PALIZA A BUU DEMOSTRANDOLE QUIEN ES EL MAS PODEROSO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 113,
+      "nombre": "BUU VS BUU",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "BUU SE DEBATE ENTRE EL BIEN Y EL MAL.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 114,
@@ -894,6 +1144,26 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 115,
+      "nombre": "ATAQUE COMBINADO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "SI ATACAS WITH DOS SAIYAJINS MODIFICA LOS VALORES DE AMBAS CARTAS EN +40 +40.",
+      "efectoId": "ATAQUE_COMBINADO"
+    },
+    {
+      "numero": 116,
+      "nombre": "VEN A MI",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 30,
+      "esferaNecesaria": 3,
+      "texto": "SI AL DEFENDER, TU DEFENSA ES MAYOR QUE EL ATAQUE DE TU ENEMIGO, ESTE DEBE DESCONTAR LA DIFERENCIA DE SU ENERGIA.",
+      "efectoId": "VEN_A_MI"
+    },
+    {
       "numero": 117,
       "nombre": "SIN PIEDAD",
       "tipo": "Modificadora",
@@ -901,7 +1171,37 @@
       "defensa": 0,
       "esferaNecesaria": 4,
       "texto": "SI TE ENFRENTAS A UN ADVERSARIO QUE NO SEA DE LA FAMILIA SAIYAJIN MODIFICA LA CARTA EN +0 +50",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 118,
+      "nombre": "RECARGA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "VUELVE LAS CARTAS DE TU MANO INCLUYENDO ESTA Y SU ESFERA AL MAZO Y MEZCLA. LEVANTA 7 CARTAS Y CONTINUA JUGANDO.",
+      "efectoId": "RECARGA"
+    },
+    {
+      "numero": 119,
+      "nombre": "RECARGA OBLIGADA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO DEBE DESCARTAR TODAS LAS CARTAS DE SU MANO Y LEVANTAR IGUAL CANTIDAD DE CARTAS.",
+      "efectoId": "RECARGA_OBLIGADA"
+    },
+    {
+      "numero": 120,
+      "nombre": "IRA INCONTROLABLE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN -20 +20",
+      "efectoId": "MODIFICAR_OBJETIVO_MENOS20_20"
     },
     {
       "numero": 121,
@@ -926,12 +1226,22 @@
     {
       "numero": 123,
       "nombre": "FUERZAS UNIDAS",
-      "tipo": "Modificadora",
+      "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 2,
       "texto": "PAGA EL COSTE DE ESTA CARTA Y BAJA DOS ATAQUES SIN NECESIDAD DE PAGAR POR ESTOS.",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "FUERZAS_UNIDAS"
+    },
+    {
+      "numero": 124,
+      "nombre": "HACIENDO LOS DEBERES",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MIRA LAS 10 PRIMERAS CARTAS DEL MAZO DE TU ADVERSARIO Y ACOMODALAS COMO QUIERAS.",
+      "efectoId": "HACIENDO_LOS_DEBERES"
     },
     {
       "numero": 125,
@@ -941,6 +1251,16 @@
       "defensa": 90,
       "esferaNecesaria": 4,
       "texto": "LOS SUPER SAIYAJINS, LA FAMILIA DE GUERREROS MAS PODEROSAS DEL UNIVERSO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 126,
+      "nombre": "LA IRA DE KRILLIN",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 50,
+      "esferaNecesaria": 4,
+      "texto": "AUNQUE PAREZCA INOFENSIVO, KRILLIN ES TEMIBLE CUANDO LASTIMAN A SUS AMIGOS.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -954,6 +1274,116 @@
       "efectoId": "RECUPERAR_DEL_DESCARTE"
     },
     {
+      "numero": 128,
+      "nombre": "ATAQUE SORPRESA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO NO PODRA DEFENDERSE DE TUS ATAQUES EN ESTE TURNO.",
+      "efectoId": "SIN_DEFENSA_RIVAL"
+    },
+    {
+      "numero": 129,
+      "nombre": "FUERZA EXTREMA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN X2 X2.",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X2_X2"
+    },
+    {
+      "numero": 130,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 131,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 132,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 133,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 134,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 135,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 136,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 137,
+      "nombre": "HORA DEL BAÑO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "ANULA UN ATAQUE. LA CARTA DE ATAQUE VA A LA PILA DE DESCARTE, LA ESFERA VUELVE A LA MANO.",
+      "efectoId": "HORA_DEL_BANO"
+    },
+    {
+      "numero": 138,
+      "nombre": "EL VALOR DE GOKU",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 80,
+      "esferaNecesaria": 2,
+      "texto": "GOKU NO PERMITIRA QUE NADIE AMENACE A SUS SERES QUERIDOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
       "numero": 139,
       "nombre": "MILK",
       "tipo": "Ataque",
@@ -961,6 +1391,16 @@
       "defensa": 30,
       "esferaNecesaria": 1,
       "texto": "MILK NO TIENE LOS PODERES DE UN GUERRERO PERO ES MUY PELIGROSA SI TE METES CON SUS NIÑOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 140,
+      "nombre": "RADITZ",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 100,
+      "esferaNecesaria": 4,
+      "texto": "EL HERMANO DE GOKU LLEGA A LA TIERRA PARA APODERARSE DEL PLANETA.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -974,6 +1414,97 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 142,
+      "nombre": "POTENCIACION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA X1 X2 (SOLO PARA PICCOLO)",
+      "efectoId": "POTENCIACION_PICCOLO"
+    },
+    {
+      "numero": 143,
+      "nombre": "DESAYUNO KAME HA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "RECUPERA 50 PUNTOS DE TU CONTADOR DE ENERGIA.",
+      "efectoId": "RECUPERAR_50"
+    },
+    {
+      "numero": 144,
+      "nombre": "UN NUEVO GOHAN",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 90,
+      "esferaNecesaria": 1,
+      "texto": "TERMINADO EL ENTRENAMIENTO, PICCOLO LE DA A GOHAN NUEVAS VESTIMENTAS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 145,
+      "nombre": "ATAQUE CAÑON",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 120,
+      "esferaNecesaria": 1,
+      "texto": "PARA PODER BAJAR ESTA CARTA DEBES HACERLO UNTO CON LA CARTA \"EL SACRIFICIO DE GOKU\".",
+      "efectoId": "ATAQUE_CAÑON",
+      "comboCon": [147]
+    },
+    {
+      "numero": 146,
+      "nombre": "GOHAN OHZARU",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 200,
+      "esferaNecesaria": 3,
+      "texto": "PARA PODER BAJAR ESTA CARTA DEBES HACERLO JUNTO CON LA CARTA \"LUNA LLENA\".",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 147,
+      "nombre": "EL SACRIFICIO DE GOKU",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "NEUTRALIZAS EL ATAQUE DE UNA CARTA. PARA BAJAR ESTA CARTA DEBES DESCARTAR DOS DE TU MANO.",
+      "efectoId": "SACRIFICIO_DE_GOKU"
+    },
+    {
+      "numero": 148,
+      "nombre": "CONECCION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "BUSCA EN TU MAZO HASTA DOS CARTAS DE PICCOLO Y DESARTA ESTA. LUEGO MEZCLA BIEN.",
+      "efectoId": "BUSCAR_PICCOLO_EN_MAZO"
+    },
+    {
+      "numero": 149,
+      "nombre": "ENMAIO SAMA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "TU OPONENTE DEBE MOSTRARTE SU MANO Y DESCARTAR A TODOS SUS PERSONAJES. NO ESFERAS.",
+      "efectoId": "ENMAIO_SAMA"
+    },
+    {
+      "numero": 150,
+      "nombre": "¡CUIDADO!",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "TODOS LOS ATAQUES DE TU ADVERSARIO SE REDUCEN A LA MITAD.",
+      "efectoId": "CUIDADO"
+    },
+    {
       "numero": 151,
       "nombre": "LLEGAN LOS SAIYAYIN",
       "tipo": "Especial",
@@ -984,14 +1515,74 @@
       "efectoId": "BUSCAR_EN_MAZO_3"
     },
     {
-      "nombre": "MILK",
-      "tipo": "Ataque",
-      "ataque": 60,
-      "defensa": 30,
+      "numero": 152,
+      "nombre": "CORRE GOKU CORRE",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
       "esferaNecesaria": 1,
-      "texto": "MILK NO TIENE LOS PODERES DE UN GUERRERO PERO ES MUY PELIGROSA SI TE METES CON SUS NIÑOS.",
-      "efectoId": "POR_DEFECTO",
-      "numero": 159
+      "texto": "BUSCA EN TU MAZO DE DESCARTE UNA CARTA DE GOKU Y DEVUELVELA A TU MAZO. LUEGO MEZCLAR.",
+      "efectoId": "CORRE_GOKU_CORRE"
+    },
+    {
+      "numero": 153,
+      "nombre": "GUARDIAN DEL INFIERNO",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 60,
+      "esferaNecesaria": 3,
+      "texto": "SI LOS DOS GUARDIANES DEL INFIERNO ATACAN JUNTOS TU ADVERSARIO NO PODRA BLOQUEAR.",
+      "efectoId": "GUARDIAN_INFIERNO"
+    },
+    {
+      "numero": 154,
+      "nombre": "GUARDIAN DEL INFIERNO",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 40,
+      "esferaNecesaria": 3,
+      "texto": "SI LOS DOS GUARDIANES DEL INFIERNO ATACAN JUNTOS TU ADVERSARIO NO PODRA BLOQUEAR.",
+      "efectoId": "GUARDIAN_INFIERNO"
+    },
+    {
+      "numero": 155,
+      "nombre": "LA FRUTA PROHIBIDA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "SI LA USAS JUNTO A UN GUARDIAN DEL INFIERNO RECUPERAS TODOS TUS PUNTOS DE ENERGIA. SI LA USAS SOLA RECUPERA 50 PUNTOS.",
+      "efectoId": "LA_FRUTA_PROHIBIDA"
+    },
+    {
+      "numero": 156,
+      "nombre": "DESCANSA UN RATO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "LAS CHICAS DE LA PRINCESA SERPIENTE CONSIDERAN QUE GOKU ESTA MUY CANSADO. TU OPONENTE PIERDE SU TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
+    },
+    {
+      "numero": 157,
+      "nombre": "MAESTRO KARIM",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 50,
+      "esferaNecesaria": 5,
+      "texto": "A PESAR DE PARECER SOLO UN GATITO, KARIM ES UN GRAN MAESTRO DE ARTES MARCIALES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 158,
+      "nombre": "PRINCESA SERPIENTE",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 40,
+      "esferaNecesaria": 1,
+      "texto": "SI TE INVITA A SU CASTILLO MEJOR DILE QUE NO.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 160,
@@ -1004,6 +1595,16 @@
       "efectoId": "DEFENSA_RIVAL_MITAD"
     },
     {
+      "numero": 161,
+      "nombre": "EL PODER DE GOHAN",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "SI SE ENFRENTA A UN PERSONAJE MALVADO MODIFICA LOS VALORES DE ESTA CARTA +20 +20.",
+      "efectoId": "PODER_GOHAN_CONTRA_MALVADOS"
+    },
+    {
       "numero": 162,
       "nombre": "FURIA DEMONIACA",
       "tipo": "Instantanea",
@@ -1012,6 +1613,46 @@
       "esferaNecesaria": 5,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA X3 X3. (SOLO PICCOLO).",
       "efectoId": "MULTIPLICAR_OBJETIVO_X3"
+    },
+    {
+      "numero": 163,
+      "nombre": "PICCOLO VS PICCOLO",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 70,
+      "esferaNecesaria": 1,
+      "texto": "SI TU ADVERSARIO ATACA CON PICCOLO MODIFICA LOS VALORES DE ESTA CARTA X2 X2.",
+      "efectoId": "PICCOLO_VS_PICCOLO"
+    },
+    {
+      "numero": 164,
+      "nombre": "¿EL MAS PODEROSO?",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 70,
+      "esferaNecesaria": 1,
+      "texto": "EL ORGULLOSO VEGETA PENSABA QUE EL ERA REALMENTE EL GUERRERO MAS PODEROSO DEL UNIVERSO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 165,
+      "nombre": "EL PEQUEÑO GOKU",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "MIRA LA MANO DE TU ADVERSARIO ENVIA HASTA 3 ESFERAS A SU MAZO PRINCIPAL. MEZCLAR BIEN.",
+      "efectoId": "EL_PEQUENO_GOKU"
+    },
+    {
+      "numero": 166,
+      "nombre": "PATADA VOLADORA",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 60,
+      "esferaNecesaria": 1,
+      "texto": "GOHAN APLICA UNA TERRIBLE PATADA VOLADORA A SU OPONENTE.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 167,
@@ -1024,14 +1665,912 @@
       "efectoId": "LA_CHANCE_DE_CELL"
     },
     {
-      "numero": 233,
-      "nombre": "semilla de ermitaño",
-      "tipo": "Especial",
+      "numero": 168,
+      "nombre": "LA TIERRA SE MUEVE",
+      "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 4,
-      "texto": "SI LA USAS JUNTO A \"MAESTRO KARIN\" RECUPERAS TODOS LOS PUNTOS DE ENERGIA. SI LA USAS SOLA RECUPERA 50 PUNTOS.",
-      "efectoId": "RECUPERAR_20"
+      "texto": "ENVIA TODAS LAS CARTAS DE TU MANO AL MAZO PRINCIPAL, MEZCLA Y TOMA OTRAS 7. SOLO SE PUEDE USAR AL PRINCIPIO DEL TURNO.",
+      "efectoId": "LA_TIERRA_SE_MUEVE"
+    },
+    {
+      "numero": 169,
+      "nombre": "ESPERA UN MOMENTO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "DESCARTA HASTA 3 CARTAS DE TU MANO Y LEVANTA LA MISMA CANTIDAD.",
+      "efectoId": "LA_CHANCE_DE_CELL"
+    },
+    {
+      "numero": 170,
+      "nombre": "TRAMPA MORTAL",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 10,
+      "esferaNecesaria": 1,
+      "texto": "SIN PODER EVITARLO, KRILLIN CAE EN UNA TRAMPA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 171,
+      "nombre": "LA FURIA DE TEN SHIN",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 2,
+      "texto": "TEN SHIN HAN SE ENFURECE TRAS LA MUERTE DE SU AMIGO CHAOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 172,
+      "nombre": "LA FURIA YAMCHA",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 50,
+      "esferaNecesaria": 3,
+      "texto": "DISPUESTO A DEMOSTRAR SU FUERZA YAMCHA ES CAPAZ DE DAR LA VIDA POR SUS AMIGOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 173,
+      "nombre": "ESTO NO ES JUEGO",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 4,
+      "texto": "EL ENTRENAMIENTO QUE PICCOLO LE DIO A GOHAN NO FUE UN JUEGO DE NIÑOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 174,
+      "nombre": "DIETA SANA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "RECUPERA 150 PUNTOS DE TU CONTADOR DE ENERGIA.",
+      "efectoId": "RECUPERAR_150"
+    },
+    {
+      "numero": 175,
+      "nombre": "KAIO SAMA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA EL VALOR DE UNA CARTA EN X2 X2.",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X2_X2"
+    },
+    {
+      "numero": 176,
+      "nombre": "¿QUE ES ESTO?",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "DESCARTA TODAS LAS CARTAS QUE QUIERAS Y LEVANTA LA MISMA CANTIDAD. PUEDES HACERLO AL ATACAR O AL DEFENDER.",
+      "efectoId": "QUE_ES_ESTO"
+    },
+    {
+      "numero": 177,
+      "nombre": "GOHAN APRENDE",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 70,
+      "esferaNecesaria": 1,
+      "texto": "A PESAR DE SER TAN PEQUEÑO, GOHAN LE DEMOSTRO A PICCOLO QUE ES UN BUEN APRENDIZ.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 178,
+      "nombre": "NO QUIERO VER",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "DESCARTA TODAS LAS CARTAS DE TU MANO Y LEVANTA OTRAS 7. TU TURNO TERMINA AQUI.",
+      "efectoId": "NO_QUIERO_VER"
+    },
+    {
+      "numero": 179,
+      "nombre": "BOCADO DIVINO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "RECUPERA 50 PUNTOS DE TU CONTADOR DE ENERGIA.",
+      "efectoId": "RECUPERAR_50"
+    },
+    {
+      "numero": 180,
+      "nombre": "TENSHINHAN Y YAMCHA",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 60,
+      "esferaNecesaria": 3,
+      "texto": "LOS COMPAÑEROS ENTRENAN DURO EN EL TEMPLO DE KAMI SAMA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 181,
+      "nombre": "ATAQUE DE ENERGIA",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "YAMCHA LOGRA UNA PODEROSA TECNICA DE ENERGIA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 182,
+      "nombre": "GOLPE BAJO",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 80,
+      "esferaNecesaria": 1,
+      "texto": "NO FUE FACIL PARA UN PEQUEÑO NIÑO COMO GOHAN EQUIPARAR LOS NIVELES DE LUCHA DE PICCOLO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 183,
+      "nombre": "QUE GRACIOSO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "ESO ES UN ATAQUE? ANULA TODOS LOS ATAQUES BAJADOS POR TU ADVERSARIO.",
+      "efectoId": "QUE_GRACIOSO"
+    },
+    {
+      "numero": 184,
+      "nombre": "AHORA VERAS",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 90,
+      "esferaNecesaria": 3,
+      "texto": "FURIOSO POR LA GOLPIZA, VEGETA RESPONDE CON TODA SU FUERZA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 185,
+      "nombre": "LEGADO SAIYAJIN",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA X1 X2. (SOLO SAIYAJINS Y DESCENDENCIA)",
+      "efectoId": "LEGADO_SAIYAJIN"
+    },
+    {
+      "numero": 186,
+      "nombre": "CAPSULA SAIYAJIN",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "BUSCA EN TU MAZO UN SAIYAJIN Y DESCARTA OTRA. CONTINUA TU TURNO.",
+      "efectoId": "CAPSULA_SAIYAJIN"
+    },
+    {
+      "numero": 187,
+      "nombre": "ENTRENAMIENTO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 50,
+      "esferaNecesaria": 4,
+      "texto": "TENSHINHAN Y YAMCHA ENTRENAN PARA ESTAR PREPARADOS CONTRA LOS SAIYAJINS INVASORES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 188,
+      "nombre": "EL MARTILLO DE KAIO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA +0 +50.",
+      "efectoId": "MARTILLO_KAIO"
+    },
+    {
+      "numero": 189,
+      "nombre": "TROPEZON",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "EL ATAQUE DE TU ADVERSARIO NO TE HACE DAÑO. LOS PUNTOS SE VUELVEN EN SU CONTRA.",
+      "efectoId": "DEVOLVER_ATAQUE"
+    },
+    {
+      "numero": 190,
+      "nombre": "EL HAMBRE DE GOKU",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "EL ATAQUE DE TU ADVERSARIO NO TE HACE DAÑO. LOS PUNTOS SE VUELVEN EN SU CONTRA.",
+      "efectoId": "DEVOLVER_ATAQUE"
+    },
+    {
+      "numero": 191,
+      "nombre": "EL DESEO DE OOLONG",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TODOS LOS ATAQUES DE TU ADVERSARIO VUELVEN A SU MANO SIN CAUSARTE DAÑO. NO PUEDE VOLVER A ATACAR.",
+      "efectoId": "EL_DESEO_DE_OOLONG"
+    },
+    {
+      "numero": 192,
+      "nombre": "LUNA LLENA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UN SAIYAJIN +20 +40. (NO MODIFICA OHZARU)",
+      "efectoId": "LUNA_LLENA"
+    },
+    {
+      "numero": 193,
+      "nombre": "KAIOKEN",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +30 +30.",
+      "efectoId": "MODIFICAR_OBJETIVO_30_30"
+    },
+    {
+      "numero": 194,
+      "nombre": "POR POCO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "ESQUIVA UN ATAQUE DE ENERGIA.",
+      "efectoId": "POR_POCO"
+    },
+    {
+      "numero": 195,
+      "nombre": "DIENTES DE ACERO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 20,
+      "esferaNecesaria": 2,
+      "texto": "SI LA UTILIZAS JUNTO CON LA CARTA \"TROPEZON\" MODIFICA EL DAÑO GENERADO POR DICHA CARTA EN X2.",
+      "efectoId": "DIENTES_ACERO",
+      "comboCon": [189]
+    },
+    {
+      "numero": 196,
+      "nombre": "PRESTA ATENCION",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "PICCOLO RESULTO SER UN MAESTRO MUY PER O MUY EXIGENTE...",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 197,
+      "nombre": "TIEMPO FUERA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TU ADVERSARIO NO PUEDE REALIZAR MAS ATAQUES. SI USAS RAPIDO ESTA CARTA PUEDE QUE NO HAGA NINGUNO.",
+      "efectoId": "TIEMPO_FUERA"
+    },
+    {
+      "numero": 198,
+      "nombre": "NECESIDADES BASICAS",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TU ADVERSARIO NO PUEDE DEFENDERSE DURANTE ESTE TURNO.",
+      "efectoId": "SIN_DEFENSA_RIVAL"
+    },
+    {
+      "numero": 199,
+      "nombre": "MR POPO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 30,
+      "esferaNecesaria": 5,
+      "texto": "MR POPO VIVE CON KAMI SAMA EN SU TEMPLO AUNQUE EN REALIDAD HABITA EL LUGAR DESDE ANTES QUE KAMI LLEGARA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 200,
+      "nombre": "YAMCHA",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 60,
+      "esferaNecesaria": 5,
+      "texto": "YAMCHA Y GOKU ESTAN UNIDOS POR UNA GRAN AMISTAD.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 201,
+      "nombre": "UN MOMENTO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TU ADVERSARIO SOLO PUEDE REALIZAR UN ATAQUE ESTE TURNO. SI HIZO VARIOS, ELIGE CUAL/ES VOLVERAN A SU MANO.",
+      "efectoId": "UN_MOMENTO"
+    },
+    {
+      "numero": 202,
+      "nombre": "BUSCANDO ESFERAS",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "BUSCA EN TU MAZO Y LLEVA HASTA 3 ESFERAS A TU MANO. LUEGO MEZCLAR. SI TERMINAS CON MAS DE 7, DESCARTA.",
+      "efectoId": "BUSCANDO_ESFERAS"
+    },
+    {
+      "numero": 203,
+      "nombre": "PURO CORAZON",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 60,
+      "esferaNecesaria": 2,
+      "texto": "A PESAR DE NO SER DE LOS GUERREROS MAS PODEROSOS, KRILLIN ES SIN DUDA UNO DE LOS MAS VALIENTES LUCHADORES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 204,
+      "nombre": "OX SATAN",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 60,
+      "esferaNecesaria": 1,
+      "texto": "EL GIGANTESCO PADRE DE MILK SIEMPRE ESTA AHI PARA CONTENERLA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 205,
+      "nombre": "EL TERCER OJO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "ANTES DE ATACAR PUEDES PEDIRLE A TU ADVERSARIO QUE TE MUESTRE LAS CARTAS DE SU MANO.",
+      "efectoId": "MOSTRAR_MANO_RIVAL"
+    },
+    {
+      "numero": 206,
+      "nombre": "NAPPA",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 90,
+      "esferaNecesaria": 4,
+      "texto": "EL TERRIBLE COMPAÑERO DE VEGETA LLEGA A LA TIERRA PARA ENFRENTAR A GOKU Y SUS AMIGOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 207,
+      "nombre": "KRILLIN",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 4,
+      "texto": "EL ENTRENAMIENTO EN EL TEMPLO DE KAMI SAMA AUMENTA MUCHO EL PODER DE KRILLIN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 208,
+      "nombre": "EL DEMONIO NAMEKIANO",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 90,
+      "esferaNecesaria": 4,
+      "texto": "A PESAR DE SU ODIO CONTRA GOKU, PICCOLO DARA SU VIDA PARA SALVAR A GOHAN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 209,
+      "nombre": "ATAQUE KIKOHO",
+      "tipo": "Ataque",
+      "ataque": 10,
+      "defensa": 90,
+      "esferaNecesaria": 1,
+      "texto": "TENSHINHAN APLICA SU TECNICA MAS PODEROSA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 210,
+      "nombre": "SAIBAMAN",
+      "tipo": "Modificadora",
+      "ataque": 30,
+      "defensa": 50,
+      "esferaNecesaria": 1,
+      "texto": "PUEDES BAJAR HASTA TRES CARTAS \"SAIBAMAN\" USANDO UNA SOLA ESFERA.",
+      "efectoId": "SAIBAMAN"
+    },
+    {
+      "numero": 211,
+      "nombre": "SORPRESA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TOMAS A TU ADVERSARIO POR SORPRESA, SUS DEFENSAS BAJAN A LA MITAD DURANTE ESTE TURNO.",
+      "efectoId": "DEFENSA_RIVAL_MITAD"
+    },
+    {
+      "numero": 212,
+      "nombre": "CODAZO",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 50,
+      "esferaNecesaria": 1,
+      "texto": "TENSHINHAN APLICA UN TERRIBLE CODAZO A UNO DE LOS SAIBAMAN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 213,
+      "nombre": "CASTIGO NAMEKIANO",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 50,
+      "esferaNecesaria": 1,
+      "texto": "PICCOLO DESTRUYE AL SAIBAMAN COMO SI FUERA UNA MOSCA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 214,
+      "nombre": "KRILLIN POTENCIADO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "MODIFICA UNA CARTA DE KRILLIN EN +20 +40.",
+      "efectoId": "KRILLIN_POTENCIADO"
+    },
+    {
+      "numero": 215,
+      "nombre": "BOMBA SAIBAMAN",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 10,
+      "esferaNecesaria": 1,
+      "texto": "DESCUENTA DE LA ENERGIA DE TU ADVERSARIO LA DIFERENCIA ENTRE SU ATAQUE Y TU DEFENSA.",
+      "efectoId": "DEFENSA_PERFORADORA"
+    },
+    {
+      "numero": 216,
+      "nombre": "TENSHINHAN",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "TENSHINHAN ES UN GUERRERO ORGULLOSO Y MUY COMPETITIVO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 217,
+      "nombre": "SED DE PELEA",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 80,
+      "esferaNecesaria": 3,
+      "texto": "NAPPA ES UN GUERRERO SANGUINARIO QUE DISFRUTA SOMETIENDO A SUS ADVERSARIOS.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 218,
+      "nombre": "ATAQUE DE ENERGIA",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 40,
+      "esferaNecesaria": 1,
+      "texto": "EN ESTE TURNO, TODAS LAS DEFENSAS DE TU ADVERSARIO SE REDUCIRAN A LA MITAD.",
+      "efectoId": "DEFENSA_RIVAL_MITAD"
+    },
+    {
+      "numero": 219,
+      "nombre": "TEMBLOR",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "VUELVE LAS CARTAS DE TU MANO, INCLUYENDO ESTA Y SU ESFERA AL FONDO DE TU MAZO, LEVANTA 7, MEZCLA Y CONTINUA.",
+      "efectoId": "RECARGA"
+    },
+    {
+      "numero": 220,
+      "nombre": "ATAQUE COMBINADO",
+      "tipo": "Ataque",
+      "ataque": 10,
+      "defensa": 60,
+      "esferaNecesaria": 3,
+      "texto": "SI REALIZAS DOS ATAQUES, LAS DEFENSAS DE TU ADVERSARIO SE REDUCEN A LA MITAD.",
+      "efectoId": "ATAQUE_COMBINADO_DEFENSAS"
+    },
+    {
+      "numero": 221,
+      "nombre": "GARRA DE DRAGON",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 50,
+      "esferaNecesaria": 3,
+      "texto": "KRILLIN, EL MAS ANTIGUO AMIGO DE GOKU.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 222,
+      "nombre": "DUDA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TODOS LOS ATAQUES DE PICCOLO SE REDUCEN A LA MITAD.",
+      "efectoId": "DUDA"
+    },
+    {
+      "numero": 223,
+      "nombre": "A DORMIR",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "EL PEQUEÑO KRILLIN SORPRENDE A NAPPA CON UN FEROZ PUNETAZO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 224,
+      "nombre": "ESTO ES HORRIBLE",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "DEVUELVE TODAS LAS CARTAS DE TU MANO AL FONDO DEL MAZO PRINCIPAL. LEVANTA 7. MEZCLA. CONTINUA.",
+      "efectoId": "RECARGA"
+    },
+    {
+      "numero": 225,
+      "nombre": "GOHAN FURIOSO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 90,
+      "esferaNecesaria": 1,
+      "texto": "LUEGO DE SU ENTRENAMIENTO CON PICCOLO LOS PODERES DE GOHAN AUMENTARON NOTABLEMENTE.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 226,
+      "nombre": "KIENZAN",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 90,
+      "esferaNecesaria": 2,
+      "texto": "LA TECNICA MAS PODEROSA DE KRILLIN: EL DISCO DESTRUCTOR.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 227,
+      "nombre": "EL REGRESO DE GOKU",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "REVISA LAS 10 PRIMERAS CARTAS DEL MAZO PRINCIPAL DE TU ADVERSARIO. MANDA 2 A SU PILA DE DESCARTE. MEZCLAR.",
+      "efectoId": "EL_REGRESO_DE_GOKU"
+    },
+    {
+      "numero": 228,
+      "nombre": "DETENER ATAQUE",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 30,
+      "esferaNecesaria": 2,
+      "texto": "PICCOLO PONE SU VIDA EN RIESGO PARA SALVAR A SU PEQUEÑO APRENDIZ.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 229,
+      "nombre": "REMATE",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 70,
+      "esferaNecesaria": 1,
+      "texto": "CON TODA SU FURIA, GOKU ESTRELLA SUS PUÑOS CONTRA EL VENCIDO SAIYAJIN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 233,
+      "nombre": "SEMILLA DE ERMITAÑO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "SI LA USAS JUNTO A \"MAESTRO KARIN\" RECUPERAS TODOS TUS PUNTOS DE ENERGIA. SI LA USAS SOLA RECUPERA 50 PUNTOS.",
+      "efectoId": "SEMILLA_ERMITANO"
+    },
+    {
+      "numero": 234,
+      "nombre": "ATAQUE KAMIKAZE",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 80,
+      "esferaNecesaria": 4,
+      "texto": "DESDE EL AIRE, NAPPA SE ARROJA CON TODA SU FURIA CONTRA SU ADVERSARIO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 235,
+      "nombre": "URANAI BABA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "ELIGE 10 CARTAS DE TU MAZO, ACOMODALAS COMO QUIERAS, MEZCLA EL RESTO Y PON ESAS 10 ARRIBA DE TODO.",
+      "efectoId": "URANAI_BABA"
+    },
+    {
+      "numero": 236,
+      "nombre": "INVESTIGANDO",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "TU ADVERSARIO TIENDA QUE MOSTRARTE LAS CARTAS DE SU MANO. ELIGE 2 PARA QUE DESCARTE. LUEGO DEBE ROBAR 2.",
+      "efectoId": "INVESTIGANDO"
+    },
+    {
+      "numero": 237,
+      "nombre": "GOLPE KAIOKEN",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 110,
+      "esferaNecesaria": 4,
+      "texto": "GRACIAS A LA TECNICA KAIOKEN GOKU POTENCIA SUS ATAQUES. NO PUEDES USARLA CON OTRA KAIOKEN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 238,
+      "nombre": "GOHAN RECARGADO",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 100,
+      "esferaNecesaria": 4,
+      "texto": "CON EL ENTRENAMIENTO DE PICCOLO Y FURIOSO, GOHAN ES IMPARABLE.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 239,
+      "nombre": "BUBBLES",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 20,
+      "esferaNecesaria": 3,
+      "texto": "BUBBLES ES LA SIMPATICA Y A VECES INSOPORTABLE MASCOTA DE KAIO SAMA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 240,
+      "nombre": "INVOCACION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "REVISA TU PILA DE DESCARTE Y VUELVE UNA CARTA A TU MANO.",
+      "efectoId": "RECUPERAR_DEL_DESCARTE"
+    },
+    {
+      "numero": 241,
+      "nombre": "VOLAR",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TUS ATAQUES NO PODRAN SER BLOQUEADOS POR CARTAS CON MENOS DE 80 PTOS DE DEFENSA.",
+      "efectoId": "VOLAR"
+    },
+    {
+      "numero": 242,
+      "nombre": "DONDE ESTA GOKU?",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "BUSCA UNA CARTA DE GOKU EN TU MAZO PRINCIPAL Y DEVUELVELA A TU MANO. MEZCLA.",
+      "efectoId": "DONDE_ESTA_GOKU"
+    },
+    {
+      "numero": 243,
+      "nombre": "CHAU NAPPA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "BUSCA UNA CARTA DE NAPPA EN EL MAZO PRINCIPAL DE TU ADVERSARIO, MANDALO A SU PILA DE DESCARTE. MEZCLAR.",
+      "efectoId": "CHAU_NAPPA"
+    },
+    {
+      "numero": 244,
+      "nombre": "MIEDO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "ANULA UNA DEFENSA DE TU ADVERSARIO.",
+      "efectoId": "MIEDO"
+    },
+    {
+      "numero": 245,
+      "nombre": "ALTO AHI",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "AMBOS JUGADORES DEBEN DESCARTAR SUS CARTAS. JUNTAR MANO CON MAZO PRINCIPAL Y PILA DE DESCARTE. MEZCLAR Y LEVANTAR 7 NUEVAS.",
+      "efectoId": "ALTO_AHI"
+    },
+    {
+      "numero": 246,
+      "nombre": "GALICK HO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 100,
+      "esferaNecesaria": 4,
+      "texto": "ESTE POTENTE ATAQUE CAÑON ES CAPAZ DE GENERAR MUCHO DAÑO A SU OBJETIVO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 247,
+      "nombre": "KAIOKEN",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +30 +30.",
+      "efectoId": "MODIFICAR_OBJETIVO_30_30"
+    },
+    {
+      "numero": 248,
+      "nombre": "DOBLE KAIOKEN",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN X2 X2.",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X2_X2"
+    },
+    {
+      "numero": 249,
+      "nombre": "TRIPLE KAIOKEN",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN X3 X3. (NO SERVIR PARA OHZARU)",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X3_X3",
+      "multiplicador": true,
+      "multAtk": 3,
+      "multDef": 3
+    },
+    {
+      "numero": 250,
+      "nombre": "VEGETA OHZARU",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 200,
+      "esferaNecesaria": 2,
+      "texto": "PARA PODER BAJAR ESTA CARTA DEBES HACERLO JUNTO CON LA CARTA \"LUNA LLENA\".",
+      "efectoId": "POR_DEFECTO",
+      "comboCon": [192]
+    },
+    {
+      "numero": 251,
+      "nombre": "ENERGIA SIN CONTROL",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "UN ATAQUE DE ENERGIA DE TU ENEMIGO SE VUELVE EN SU CONTRA.",
+      "efectoId": "DEVOLVER_ATAQUE"
+    },
+    {
+      "numero": 252,
+      "nombre": "HONOR SAIYAJIN",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 40,
+      "esferaNecesaria": 1,
+      "texto": "VEGETA NO PUEDE CREER LO PODEROSO QUE SON GOKU Y SU HIJO GOHAN.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 253,
+      "nombre": "CUADRUPLE KAIOKEN",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN X4 X4. (SOLO GOKU)",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X4_X4",
+      "multiplicador": true,
+      "multAtk": 4,
+      "multDef": 4
+    },
+    {
+      "numero": 254,
+      "nombre": "DOBLE GALICK HO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 150,
+      "esferaNecesaria": 1,
+      "texto": "CONCENTRANDO TODA SU ENERGIA VEGETA ES CAPAZ DE DUPLICAR LA TECNICA GALICK HO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 255,
+      "nombre": "YOJIMBO EL VALIENTE",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "JUEGA ESTA CARTA AL FINAL DE TU TURNO. TU OPONENTE NO PUEDE REALIZAR NINGUN ATAQUE EN SU TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
+    },
+    {
+      "numero": 256,
+      "nombre": "GOLPE CERTERO",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 70,
+      "esferaNecesaria": 3,
+      "texto": "VEGETA RESULTO SER MUCHO MAS PODEROSO DE LO QUE LOS GUERREROS Z ESTABAN ESPERANDO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 257,
+      "nombre": "CODAZO VOLADOR",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "GOHAN NO ES UN NIÑO NORMAL, SUS PODERES CRECEN JUNTO CON SU FURIA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 258,
+      "nombre": "DETENER ENERGIA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "REDUCE EL DAÑO DE UN ATAQUE DE ENERGIA A LA MITAD.",
+      "efectoId": "DETENER_ENERGIA"
+    },
+    {
+      "numero": 259,
+      "nombre": "TANGO SERPIENTE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TU ADVERSARIO SE ENTRETIENE BAILANDO. PIERDE SU TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
+    },
+    {
+      "numero": 260,
+      "nombre": "BURLA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TU OPONENTE NO LOGRA CONCENTRARSE. TODAS LOS ATAQUES DE ENERGIA QUEDAN ANULADOS.",
+      "efectoId": "BURLA"
     },
     {
       "numero": 261,
@@ -1041,7 +2580,120 @@
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "TU ADVERSARIO DEBE MOSTRARTE SU MANI Y ENVIAR AL FONDO DE SU MAZO TODAS LAS CARTAS DE GOHAN Y GOKU. MEZCLAR.",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "MILK_AL_RESCATE"
+    },
+    {
+      "numero": 262,
+      "nombre": "YAJIROBE, EL SAMURAI",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 40,
+      "esferaNecesaria": 4,
+      "texto": "ESTA CARTA ANULA LAS CARTAS \"OHZARU\"",
+      "efectoId": "ANULAR_OHZARU"
+    },
+    {
+      "numero": 263,
+      "nombre": "CONTROL GENKIDAMA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN X2 X2.",
+      "efectoId": "MULTIPLICAR_OBJETIVO_X2_X2",
+      "multiplicador": true,
+      "multAtk": 2,
+      "multDef": 2
+    },
+    {
+      "numero": 264,
+      "nombre": "LA ESPADA DE YAJIROBE",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "ESTA CARTA ANULA LAS CARTAS \"OHZARU\"",
+      "efectoId": "ANULAR_OHZARU"
+    },
+    {
+      "numero": 265,
+      "nombre": "RESERVADA_AGUARDANDO_DATA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "PENDIENTE DE TU ENVIÓ.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 266,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 267,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 268,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 269,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 270,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 271,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 272,
+      "nombre": "ESFERA DEL DRAGON",
+      "tipo": "Esfera",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 0,
+      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 273,
@@ -1076,6 +2728,16 @@
       "efectoId": "ANULAR_SI_MENOR_80"
     },
     {
+      "numero": 276,
+      "nombre": "REVISACION MEDICA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO NO PUEDE REALIZAR ATAQUES EN SU PROXIMO TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
+    },
+    {
       "numero": 277,
       "nombre": "LA TERRIBLE MILK",
       "tipo": "Instantanea",
@@ -1083,7 +2745,17 @@
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "ANULA TODOS LOS ATAQUE DE GOHAN Y GOTEN. TU ADVERSARIO DEBE MANDAR DICHAS CARTAS AL FONDO DE SU MAZO DE DESCARTE.",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "LA_TERRIBLE_MILK"
+    },
+    {
+      "numero": 278,
+      "nombre": "BUSCANDO ESFERAS",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "LEVANTA LAS 10 PRIMERAS CARTAS DE TU MAZO PRINCIPAL Y CAMBIA TODAS LAS ESFERAS QUE ENCUENTRES Y QUIERAS POR CARTAS DE TU MANO. LUEGO MEZCLAR BIEN.",
+      "efectoId": "BUSCANDO_ESFERAS"
     },
     {
       "numero": 279,
@@ -1106,6 +2778,16 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 281,
+      "nombre": "GUERRERO NAMEKIANO",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 50,
+      "esferaNecesaria": 2,
+      "texto": "LOS GUERREROS DE NAMEK NO SE RENDIRAN ANTE NADA NI NADIE.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
       "numero": 282,
       "nombre": "MERCENARIOS",
       "tipo": "Modificadora",
@@ -1115,11 +2797,19 @@
       "texto": "SI BAJAS ESTA CARTA JUNTO A LA CARTA \"EXPLORADORES\" MODIFICA EN X2 X2.",
       "efectoId": "POR_DEFECTO",
       "multDef": 2,
-      "comboCon": [
-        279
-      ],
+      "comboCon": [279],
       "multiplicador": true,
       "multAtk": 2
+    },
+    {
+      "numero": 283,
+      "nombre": "CAMPO PROTECTOR",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "REDUCE EL TOTAL DE LOS ATAQUES DE TU ENEMIGO DURANTE ESTE TURNO EN -100 PUNTOS.",
+      "efectoId": "CAMPO_PROTECTOR"
     },
     {
       "numero": 284,
@@ -1142,6 +2832,16 @@
       "efectoId": "MOSTRAR_MANO_RIVAL"
     },
     {
+      "numero": 286,
+      "nombre": "ORGULLO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LAS CARACTERISTICAS DE UNA CARTA EN +30 +30.",
+      "efectoId": "MODIFICAR_OBJETIVO_30_30"
+    },
+    {
       "numero": 287,
       "nombre": "GOLPE MARTILLO",
       "tipo": "Ataque",
@@ -1152,6 +2852,16 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 288,
+      "nombre": "DESTRUCCION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "DESTRUYE UNA CARTA INSTANTANEA DEJANDOLA SIN EFECTO.",
+      "efectoId": "DESTRUIR_INSTANTANEA"
+    },
+    {
       "numero": 289,
       "nombre": "DODORIA",
       "tipo": "Modificadora",
@@ -1160,9 +2870,7 @@
       "esferaNecesaria": 3,
       "texto": "SI BAJAS ESTA CARTA JUNTO A LA CARTA \"ZABRON\" UTILIZA SOLO UNA DE LAS 2 ESFERAS PARA BAJAR LAS DOS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        290
-      ]
+      "comboCon": [290]
     },
     {
       "numero": 290,
@@ -1173,9 +2881,27 @@
       "esferaNecesaria": 4,
       "texto": "SI BAJAS ESTA CARTA JUNTO A LA CARTA \"DODORIA\" UTILIZA SOLO UNA DE LAS 2 ESFERAS PARA BAJAR LAS DOS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        289
-      ]
+      "comboCon": [289]
+    },
+    {
+      "numero": 291,
+      "nombre": "FUEGO CRUZADO",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 30,
+      "esferaNecesaria": 1,
+      "texto": "PUEDES USAR ESTA CARTA PARA DEFENDERTE DE DOS ATAQUES.",
+      "efectoId": "MULTIPLICACION"
+    },
+    {
+      "numero": 292,
+      "nombre": "CAMBIO DE ESFERA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "DESCARTA UNA ESFERA DE TU MANO REVISA TU MAZO Y LEVANTA UNA ESFERA. LUEGO MEZCLAR BIEN.",
+      "efectoId": "CAMBIO_DE_ESFERA"
     },
     {
       "numero": 293,
@@ -1185,6 +2911,16 @@
       "defensa": 0,
       "esferaNecesaria": 7,
       "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +0 +30.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 294,
+      "nombre": "PARADA EN SECO",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 30,
+      "esferaNecesaria": 1,
+      "texto": "EL CRUEL DODORIA DISFRUTA LUCHANDO CON GUERREROS DE MENOR FUERZA QUE EL.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -1198,6 +2934,26 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 296,
+      "nombre": "TRAMPA MORTAL",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "UN ATAQUE MENOR A 100 PUNTOS ES NEUTRALIZADO INSTANTANEAMENTE.",
+      "efectoId": "ANULAR_SI_MENOR_IGUAL_100"
+    },
+    {
+      "numero": 297,
+      "nombre": "QUEBRADORA",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 80,
+      "esferaNecesaria": 1,
+      "texto": "LA CABEZA DEL NAMEKIANO ES PARA DODORIA COMO UNA RAMITA EN MANOS DE UN NIÑO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
       "numero": 298,
       "nombre": "ATRAPADO",
       "tipo": "Instantanea",
@@ -1206,6 +2962,26 @@
       "esferaNecesaria": 5,
       "texto": "ANULA UN ATAQUE MENOR A 80 PUNTOS.",
       "efectoId": "ANULAR_SI_MENOR_IGUAL_80_V2"
+    },
+    {
+      "numero": 299,
+      "nombre": "TAIYOKEN",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "ENCANDILAS A TU ADVERSARIO. NO PUEDE ATACAR EN SU PROXIMO TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
+    },
+    {
+      "numero": 300,
+      "nombre": "DOBLE PALANCA",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 40,
+      "esferaNecesaria": 4,
+      "texto": "VEGETA INMOBILIZA FACILMENTE A DODORIA ANULANDO SU ATAQUE SIN HACER EL MENOR ESFUERZO.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 301,
@@ -1228,6 +3004,16 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 303,
+      "nombre": "SUPER VELOCIDAD",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "UN ATAQUE ENEMIGO (MENOR A 100) QUEDA SIN EFECTO Y PUEDES REALIZAR UN ATAQUE AUNQUE NO SEA TU TURNO.",
+      "efectoId": "SUPER_VELOCIDAD_INST"
+    },
+    {
       "numero": 304,
       "nombre": "CODAZO SORPRESIVO",
       "tipo": "Modificadora",
@@ -1237,11 +3023,19 @@
       "texto": "SI BAJAS ESTA CARTA JUNTO CON \"SUPER VELOCIDAD\" MODIFICA EN X1 X2.",
       "efectoId": "POR_DEFECTO",
       "multDef": 2,
-      "comboCon": [
-        9
-      ],
+      "comboCon": [9],
       "multiplicador": true,
       "multAtk": 1
+    },
+    {
+      "numero": 305,
+      "nombre": "METAMORFOSIS",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "MODIFICA LOS VALORES DE LA CARTA \"ZARBON\" EN X2 X2.",
+      "efectoId": "METAMORFOSIS"
     },
     {
       "numero": 306,
@@ -1252,9 +3046,7 @@
       "esferaNecesaria": 1,
       "texto": "TOMANDOLO POR SORPRESA, ZABRON APLICA UN TERRIBLE MANOTAZO A VEGETA. (ESTA CARTA NO SE PUEDE BLOQUEAR).",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        307
-      ],
+      "comboCon": [307],
       "noBloqueable": true
     },
     {
@@ -1266,9 +3058,7 @@
       "esferaNecesaria": 2,
       "texto": "SU JUEGAS ESTA CARTA JUNTO A \"CACHETAZO\" UTILIZA SOLO UNA DE LAS ESFERAS PARA BAJAR LAS DOS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        306
-      ]
+      "comboCon": [306]
     },
     {
       "numero": 308,
@@ -1278,6 +3068,16 @@
       "defensa": 0,
       "esferaNecesaria": 3,
       "texto": "(PERMANENTE) MODIFICA LOS VALORES DE UNA CARTA EN +20 +20.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 309,
+      "nombre": "FAMILIA NUMEROSA",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 30,
+      "esferaNecesaria": 3,
+      "texto": "DENDE ES EL HIJO NUMERO 108 DE EL GRAN PATRIARCA.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -1303,12 +3103,32 @@
     {
       "numero": 312,
       "nombre": "SUPER REMATE",
-      "tipo": "Instantanea",
+      "tipo": "Especial",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 7,
       "texto": "DESTRUYE TODAS LAS CARTAS EN JUEGO EN LAS QUE ESTE ZABRON O DODORIA DEJANDOLAS SIN EFECTO.",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "SUPER_REMATE"
+    },
+    {
+      "numero": 313,
+      "nombre": "EMBOSCADA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO DEBE MOSTRAR SU MANO Y ENVIAR TODAS SUS ESFERAS A SU MAZO PRINCIPAL. LUEGO MEZCLAR.",
+      "efectoId": "EMBOSCADA"
+    },
+    {
+      "numero": 314,
+      "nombre": "BOLA EXPLOSIVA",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 80,
+      "esferaNecesaria": 2,
+      "texto": "GOKU CONCENTRA TODO SU PODER EN SU MANO GENERANDO UNA BOLA EXPLOSIVA MUY PODEROSA.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 315,
@@ -1317,48 +3137,162 @@
       "ataque": 30,
       "defensa": 30,
       "esferaNecesaria": 3,
-      "texto": "EL MAS PATETICO DE LAS FUERZAS ESPECIALES GINYU, AUNQUE TIENE UN ATAUQE SECRETO.",
+      "texto": "EL MAS PATETICO DE LAS FUERZAS ESPECIALES GINYU, AUNQUE TIENE UN ATAQUE SECRETO.",
       "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 316,
       "nombre": "RECOOME",
       "tipo": "Ataque",
-      "ataque": 100,
-      "defensa": 30,
-      "esferaNecesaria": 4,
-      "texto": "A PESAR DE NO SER MUY INTELIGENTE RECOOME ES UN ADVERSARIO MUY PELIGROSO DEBIDO A SU GRAN ZUERZA.",
+      "ataque": 30,
+      "defensa": 100,
+      "esferaNecesaria": 3,
+      "texto": "A PESE DE NO SER MUY INTELIGENTE RECOOME ES UN ADVERSARIO MUY PELIGROSO DEBIDO A SU GRAN FUERZA.",
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 317,
+      "nombre": "JEICE",
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "SI BAJAS A \"JEICE\" JUNTO A \"BURTER\" USA SOLO UNA DE LAS ESFERAS (ESFERA 5 O ESFERA 1).",
+      "efectoId": "POR_DEFECTO",
+      "comboCon": [318]
+    },
+    {
+      "numero": 318,
+      "nombre": "BURTER",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 50,
+      "esferaNecesaria": 4,
+      "texto": "SI BAJAS A \"BURTER\" JUNTO A \"JEICE\" USA SOLO UNA DE LAS ESFERAS (ESFERA 1 O ESFERA 5).",
+      "efectoId": "POR_DEFECTO",
+      "comboCon": [317]
+    },
+    {
       "numero": 319,
-      "nombre": "CAPITAL GINYU",
-      "tipo": "Modificadora",
+      "nombre": "CAPITAN GINYU",
+      "tipo": "Ataque",
       "ataque": 90,
       "defensa": 90,
       "esferaNecesaria": 2,
-      "texto": "JUNTA A TODOS LOS INTEGRANTES DE LAS FUERZAS ESPECIALES GINYU (BURTER, GULDO, REECOME, JEICE, GINYU) Y BAJALOS USANDO SOLO DOS DE LAS ESFERAS.",
-      "efectoId": "POR_DEFECTO"
+      "texto": "JUNTA A TODOS LOS INTEGRANTES DE LAS FUERZAS ESPECIALES GINYU (BURTER, GULDO, RECOOME, JEICE Y GINYU) Y BAJALOS USANDO SOLO DOS DE LAS ESFERAS.",
+      "efectoId": "CAPITAN_GINYU"
+    },
+    {
+      "numero": 320,
+      "nombre": "DETENER EL TIEMPO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "LEVANTA LAS 10 PRIMERAS CARTAS DE TU MAZO PRINCIPAL Y CAMBIA LAS QUE QUIERAS DE TU MANO. LUEGO MEZCLAR BIEN.",
+      "efectoId": "DETENER_EL_TIEMPO"
+    },
+    {
+      "numero": 321,
+      "nombre": "PARALIZADO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "ANULA UN ATAQUE.",
+      "efectoId": "BLOQUEAR_ATAQUE"
     },
     {
       "numero": 322,
       "nombre": "TIRON DE OREJAS",
-      "tipo": "Modificadora",
-      "ataque": 50,
-      "defensa": 10,
+      "tipo": "Ataque",
+      "ataque": 10,
+      "defensa": 50,
       "esferaNecesaria": 5,
       "texto": "SI BAJAS LA CARTA \"PARALIZADO\" PUEDES USAR ESTA CARTA AUNQUE NO SEA TU TURNO.",
-      "efectoId": "ANULAR_PERSONAJE"
+      "efectoId": "TIRON_DE_OREJAS",
+      "comboCon": [321]
+    },
+    {
+      "numero": 323,
+      "nombre": "FUERZA Y VELOCIDAD",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 20,
+      "esferaNecesaria": 5,
+      "texto": "A PESAR DE SU ALTO NIVEL DE PELEA, VEGETA NO PUEDE ATRAVESAR LA DEFENSA DE RECOOME.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 324,
+      "nombre": "ROMPEGUARDIA",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 70,
+      "esferaNecesaria": 5,
+      "texto": "VEGETA LOGRA CONECTAR UN TERRIBLE PUNETAZO AL CONFIADO DE RECOOME.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 325,
+      "nombre": "LA CALESITA",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 30,
+      "esferaNecesaria": 1,
+      "texto": "VEGETA SE DISPONE A PONER A RECCOOME EN ORBITA HACIENDOLO GIRAR A GRAN VELOCIDAD.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 326,
+      "nombre": "PUNTAPIE INICIAL",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 70,
+      "esferaNecesaria": 2,
+      "texto": "SI LOGRAS QUE ESTE ATAQUE SEA EL PRIMERO DEL JUEGO MODIFICA EN X1 X3.",
+      "efectoId": "PUNTAPIE_INICIAL"
+    },
+    {
+      "numero": 327,
+      "nombre": "GOHAN SE ENFURECE",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA EL PODER DE UNA CARTA DE GOHAN EN X2 X2.",
+      "efectoId": "GOHAN_SE_ENFURECE"
+    },
+    {
+      "numero": 328,
+      "nombre": "ATAQUE FEROZ",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 80,
+      "esferaNecesaria": 1,
+      "texto": "GOHAN ARREMETE FEROZMENTE CONTRA RECOOME DANDOLE UNA TERRIBLE PALIZA.",
+      "efectoId": "POR_DEFECTO"
     },
     {
       "numero": 329,
-      "nombre": "FURERZAS ESPECIALES",
-      "tipo": "Especial",
+      "nombre": "FUERZAS ESPECIALES",
+      "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 5,
-      "texto": "BUSCA EN EL MAZO PRINCIPAL A CUALQUIERA DE LOS INTEGRANTES DE LAS FUERZAS ESPECIALES (GINYU, BURTER, GULDO, REECOME, JEICE) Y DEVUELVELO A TU MANO. MEZCLAR.",
-      "efectoId": "BUSCAR_EN_MAZO_3"
+      "texto": "BUSCA EN TU MAZO PRINCIPAL A CUALQUIERA DE LOS INTEGRANTES DE LAS FUERZAS ESPECIALES (GINYU, BURTER, GULDO, RECOOME, JEICE) Y DEVUELVELO A TU MANO. MEZCLAR.",
+      "efectoId": "FUERZAS_ESPECIALES"
+    },
+    {
+      "numero": 330,
+      "nombre": "FURIA OCULTA",
+      "tipo": "Ataque",
+      "ataque": 10,
+      "defensa": 70,
+      "esferaNecesaria": 4,
+      "texto": "SI UTILIZAS ESTA CARTA JUNTO A LA CARTA \"GOHAN\" MODIFICA AMBAS EN X1 X2.",
+      "efectoId": "POR_DEFECTO",
+      "comboCon": [32]
     },
     {
       "numero": 331,
@@ -1371,30 +3305,87 @@
       "efectoId": "RECUPERAR_ULTIMA_JUGADA"
     },
     {
-      "numero": 336,
-      "nombre": "MENTE CLARA",
-      "tipo": "Modificadora",
+      "numero": 332,
+      "nombre": "SALUDOS A TI",
+      "tipo": "Instantanea",
       "ataque": 0,
       "defensa": 0,
-      "esferaNecesaria": 7,
-      "texto": "MODIFICA LOS VALORES DE UNA CARTA +20 +0",
+      "esferaNecesaria": 3,
+      "texto": "SI RECIBES UN ATAQUE DE MAS DE 150 PUNTOS ESE ATAQUE QUEDA ANULADO Y TU OPONENTE RECIBE LA MITAD DEL DAÑO EL MISMO.",
+      "efectoId": "SALUDOS_A_TI"
+    },
+    {
+      "numero": 333,
+      "nombre": "FULMINANTE",
+      "tipo": "Ataque",
+      "ataque": 120,
+      "defensa": 60,
+      "esferaNecesaria": 4,
+      "texto": "GOKU CONTRAATACA A RECCOME DEJANDOLO FUERA DE COMBATE CON SOLO UN GOLPE.",
       "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 334,
+      "nombre": "DESACUERDO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "ANULA UNA CARTA DE PERSONAJE DE LAS FUERZAS ESPECIALES GINYU (BURTER, GULDO, RECOOME, JEICE O GINYU)",
+      "efectoId": "DESACUERDO"
+    },
+    {
+      "numero": 335,
+      "nombre": "ESQUIVAR ATAQUE",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 20,
+      "esferaNecesaria": 5,
+      "texto": "EL CAPITAN DE LAS FUERZAS ESPECIALES NO LOGRA GOLPEAR A GOKU DEBIDO A SU GRAN VELOCIDAD.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 336,
+      "nombre": "MENTE CLARA",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA +20 +0",
+      "efectoId": "MODIFICAR_OBJETIVO_20_0",
+      "permanente": true,
+      "efectoTurnoId": "MENTE_CLARA_TURNO"
+    },
+    {
+      "numero": 337,
+      "nombre": "LA FUERZA DE GINYU",
+      "tipo": "Ataque",
+      "ataque": 100,
+      "defensa": 60,
+      "esferaNecesaria": 1,
+      "texto": "GINYU ES EL CAPITAN Y EL PERSONAJE MAS PELIGROSO DE LAS FUERZAS ESPECIALES AL SERVICIO DE FREEZER.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 338,
+      "nombre": "ATRAPADO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "ANULA UN ATAQUE ENEMIGO DEJANDOLO SIN EFECTO (SOLO UNA CARTA).",
+      "efectoId": "BLOQUEAR_ATAQUE"
     },
     {
       "numero": 339,
       "nombre": "NAIL",
-      "tipo": "Modificadora",
-      "ataque": 50,
-      "defensa": 60,
+      "tipo": "Ataque",
+      "ataque": 60,
+      "defensa": 50,
       "esferaNecesaria": 3,
       "texto": "SI LA BAJAS JUNTO A LA CARTA \"PICCOLO\" MODIFICA AMBAS EN X2 X2.",
-      "efectoId": "POR_DEFECTO",
-      "multDef": 2,
-      "comboCon": [
-        78
-      ],
-      "multiplicador": true,
-      "multAtk": 2
+      "efectoId": "NAIL",
+      "comboCon": [78]
     },
     {
       "numero": 340,
@@ -1407,9 +3398,111 @@
       "efectoId": "ANULAR_SI_MENOR_IGUAL_100"
     },
     {
+      "numero": 341,
+      "nombre": "HERMOSA Y DE TEMER",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO DEBE MOSTRARTE SU MANO ELIGE TODAS LAS CARTAS QUE QUIERAS PARA QUE LAS CAMBIE POR OTRAS DE SU MAZO. LUEGO MEZCLAR.",
+      "efectoId": "HERMOSA_Y_DE_TEMER"
+    },
+    {
+      "numero": 342,
+      "nombre": "MARTILLO Y YUNKE",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 50,
+      "esferaNecesaria": 1,
+      "texto": "VEGETA GOLPEA CON LA RODILLA Y EL CODO A LA VEZ, APRISIONANDO LA CABEZA DE GINYU EN UN DOBLE GOLPE FEROZ.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 343,
+      "nombre": "ESPALDA CON ESPALDA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "MODIFICA EL VALOR DE TUS CARTAS EN X2 X1.",
+      "efectoId": "ESPALDA_CON_ESPALDA"
+    },
+    {
+      "numero": 344,
+      "nombre": "TRAJE ESPECIAL",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA EL VALOR DE UNA CARTA EN +30 +0.",
+      "efectoId": "MODIFICAR_OBJETIVO_20_0",
+      "permanente": true,
+      "efectoTurnoId": "TRAJE_ESPECIAL_TURNO"
+    },
+    {
+      "numero": 345,
+      "nombre": "CAMBIO DE CUERPOS",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "CAMBIA LOS PUNTOS DE TU CONTADOR DE ENERGIA POR LOS DE TU ADVERSARIO Y VICEVERSA.",
+      "efectoId": "CAMBIO_DE_CUERPOS_ENERGIA"
+    },
+    {
+      "numero": 346,
+      "nombre": "RECOLECCION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "BUSCA EN TU MAZO PRINCIPAL Y LLEVA A TU MANO HASTA 5 ESFERAS. DESCARTAR HASTA QUEDAR WITH 7. LUEGO MEZCLAR BIEN.",
+      "efectoId": "RECOLECCION"
+    },
+    {
+      "numero": 347,
+      "nombre": "PREVENCION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "AL GIRAR ESTA CARTA PREVIENES 20 PUNTOS DE DAÑO. USAR LUEGO DE DEFINIR LOS ATAQUES DE TU ADVERSARIO.",
+      "efectoId": "PREVENCION"
+    },
+    {
+      "numero": 348,
+      "nombre": "PORUNGA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "REVISA TU MAZO DE DESCARTE Y DEVUELVE A TU MANO HASTA 3 CARTAS. MEZCLAR.",
+      "efectoId": "RECUPERAR_3_DEL_DESCARTE"
+    },
+    {
+      "numero": 349,
+      "nombre": "DISCUSION DE AMIGOS",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "SI TU ADVERSARIO REALIZA DOS ATAQUES DE DISTINTOS PERSONAJES AMBOS VUELVEN A SU MANO.",
+      "efectoId": "DISCUSION_DE_AMIGOS"
+    },
+    {
+      "numero": 350,
+      "nombre": "TIEMPO DE REFLEXION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "TU OPONENTE NO PUESDE ATACAR EN SU PROXIMO TURNO. PARA BAJAR ESTA CARTA NO PUEDES ATACAR EN TU TURNO.",
+      "efectoId": "TIEMPO_DE_REFLEXION"
+    },
+    {
       "numero": 351,
       "nombre": "MUERTE DEL PATRIARCA",
-      "tipo": "Especial",
+      "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 0,
       "esferaNecesaria": 3,
@@ -1417,17 +3510,151 @@
       "efectoId": "AMBOS_DESCARTAN_ESFERAS"
     },
     {
+      "numero": 352,
+      "nombre": "FURIA TOTAL",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA DE FREEZER EN +0 +30.",
+      "efectoId": "FURIA_TOTAL",
+      "permanente": true,
+      "efectoTurnoId": "FURIA_TOTAL_TURNO"
+    },
+    {
+      "numero": 353,
+      "nombre": "DETENER GOLPE",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 10,
+      "esferaNecesaria": 4,
+      "texto": "VEGETA LOGRA DETENER EL TREMENDO ATAQUE DE FREEZER.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 354,
+      "nombre": "RECARGA DE ENERGIA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "ENDEREZA UNA CARTA PERMANENTE PARA PODER VOLVER A USARLA EN ESTE TURNO.",
+      "efectoId": "RECARGA_DE_ENERGIA"
+    },
+    {
+      "numero": 355,
+      "nombre": "EL REY VEGETA",
+      "tipo": "Ataque",
+      "ataque": 80,
+      "defensa": 80,
+      "esferaNecesaria": 2,
+      "texto": "PADRE DE VEGETA, REY DE LOS SAIYAJINS. FUE ASESINADO POR FREEZER JUNTO A CASI TODA SU RAZA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 356,
+      "nombre": "BOLA DE LA MUERTE",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TU ADVERSARIO DEBE GANAR LA PARTIDA DENTRO DE 10 TURNOS O PERDER INEVITABLEMENTE.",
+      "efectoId": "BOLA_DE_LA_MUERTE",
+      "permanente": true,
+      "efectoTurnoId": "BOLA_DE_LA_MUERTE_TURNO"
+    },
+    {
+      "numero": 357,
+      "nombre": "ATAQUE RENZOKU",
+      "tipo": "Ataque",
+      "ataque": 70,
+      "defensa": 70,
+      "esferaNecesaria": 4,
+      "texto": "VEGETA PREPARA SU ATAQUE RENZOKU MEDIANTE EL CUAL PUEDE DISPARAR MULTIPLES BOLAS DE ENERGIA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
       "numero": 358,
-      "nombre": "PRIMER TRANFORMACION",
+      "nombre": "PRIMER TRANSFORMACION",
       "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 0,
-      "esferaNecesaria": 5,
+      "esferaNecesaria": 4,
       "texto": "BAJA ESTA CARTA JUNTO A LA CARTA \"FREEZER\" Y MODIFICA VALORES EN +30 +30.",
-      "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        310
-      ]
+      "efectoId": "PRIMER_TRANSFORMACION",
+      "comboCon": [310]
+    },
+    {
+      "numero": 359,
+      "nombre": "RETENER PERSONAJE",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO DEBE MOSTRARTE SU MANO ELIGE UNA CARTA DE ATAQUE. ESTA NO PODRA SER USADA EN EL PROXIMO TURNO.",
+      "efectoId": "RETENER_PERSONAJE"
+    },
+    {
+      "numero": 360,
+      "nombre": "LERO LERO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA DE TU OPONENTE EN -50 +20.",
+      "efectoId": "LERO_LERO"
+    },
+    {
+      "numero": 361,
+      "nombre": "GOLPE MORTAL",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 100,
+      "esferaNecesaria": 1,
+      "texto": "FREEZER ATACA WITH TODA SU FUERZA.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 362,
+      "nombre": "EMBESTIDA",
+      "tipo": "Ataque",
+      "ataque": 20,
+      "defensa": 60,
+      "esferaNecesaria": 1,
+      "texto": "ESTE ATAQUE NO PUEDE SER BLOQUEADO",
+      "efectoId": "HUMILLANDO"
+    },
+    {
+      "numero": 363,
+      "nombre": "FUSION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "BAJA ESTA CARTA JUNTO A LAS CARTAS \"PICCOLO\" Y \"NAIL\" Y MODIFICA AMBAS EN X2 X2.",
+      "efectoId": "FUSION",
+      "comboCon": [78, 339]
+    },
+    {
+      "numero": 364,
+      "nombre": "KAKASANYUDOKODAN",
+      "tipo": "Ataque",
+      "ataque": 50,
+      "defensa": 50,
+      "esferaNecesaria": 3,
+      "texto": "CADA ESFERA EXTRA (CUALQUIER NRO.) QUE BAJES JUNTO A ESTA CARTA MODIFICA X2 X2",
+      "efectoId": "KAKASANYUDOKODAN"
+    },
+    {
+      "numero": 365,
+      "nombre": "SEGUNDA TRANSFORMACION",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "BAJA ESTA CARTA JUNTO A LA CARTA \"PRIMER TRANSFORMACION\" Y TU ADVERSARIO NO PODRA BLOQUEAR ESTE ATAQUE.",
+      "efectoId": "HUMILLANDO",
+      "comboCon": [358]
     },
     {
       "numero": 366,
@@ -1440,6 +3667,47 @@
       "efectoId": "RECUPERAR_3_DEL_DESCARTE"
     },
     {
+      "numero": 367,
+      "nombre": "RAYO DE ENERGIA",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 130,
+      "esferaNecesaria": 2,
+      "texto": "FREEZER CONCENTRA TODO SU KI EN LA PUNTA DE SU DEDO CREANDO UN RAYO CAPAZ DE TRASPASAR CUALQUIER OBJETO.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 368,
+      "nombre": "GOKU",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "REVISA TU MAZO PRINCIPAL. CAMBIA DE TU MANO TODAS LAS CARTAS QUE QUIERAS POR LAS QUE TENGAN A GOKU. MEZCLAR.",
+      "efectoId": "BUSCAR_GOKU_EN_MAZO"
+    },
+    {
+      "numero": 369,
+      "nombre": "ASFIXIA",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TU OPONENTE PIERDE 10 PUNTOS DE SU CONTADOR DE ENERGIA.",
+      "efectoId": "ASFIXIA",
+      "permanente": true
+    },
+    {
+      "numero": 370,
+      "nombre": "REFLEJAR ATAQUE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "LOS PUNTOS DE ATAQUE DE TU ENEMIGO SE VUELVEN EN SU CONTRA (100 PUNTOS MAXIMO)",
+      "efectoId": "REFLEJAR_ATAQUE"
+    },
+    {
       "numero": 371,
       "nombre": "BARRERA",
       "tipo": "Ataque",
@@ -1450,8 +3718,38 @@
       "efectoId": "POR_DEFECTO"
     },
     {
+      "numero": 372,
+      "nombre": "RETENER PERSONAJE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "ANULA UN ATAQUE. LA CARTA DE TU OPONENTE VUELVE A SU MANO JUNTO A LA ESFERA Y MODIFICADORAS USADAS.",
+      "efectoId": "RETENER_PERSONAJE_V2"
+    },
+    {
+      "numero": 373,
+      "nombre": "GRAN PATADA",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 40,
+      "esferaNecesaria": 1,
+      "texto": "FREEZER SORPRENDE A GOKU CON UNA TERRIBLE PATADA AL MENTON.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 374,
+      "nombre": "SORPRENDER",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "BAJA ESTA CARTA JUNTO CON UNA DE ATAQUE Y NO PODRA SER BLOQUEADA.",
+      "efectoId": "HUMILLANDO"
+    },
+    {
       "numero": 375,
-      "nombre": "FREEZR FULL POWER",
+      "nombre": "FREEZER FULL POWER",
       "tipo": "Modificadora",
       "ataque": 0,
       "defensa": 0,
@@ -1459,11 +3757,19 @@
       "texto": "BAJA ESA CARTA JUNTO A \"FREEZER\", \"PRIMER Y SEGUNDA TRANSFORMACION\" MODIFICA X3 X3.",
       "efectoId": "POR_DEFECTO",
       "multDef": 3,
-      "comboCon": [
-        310
-      ],
+      "comboCon": [310],
       "multiplicador": true,
       "multAtk": 3
+    },
+    {
+      "numero": 376,
+      "nombre": "DESTRUCCION TOTAL",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TODAS LAS CARTAS PERMANENTES EN JUEGO DEBEN IR A SUS RESPECTIVOS MAZOS DE DESCARTE.",
+      "efectoId": "DESTRUCCION_TOTAL"
     },
     {
       "numero": 377,
@@ -1473,7 +3779,7 @@
       "defensa": 0,
       "esferaNecesaria": 5,
       "texto": "(PERMANENTE) MODIFICA LOS VALORES DE UNA CARTA +10 +30.",
-      "efectoId": "POR_DEFECTO"
+      "efectoId": "MODIFICAR_OBJETIVO_10_30"
     },
     {
       "numero": 378,
@@ -1484,6 +3790,240 @@
       "esferaNecesaria": 1,
       "texto": "AL FUSIONARSE CON NAIL, EL PODER DE PELEA DE PICCOLO AUMENTO CONSIDERABLEMENTE.",
       "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 379,
+      "nombre": "MALA SUERTE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TU ADVERSARIO DEBE MOSTRATE SU MANO ELIGE UNA CARTA DE FREEZER PARA QUE DESCARTE.",
+      "efectoId": "MALA_SUERTE"
+    },
+    {
+      "numero": 380,
+      "nombre": "EL SACRIFICIO DE PICCOLO",
+      "tipo": "Ataque",
+      "ataque": 90,
+      "defensa": 30,
+      "esferaNecesaria": 3,
+      "texto": "PICCOLO ARRIESGA SU VIDA PARA PROTEGER A GOKU DE LOS ATAQUES DE FREEZER.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 381,
+      "nombre": "SALVANDO A UN AMIGO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "BUSCA EN TU PILA DE DESCARTE Y DEVUELVE UNA CARTA DE ATAQUE A TU MANO.",
+      "efectoId": "RECUPERAR_ATAQUE_DESCARTE"
+    },
+    {
+      "numero": 382,
+      "nombre": "TIEMPO DE CAMBIOS",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "DESCARTA 3 CARTAS Y LEVANTA OTRAS TRES.",
+      "efectoId": "MANDAR_Y_ROBAR_3"
+    },
+    {
+      "numero": 383,
+      "nombre": "HUMILLACION",
+      "tipo": "Ataque",
+      "ataque": 130,
+      "defensa": 40,
+      "esferaNecesaria": 4,
+      "texto": "SI AL DEFENDER, TU DEFENSA ES MAYOR QUE EL ATAQUE DE TU ENEMIGO, ESTE DEBE DESCONTAR LA DIFERENCIA DE SU ENERGIA.",
+      "efectoId": "DEFENSA_PERFORADORA"
+    },
+    {
+      "numero": 384,
+      "nombre": "PACIENCIA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "ANULA UN ATAQUE. LA CARTA DE ATAQUE VUELVE A LA MANO DE TU OPONENTE, LA ESFERA A LA PILA DE DESCARTE.",
+      "efectoId": "PACIENCIA"
+    },
+        {
+      "numero": 385,
+      "nombre": "EL REPOSO DEL GUERRERO",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "SI AL FINAL DE TU TURNO NO HAS REALIZADO NINGUN ATAQUE, GIRA ESTA CARTA Y RECUPERA 30 PUNTOS DE VIDA.",
+      "efectoId": "EL_REPOSO_DEL_GUERRERO",
+      "permanente": true,
+      "efectoTurnoId": "EL_REPOSO_DEL_GUERRERO_TURNO"
+    },
+    {
+      "numero": 386,
+      "nombre": "PRECISION SAIYAJIN",
+      "tipo": "Ataque",
+      "ataque": 30,
+      "defensa": 70,
+      "esferaNecesaria": 2,
+      "texto": "SI TU ADVERSARIO DEFIENDE CON MAS DE 70 DEBERA RESTAR LA DIFERENCIA DE SU CONTADOR DE ENERGIA.",
+      "efectoId": "DEFENSA_PERFORADORA"
+    },
+    {
+      "numero": 387,
+      "nombre": "FURIA INCONTENIBLE",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "DESTRUYE TODAS LAS CARTAS PERMANENTES QUE ESTEN EN JUEGO INCLUYENDO ESFERAS.",
+      "efectoId": "DESTRUYE_PERMANENTES_Y_ESFERAS"
+    },
+    {
+      "numero": 388,
+      "nombre": "BOMBA DE KI",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "TU ADVERSARIO TIENE QUE ENVIAR LAS 5 PRIMERAS CARTAS DE SU MAZO PRINCIPAL A SU PILA DE DESCARTE.",
+      "efectoId": "MIL_CORTES"
+    },
+    {
+      "numero": 389,
+      "nombre": "RETENCION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "REDUCE A LA MITAD CUALQUIER ATAQUE DE FREEZER Y TU OPONENTE NO PODRA DEFENDER EN TU PROXIMO TURNO.",
+      "efectoId": "RETENCION"
+    },
+    {
+      "numero": 390,
+      "nombre": "DIFICIL DECISION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "BUSCA EN TU MAZO PRINCIPAL Y CAMBIA UNA CARTA POR DOS DE TU MANO. LUEGO MEZCLAR.",
+      "efectoId": "DIFICIL_DECISION"
+    },
+    {
+      "numero": 391,
+      "nombre": "GOLPE DEMOLEDOR",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "TU ADVERSARIO ESTA OBLIGADO A MOSTRARTE SU MANO Y DESCARTAR UNA CARTA DE PICCOLO O KRILLIN.",
+      "efectoId": "GOLPE_DEMOLEDOR"
+    },
+    {
+      "numero": 392,
+      "nombre": "SED DE VENGANZA",
+      "tipo": "Modificadora",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "MODIFICA LOS VALORES DE LA CARTA \"FREEZER\" EN +50 +50.",
+      "efectoId": "MODIFICAR_FREEZER_50_50"
+    },
+    {
+      "numero": 393,
+      "nombre": "EL GUERRERO LEGENDARIO",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "DESTRUYE UNA CARTA PERMANENTE.",
+      "efectoId": "DESTRUIR_PERMANENTE_RIVAL"
+    },
+    {
+      "numero": 394,
+      "nombre": "VEGETA CONTRAATACA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "ANULA UN ATAQUE UNICO (SIN MODIFICADORA) Y PERMITE QUE BAJES UN ATAQUE AUNQUE NO SEA TU TURNO.",
+      "efectoId": "VEGETA_CONTRAATACA"
+    },
+    {
+      "numero": 395,
+      "nombre": "VESTIDA PARA MATAR",
+      "tipo": "Especial",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 5,
+      "texto": "MODIFICA LOS VALORES DE UNA CARTA EN +0 +20.",
+      "efectoId": "MODIFICAR_OBJETIVO_0_20",
+      "permanente": true,
+      "efectoTurnoId": "VESTIDA_PARA_MATAR_TURNO"
+    },
+    {
+      "numero": 396,
+      "nombre": "CHAOS",
+      "tipo": "Ataque",
+      "ataque": 40,
+      "defensa": 40,
+      "esferaNecesaria": 5,
+      "texto": "CHAOS ES EL INSEPARABLE AMIGO DE TENSHINHAN A QUIEN ACOMPAÑARA HASTA EN LA MUERTE.",
+      "efectoId": "POR_DEFECTO"
+    },
+    {
+      "numero": 397,
+      "nombre": "DEVOLVER ESFERAS",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 1,
+      "texto": "TODAS LAS ESFERAS QUE HAYAS USADO EN ESTE TURNO VUELVEN A TU MAZO PRINCIPAL. LUEGO MEZCLAR BIEN.",
+      "efectoId": "DEVOLVER_ESFERAS"
+    },
+    {
+      "numero": 398,
+      "nombre": "EXPLOSION",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 2,
+      "texto": "DESTRUYE TODAS LAS CARTAS PERMANENTES QUE ESTEN EN JUEGO, TANTO TUYAS COMO DE TU ENEMIGO.",
+      "efectoId": "DESTRUCCION_TOTAL"
+    },
+    {
+      "numero": 399,
+      "nombre": "LA FURIA DE ROSHI",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "AMBOS JUGADORES DEBEN DESCARTAR TODAS SUS CARTAS Y LEVANTAR 7. NO PUEDES ATACAR EN ESTE TURNO.",
+      "efectoId": "LA_FURIA_DE_ROSHI"
+    },
+    {
+      "numero": 400,
+      "nombre": "GRITO DE BATALLA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 3,
+      "texto": "EN ESTE TURNO PUEDES BAJAR HASTA 2 ATAQUES (SIN MODIFICADORAS) SIN NECESIDAD DE USAR ESFERAS.",
+      "efectoId": "GRITO_DE_BATALLA"
+    },
+    {
+      "numero": 401,
+      "nombre": "TIENES UNA LLAMADA",
+      "tipo": "Instantanea",
+      "ataque": 0,
+      "defensa": 0,
+      "esferaNecesaria": 4,
+      "texto": "TU ADVERSARIO PIERDE SU PROXIMO TURNO.",
+      "efectoId": "RIVAL_NO_PUEDE_ATACAR"
     },
     {
       "numero": 551,
@@ -1504,9 +4044,7 @@
       "esferaNecesaria": 2,
       "texto": "DISIPULO DEL GRAN CAMPEON DE ARTES MARCIALES: \"MR. SATAN\".",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        555
-      ]
+      "comboCon": [555]
     },
     {
       "numero": 553,
@@ -1517,9 +4055,7 @@
       "esferaNecesaria": 4,
       "texto": "\"DISIPULO DEL GRAN CAMPEON DE ARTES MARCIALES: \"MR. SATAN\".",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        555
-      ]
+      "comboCon": [555]
     },
     {
       "numero": 554,
@@ -1542,10 +4078,7 @@
       "esferaNecesaria": 4,
       "texto": "SI BAJAS ESTA CARTA JUNTO A \"PIROSHKI\" Y \"EL APUESTO CALONI\" TU ADVERSARIO NO PODRA DEFENDERSE.",
       "efectoId": "EL_GRAN_SATAN",
-      "comboCon": [
-        552,
-        553
-      ]
+      "comboCon": [552, 553]
     },
     {
       "numero": 556,
@@ -1559,9 +4092,7 @@
       "multiplicador": true,
       "multAtk": 3,
       "multDef": 3,
-      "comboCon": [
-        552
-      ]
+      "comboCon": [552]
     },
     {
       "numero": 558,
@@ -1602,9 +4133,7 @@
       "esferaNecesaria": 4,
       "texto": "MODIFICA LA CARTA \"CELL PERFECTO\" EN +60 +60. DESCARTA TODAS LAS CARTAS DE TU MANO.",
       "efectoId": "LA_TRANQUILIDAD",
-      "comboCon": [
-        310
-      ]
+      "comboCon": [310]
     },
     {
       "numero": 563,
@@ -1800,9 +4329,7 @@
       "esferaNecesaria": 4,
       "texto": "SI BAJAS ESTA CARTA JUNTO CON LA FURIA DEL GUERRERO UTILIZA SOLO UNA DE LAS ESFERAS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        588
-      ]
+      "comboCon": [588]
     },
     {
       "numero": 610,
@@ -1855,11 +4382,7 @@
       "esferaNecesaria": 1,
       "texto": "BAJA ESTA CARTA JUNTO A SATAN LO HIZO, SALVADOS, GRACIAS MR. SATAN Y SOY EL MEJOR PARA GANAR LA PARTIDA. USA SOLO DOS DE LAS ESFERAS.",
       "efectoId": "WIN_COMBO_SATAN",
-      "comboCon": [
-        622,
-        623,
-        625
-      ]
+      "comboCon": [622, 623, 625]
     },
     {
       "numero": 622,
@@ -1870,11 +4393,7 @@
       "esferaNecesaria": 2,
       "texto": "BAJA ESTA CARTA JUNTO A SATAN LO HIZO, SALVADOS, GRACIAS MR. SATAN Y SOY EL MEJOR PARA GANAR LA PARTIDA. USA SOLO DOS DE LAS ESFERAS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        621,
-        623,
-        625
-      ]
+      "comboCon": [621, 623, 625]
     },
     {
       "numero": 623,
@@ -1885,11 +4404,7 @@
       "esferaNecesaria": 4,
       "texto": "BAJA ESTA CARTA JUNTO A SATAN LO HIZO, SALVADOS, GRACIAS MR. SATAN Y SOY EL MEJOR PARA GANAR LA PARTIDA. USA SOLO DOS DE LAS ESFERAS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        621,
-        622,
-        625
-      ]
+      "comboCon": [621, 622, 625]
     },
     {
       "numero": 625,
@@ -1900,11 +4415,7 @@
       "esferaNecesaria": 4,
       "texto": "BAJA ESTA CARTA JUNTO A SATAN LO HIZO, SALVADOS, GRACIAS MR. SATAN Y SOY EL MEJOR PARA GANAR LA PARTIDA. USA SOLO DOS DE LAS ESFERAS.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        621,
-        622,
-        623
-      ]
+      "comboCon": [621, 622, 623]
     },
     {
       "numero": 626,
@@ -1970,9 +4481,7 @@
       "multiplicador": true,
       "multAtk": 2,
       "multDef": 2,
-      "comboCon": [
-        671
-      ]
+      "comboCon": [671]
     },
     {
       "numero": 650,
@@ -2056,9 +4565,7 @@
       "esferaNecesaria": 2,
       "texto": "GOKU APLICA UN TERRIBLE GOLPE A PAIKU HAN EN SU ROSTRO.",
       "efectoId": "POR_DEFECTO",
-      "comboCon": [
-        638
-      ]
+      "comboCon": [638]
     },
     {
       "numero": 672,
@@ -2067,7 +4574,7 @@
       "ataque": 300,
       "defensa": 300,
       "esferaNecesaria": 4,
-      "texto": "GOKU SORPRENDE A LOS ESPECTADORES DEL TORNEO XEL OTRO MUNDO CON SU TRANSFORMACION.",
+      "texto": "GOKU SORPREDE A LOS ESPECTADORES DEL TORNEO XEL OTRO MUNDO CON SU TRANSFORMACION.",
       "efectoId": "POR_DEFECTO"
     },
     {
@@ -2111,16 +4618,6 @@
       "esferaNecesaria": 4,
       "texto": "TODAS LAS CARTAS QUE HAYAN SIDO BAJADAS EN ESTE TURNO VAN AL MAZO PRINCIPAL Y NO SE COMPUTAN DAÑOS.",
       "efectoId": "LAS_REGLAS_DICEN"
-    },
-    {
-      "numero": 680,
-      "nombre": "ESFERA DEL DRAGON 1",
-      "tipo": "Esfera",
-      "ataque": 0,
-      "defensa": 0,
-      "esferaNecesaria": 0,
-      "texto": "UTILIZA LAS CARTAS DE ESFERA DEL DRAGON PARA PODER REALIZAR LOS DIFERENTES ATAQUES.",
-      "efectoId": "POR_DEFECTO"
     }
   ]
 }
