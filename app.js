@@ -1,10 +1,8 @@
 // app.js - DBZ Leyenda (Cromeros / Flashgondor)
+// Versión corregida con todos los efectos y validaciones
 
 const coleccionAlbum = {};
 
-// RANGOS DE CAJAS: "carpeta" es el nombre de la subcarpeta en cartas/
-// "fondo" es el archivo en fondos/
-// Los rangos son los números OFICIALES de las cartas físicas de cada caja.
 const rangosCajas = [
     { id: "caja_1", titulo: "Serie 1 — Caja Goku",       desde: 1,   hasta: 176, css: "naranja",  carpeta: "caja1", fondo: "fondos/caja1.png" },
     { id: "caja_2", titulo: "Serie 2 — Caja Piccolo",    desde: 177, hasta: 265, css: "azul",     carpeta: "caja2", fondo: "fondos/caja2.png" },
@@ -16,10 +14,9 @@ const rangosCajas = [
 let cajaActiva = null;
 let cartaSeleccionadaNum = null;
 let filtroActual = 'todas';
-let mazoPoolEspecificaciones = []; 
-let estructuraMazosGuardados = {}; 
+let mazoPoolEspecificaciones = [];
+let estructuraMazosGuardados = {};
 let mazoIdEnEdicion = null;
-
 let arenaCombateEstado = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -27,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     inicializarEstructuraBase();
     await cargarBaseDatosCartas();
     cargarDesdeLocalStorage();
-    renderizarMenuCajas(); 
+    renderizarMenuCajas();
 });
 
 function inicializarEstructuraBase() {
@@ -45,22 +42,22 @@ async function cargarBaseDatosCartas() {
         if (res.ok) {
             const data = await res.json();
             mazoPoolEspecificaciones = data.cartas || [];
+        } else {
+            console.warn('No se pudo cargar cartas_db.json. El inventario estará vacío.');
         }
-    } catch (e) { console.log("Pool cargado."); }
+    } catch (e) {
+        console.error('Error al cargar cartas_db.json:', e);
+    }
 }
 
-// Devuelve la ruta relativa de la imagen de frente de una carta dado su número.
-// Busca en la carpeta de la caja que corresponde al rango de ese número.
-// Si la carta tiene una foto subida manualmente (imgFrente en base64), esa tiene prioridad.
 function rutaImagenCarta(numero) {
     const carta = buscarCartaEnMemoria(numero);
-    if (carta && carta.imgFrente) return carta.imgFrente; // foto subida manualmente
+    if (carta && carta.imgFrente) return carta.imgFrente;
     const caja = rangosCajas.find(c => numero >= c.desde && numero <= c.hasta);
     if (caja) return `cartas/${caja.carpeta}/${numero}.jpg`;
     return null;
 }
 
-// Devuelve la ruta del dorso universal.
 function rutaDorsoCarta() {
     return 'cartas/dorso/dorso.jpg';
 }
@@ -75,7 +72,6 @@ function renderizarMenuCajas() {
         const total = caja.hasta - caja.desde + 1;
         const obtenidas = Object.values(caja.cartas).filter(c => c.obtenida || c.repetidas > 0).length;
 
-        // Fondo de imagen de la caja
         if (rangoCaja && rangoCaja.fondo) {
             div.style.backgroundImage = `url('${rangoCaja.fondo}')`;
             div.style.backgroundSize = 'cover';
@@ -112,6 +108,10 @@ function refrescarGrilla() {
         if (filtroActual === 'obtenidas' && !estaObtenida) return;
         if (filtroActual === 'faltantes' && estaObtenida) return;
 
+        // Contenedor principal de la carta (slot) + número debajo
+        const wrapper = document.createElement("div");
+        wrapper.className = "carta-wrapper";
+
         const slot = document.createElement("div");
         slot.className = `carta-slot ${estaObtenida ? 'obtenida' : ''}`;
         slot.onclick = () => abrirModalFicha(carta.numero);
@@ -121,22 +121,33 @@ function refrescarGrilla() {
             const img = document.createElement("img");
             img.src = ruta;
             img.alt = match ? match.nombre : `#${carta.numero}`;
-            // Si la imagen no existe en disco, mostrar el dorso como placeholder
             img.onerror = function() {
                 this.src = rutaDorsoCarta();
-                this.onerror = null; // evitar loop si tampoco existe el dorso
+                this.onerror = null;
             };
             slot.appendChild(img);
         } else {
             slot.innerHTML = `<span class="sin-foto-lbl">${match ? match.nombre : 'N° ' + carta.numero}</span>`;
         }
-        slot.innerHTML += `<span class="numero-flotante">#${carta.numero}</span>`;
-        if (carta.repetidas > 0) slot.innerHTML += `<span class="repetidas-tag">x${carta.repetidas}</span>`;
 
-        grilla.appendChild(slot);
+        // Eliminamos el número flotante de dentro del slot
+        // y lo añadimos como un elemento aparte debajo
+        const numeroLabel = document.createElement("div");
+        numeroLabel.className = "carta-numero";
+        numeroLabel.textContent = `#${carta.numero}`;
+
+        if (carta.repetidas > 0) {
+            const repTag = document.createElement("span");
+            repTag.className = "repetidas-tag";
+            repTag.textContent = `x${carta.repetidas}`;
+            numeroLabel.appendChild(repTag);
+        }
+
+        wrapper.appendChild(slot);
+        wrapper.appendChild(numeroLabel);
+        grilla.appendChild(wrapper);
     });
 }
-
 function abrirModalFicha(numero) {
     cartaSeleccionadaNum = numero;
     const carta = buscarCartaEnMemoria(numero);
@@ -154,7 +165,6 @@ function abrirModalFicha(numero) {
     document.getElementById("modal-img-frente").onerror = function() { this.src = rutaDorsoCarta(); this.onerror = null; };
     document.getElementById("modal-img-atras").src = carta.imgAtras || rutaDorsoCarta();
 
-    // PANEL DE ENVÍO DIRECTO DESDE EL MODAL A MAZOS EXISTENTES
     const bloqueMazo = document.getElementById("bloque-agregar-a-mazo-modal");
     const selectMazo = document.getElementById("select-mazo-directo-modal");
     
@@ -173,11 +183,25 @@ function abrirModalFicha(numero) {
 
 function enviarCartaAMazoDesdeModal() {
     const idMazo = document.getElementById("select-mazo-directo-modal").value;
-    if(idMazo && estructuraMazosGuardados[idMazo]) {
-        estructuraMazosGuardados[idMazo].cartas.push(cartaSeleccionadaNum);
-        guardarEnLocalStorage();
-        alert(`¡Carta #${cartaSeleccionadaNum} agregada al mazo de forma exitosa!`);
+    if (!idMazo || !estructuraMazosGuardados[idMazo]) return;
+
+    const mazo = estructuraMazosGuardados[idMazo];
+    const spec = mazoPoolEspecificaciones.find(c => c.numero === cartaSeleccionadaNum);
+    if (!spec) return alert("Carta no encontrada en la base de datos.");
+
+    // Validar límites
+    const copias = mazo.cartas.filter(n => n === cartaSeleccionadaNum).length;
+    if (spec.tipo !== "Esfera" && copias >= 1) {
+        return alert(`La carta "${spec.nombre}" no puede repetirse en el mazo (solo 1 copia).`);
     }
+    if (spec.maxCopias && copias >= spec.maxCopias) {
+        return alert(`La carta "${spec.nombre}" solo admite ${spec.maxCopias} copias en el mazo.`);
+    }
+
+    mazo.cartas.push(cartaSeleccionadaNum);
+    guardarEnLocalStorage();
+    construirSeccionMisMazos();
+    alert(`¡Carta #${cartaSeleccionadaNum} agregada a "${mazo.nombre}"!`);
 }
 
 function cambiarRepetidas(mod) {
@@ -275,9 +299,27 @@ function renderizarListasMazo(mazo) {
 
     const cajaInv = document.getElementById("pool-inventario");
     cajaInv.innerHTML = "";
+    if (!mazoPoolEspecificaciones.length) {
+        cajaInv.innerHTML = '<p style="color:var(--txt-muted); font-size:12px; text-align:center;">Cargando cartas...</p>';
+        return;
+    }
     mazoPoolEspecificaciones.forEach(spec => {
         const div = document.createElement("div"); div.className = "mini-cromo-slot";
-        div.onclick = () => { mazo.cartas.push(spec.numero); guardarEnLocalStorage(); construirSeccionMisMazos(); };
+        div.onclick = () => {
+            // Validar antes de añadir
+            const copias = mazo.cartas.filter(n => n === spec.numero).length;
+            if (spec.maxCopias && copias >= spec.maxCopias) {
+                alert(`No puedes tener más de ${spec.maxCopias} copias de "${spec.nombre}" en el mazo.`);
+                return;
+            }
+            if (spec.tipo !== "Esfera" && copias >= 1) {
+                alert(`La carta "${spec.nombre}" no puede repetirse en el mazo.`);
+                return;
+            }
+            mazo.cartas.push(spec.numero);
+            guardarEnLocalStorage();
+            construirSeccionMisMazos();
+        };
         const ruta = rutaImagenCarta(spec.numero);
         if (ruta) {
             div.innerHTML = `<img src="${ruta}" onerror="this.src='${rutaDorsoCarta()}';this.onerror=null;">`;
@@ -288,10 +330,6 @@ function renderizarListasMazo(mazo) {
         cajaInv.appendChild(div);
     });
 }
-
-// ==========================================================================
-// SECCIÓN PVP — ver bloque "MOTOR DE COMBATE (DBZEngine)" más abajo
-// ==========================================================================
 
 // ==========================================================================
 // CONTROLADORES DE INTERFAZ GENERALES
@@ -342,9 +380,10 @@ function iniciarCombatePVPLocal() {
     const mazo1 = estructuraMazosGuardados[m1].cartas;
     const mazo2 = estructuraMazosGuardados[m2].cartas;
 
-    const v1 = DBZEngine.validarMazo(mazo1);
+    const poolMap = new Map(mazoPoolEspecificaciones.map(c => [c.numero, c]));
+    const v1 = DBZEngine.validarMazo(mazo1, poolMap);
     if (!v1.ok) return alert(`Mazo de J1 inválido: ${v1.error}`);
-    const v2 = DBZEngine.validarMazo(mazo2);
+    const v2 = DBZEngine.validarMazo(mazo2, poolMap);
     if (!v2.ok) return alert(`Mazo de J2 inválido: ${v2.error}`);
 
     arenaCombateEstado = DBZEngine.crearEstadoPartida(mazo1, mazo2, energia, mazoPoolEspecificaciones);
@@ -411,7 +450,6 @@ function renderFilaAtaques(idDom, campoAtaque, jugadorId) {
         const { atk, def } = DBZEngine.totalDeEntrada(arenaCombateEstado, entrada);
         div.innerHTML = img ? `<img src="${img}">` : `<div style="font-size:7px; padding:3px; text-align:center;">${nombre}</div>`;
         div.innerHTML += `<span class="numero-flotante" style="font-size:9px;">${atk}/${def}</span>`;
-        // Permite aplicar una modificadora de la mano a este ataque (solo si es el turno de ese jugador)
         const esTurnoDeEseJugador = (arenaCombateEstado.turnoJugador === 1 && jugadorId === "j1") ||
                                      (arenaCombateEstado.turnoJugador === 2 && jugadorId === "j2");
         if (esTurnoDeEseJugador) {
@@ -432,8 +470,6 @@ function renderFilaDefensa(idDom, campoDefensa, jugadorId) {
     const { def } = DBZEngine.totalDeEntrada(arenaCombateEstado, { ...campoDefensa, ataqueNum: campoDefensa.defensaNum });
     div.innerHTML = img ? `<img src="${img}">` : `<div style="font-size:7px; padding:3px; text-align:center;">${nombre}</div>`;
     div.innerHTML += `<span class="numero-flotante" style="font-size:9px;">DEF ${def}</span>`;
-    // Permite aplicar una modificadora desde la mano del jugador dueño de
-    // esta defensa (cartas como "MANO ABIERTA" se usan típicamente así).
     if (jugadorId) {
         div.onclick = () => abrirSelectorModificadoraParaDefensa(jugadorId);
         div.title = "Tocá para aplicar una carta Modificadora desde la mano a esta defensa";
@@ -441,7 +477,6 @@ function renderFilaDefensa(idDom, campoDefensa, jugadorId) {
     el.appendChild(div);
 }
 
-let _ultimoLogPintado = 0;
 function renderLogBatalla() {
     const box = document.getElementById("log-batalla-pvp");
     if (!box) return;
@@ -453,7 +488,6 @@ function agregarLogVisual(msg) {
     renderLogBatalla();
 }
 
-// Click en una carta de la mano: decide qué acción corresponde según su tipo
 function manejarClickCartaEnMano(idx, num, spec) {
     if (!spec) return alert("Esta carta no tiene datos cargados en la base de cartas.");
     const estado = arenaCombateEstado;
@@ -477,11 +511,7 @@ function manejarClickCartaEnMano(idx, num, spec) {
     }
 
     if (spec.tipo === "Instantanea") {
-        // Algunas instantáneas modifican ATK/DEF de un ataque ya bajado en
-        // mesa (propio o rival). Se reconocen por su efectoId y, si hay
-        // algún ataque en mesa (de cualquiera de los dos jugadores), se le
-        // pide al jugador elegir cuál antes de resolver el efecto.
-        const REQUIERE_OBJETIVO = ["MODIFICAR_OBJETIVO_0_40", "MODIFICAR_OBJETIVO_20_0", "MODIFICAR_OBJETIVO_20_20", "MODIFICAR_OBJETIVO_MENOS20_MENOS20", "MULTIPLICAR_OBJETIVO_X3", "MULTIPLICAR_OBJETIVO_X1_X2"];
+        const REQUIERE_OBJETIVO = ["MODIFICAR_OBJETIVO_0_40", "MODIFICAR_OBJETIVO_20_0", "MODIFICAR_OBJETIVO_20_20", "MODIFICAR_OBJETIVO_MENOS20_MENOS20", "MULTIPLICAR_OBJETIVO_X3", "MULTIPLICAR_OBJETIVO_X1_X2", "MODIFICAR_OBJETIVO_20_40", "MODIFICAR_OBJETIVO_80_0"];
         if (REQUIERE_OBJETIVO.includes(spec.efectoId)) {
             const hayAtaquesEnMesa = estado.j1.campoAtaque.length > 0 || estado.j2.campoAtaque.length > 0;
             if (!hayAtaquesEnMesa) return alert("No hay ningún ataque en mesa todavía para aplicarle esta carta.");
@@ -499,8 +529,6 @@ function manejarClickCartaEnMano(idx, num, spec) {
     }
 }
 
-// Modal simple de selección (reutilizable): usado para elegir a qué ataque
-// del campo aplicar una modificadora.
 let _pendienteIdxModificadoraMano = null;
 function abrirSelectorAtaqueParaModificar(idxModEnMano) {
     _pendienteIdxModificadoraMano = idxModEnMano;
@@ -529,8 +557,6 @@ function abrirSelectorAtaqueParaModificar(idxModEnMano) {
 }
 
 function abrirSelectorModificadora() {
-    // Atajo: tocar un ataque ya bajado abre el selector de modificadoras
-    // disponibles en la mano del jugador activo.
     const estado = arenaCombateEstado;
     const jugadorId = estado.turnoJugador === 1 ? "j1" : "j2";
     const mano = estado[jugadorId].mano;
@@ -556,9 +582,6 @@ function abrirSelectorModificadora() {
     document.getElementById("modal-eleccion-pvp").className = "seccion-activa";
 }
 
-// Variante: aplicar una modificadora de la mano del jugador DUEÑO de la
-// defensa (puede no ser el jugador activo del turno) a su propia defensa
-// preparada. Necesario para cartas como "MANO ABIERTA".
 function abrirSelectorModificadoraParaDefensa(jugadorId) {
     const estado = arenaCombateEstado;
     const mano = estado[jugadorId].mano;
@@ -586,9 +609,6 @@ function abrirSelectorModificadoraParaDefensa(jugadorId) {
     document.getElementById("modal-eleccion-pvp").className = "seccion-activa";
 }
 
-// Selector de "a qué ataque en mesa (propio o rival) aplicar esta
-// instantánea". Usado por cartas tipo "SUPER ATAQUE" (+0+40) o "FURIA
-// DEMONIACA" (x3 sobre PICCOLO).
 function abrirSelectorObjetivoParaInstantanea(jugadorId, idxEnMano) {
     const estado = arenaCombateEstado;
     const cont = document.getElementById("modal-eleccion-opciones");
@@ -632,9 +652,6 @@ function resolverDueloMesa() {
         return alert("No bajaste ningún ataque todavía. Tocá una carta de Ataque en tu mano primero.");
     }
 
-    // Si el rival tiene cartas de Ataque en mano, le damos la chance de
-    // defenderse antes de resolver (flujo simplificado local: se pregunta
-    // por consola/confirm ya que es hotseat en la misma pantalla).
     const defensorId = estado.turnoJugador === 1 ? "j2" : "j1";
     const defensor = estado[defensorId];
     const tieneAtaquesParaDefender = defensor.mano.some(n => specDe(n)?.tipo === "Ataque");
@@ -642,7 +659,8 @@ function resolverDueloMesa() {
     if (tieneAtaquesParaDefender && !defensor.campoDefensa) {
         const quiereDefender = confirm(`Jugador ${defensorId === 'j1' ? 1 : 2}: ¿querés preparar una defensa antes de resolver el ataque? (Cancelar = no defenderse)`);
         if (quiereDefender) {
-            return abrirSelectorDefensa(defensorId);
+            abrirSelectorDefensa(defensorId);
+            return;
         }
     }
 
@@ -657,6 +675,14 @@ function abrirSelectorDefensa(defensorId) {
     const opciones = mano.map((num, idx) => ({ num, idx, spec: specDe(num) }))
         .filter(c => c.spec && c.spec.tipo === "Ataque");
 
+    if (opciones.length === 0) {
+        alert("No tenés cartas de Ataque en mano para defenderte.");
+        const r = DBZEngine.resolverAtaques(estado);
+        if (!r.ok) alert(r.error);
+        actualizarInterfazTableroPVP();
+        return;
+    }
+
     const cont = document.getElementById("modal-eleccion-opciones");
     cont.innerHTML = "";
     document.getElementById("modal-eleccion-titulo").innerText = `Jugador ${defensorId === 'j1' ? 1 : 2}: elegí tu carta de defensa`;
@@ -667,10 +693,14 @@ function abrirSelectorDefensa(defensorId) {
         btn.innerText = `${c.spec.nombre} (DEF ${c.spec.defensa})`;
         btn.onclick = () => {
             const r = DBZEngine.declararDefensa(estado, defensorId, c.idx);
-            cerrarModalEleccionPVP();
-            if (!r.ok) { alert(r.error); return; }
+            if (!r.ok) { 
+                cerrarModalEleccionPVP();
+                alert(r.error);
+                return; 
+            }
             const r2 = DBZEngine.resolverAtaques(estado);
             if (!r2.ok) alert(r2.error);
+            cerrarModalEleccionPVP();
             actualizarInterfazTableroPVP();
         };
         cont.appendChild(btn);
@@ -679,9 +709,108 @@ function abrirSelectorDefensa(defensorId) {
 }
 
 function pasarTurnoCombateLocal() {
-    DBZEngine.pasarTurno(arenaCombateEstado);
-    actualizarInterfazTableroPVP();
+    const estado = arenaCombateEstado;
+    const info = DBZEngine.prepararPasarTurno(estado);
+    if (info && info.requiereDescarte) {
+        mostrarSelectorDescartes(info);
+        return;
+    }
+    // Si no hay descarte, el engine ya cambió el turno en prepararPasarTurno? No, prepararPasarTurno solo prepara, no cambia.
+    // Debemos cambiar el turno manualmente si no requiere descarte.
+    if (!info || !info.requiereDescarte) {
+        DBZEngine.cambiarTurnoYRobar(estado);
+        actualizarInterfazTableroPVP();
+    }
 }
 
-function guardarEnLocalStorage() { localStorage.setItem("coleccionAlbum_Publico", JSON.stringify(coleccionAlbum)); localStorage.setItem("estructuraMazos_Publico", JSON.stringify(estructuraMazosGuardados)); }
-function cargarDesdeLocalStorage() { const f = localStorage.getItem("coleccionAlbum_Publico"); if(f) { const o = JSON.parse(f); Object.keys(o).forEach(k => { if(coleccionAlbum[k]) { Object.keys(o[k].cartas).forEach(numCarta => { if(coleccionAlbum[k].cartas[numCarta]) { coleccionAlbum[k].cartas[numCarta].obtenida = o[k].cartas[numCarta].obtenida; coleccionAlbum[k].cartas[numCarta].repetidas = o[k].cartas[numCarta].repetidas; coleccionAlbum[k].cartas[numCarta].imgFrente = o[k].cartas[numCarta].imgFrente; coleccionAlbum[k].cartas[numCarta].imgAtras = o[k].cartas[numCarta].imgAtras; } }); } }); } const m = localStorage.getItem("estructuraMazos_Publico"); if(m) estructuraMazosGuardados = JSON.parse(m); }
+function mostrarSelectorDescartes(info) {
+    const cont = document.getElementById("modal-eleccion-opciones");
+    cont.innerHTML = "";
+    document.getElementById("modal-eleccion-titulo").innerText = `Jugador ${info.jugadorId === 'j1' ? 1 : 2}: debes descartar ${info.cantidad} carta(s) (no jugaste en tu turno)`;
+
+    let seleccionados = [];
+    const mano = info.mano;
+
+    mano.forEach((num, idx) => {
+        const spec = specDe(num);
+        const btn = document.createElement("button");
+        btn.className = "btn-guardar-stats";
+        btn.style.width = "auto";
+        btn.style.margin = "4px";
+        btn.innerText = `${spec ? spec.nombre : '#'+num} (${idx+1})`;
+        btn.dataset.idx = idx;
+        btn.onclick = function() {
+            const i = parseInt(this.dataset.idx);
+            const pos = seleccionados.indexOf(i);
+            if (pos >= 0) {
+                seleccionados.splice(pos, 1);
+                this.style.border = "1px solid var(--amarilla)";
+            } else {
+                if (seleccionados.length < info.cantidad) {
+                    seleccionados.push(i);
+                    this.style.border = "3px solid red";
+                } else {
+                    alert(`Ya seleccionaste ${info.cantidad} cartas.`);
+                }
+            }
+        };
+        cont.appendChild(btn);
+    });
+
+    const confirmBtn = document.createElement("button");
+    confirmBtn.className = "btn-guardar-stats";
+    confirmBtn.style.width = "auto";
+    confirmBtn.style.margin = "8px auto";
+    confirmBtn.innerText = "Confirmar descarte";
+    confirmBtn.onclick = function() {
+        if (seleccionados.length !== info.cantidad) {
+            alert(`Debes seleccionar exactamente ${info.cantidad} cartas.`);
+            return;
+        }
+        cerrarModalEleccionPVP();
+        const estado = arenaCombateEstado;
+        const r = DBZEngine.ejecutarDescarte(estado, seleccionados);
+        if (r.ok) {
+            actualizarInterfazTableroPVP();
+        } else {
+            alert(r.error);
+        }
+    };
+    cont.appendChild(confirmBtn);
+
+    document.getElementById("modal-eleccion-pvp").className = "seccion-activa";
+}
+
+function guardarEnLocalStorage() {
+    try {
+        localStorage.setItem("coleccionAlbum_Publico", JSON.stringify(coleccionAlbum));
+        localStorage.setItem("estructuraMazos_Publico", JSON.stringify(estructuraMazosGuardados));
+    } catch (e) {
+        console.warn('Error al guardar en localStorage:', e);
+    }
+}
+
+function cargarDesdeLocalStorage() {
+    try {
+        const f = localStorage.getItem("coleccionAlbum_Publico");
+        if(f) {
+            const o = JSON.parse(f);
+            Object.keys(o).forEach(k => {
+                if(coleccionAlbum[k]) {
+                    Object.keys(o[k].cartas).forEach(numCarta => {
+                        if(coleccionAlbum[k].cartas[numCarta]) {
+                            coleccionAlbum[k].cartas[numCarta].obtenida = o[k].cartas[numCarta].obtenida;
+                            coleccionAlbum[k].cartas[numCarta].repetidas = o[k].cartas[numCarta].repetidas;
+                            coleccionAlbum[k].cartas[numCarta].imgFrente = o[k].cartas[numCarta].imgFrente;
+                            coleccionAlbum[k].cartas[numCarta].imgAtras = o[k].cartas[numCarta].imgAtras;
+                        }
+                    });
+                }
+            });
+        }
+        const m = localStorage.getItem("estructuraMazos_Publico");
+        if(m) estructuraMazosGuardados = JSON.parse(m);
+    } catch (e) {
+        console.warn('Error al cargar desde localStorage:', e);
+    }
+}
