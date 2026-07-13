@@ -93,6 +93,7 @@ body {
     letter-spacing: 2px;
     background: linear-gradient(45deg, #fff, var(--amarilla));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 @media (min-width: 768px) {
@@ -172,6 +173,36 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
+/* Contenedor de cada carta con su número debajo */
+.carta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* El número de carta debajo */
+.carta-numero {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--txt-muted);
+    background: rgba(0,0,0,0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Las repetidas se mantienen como estaban */
+.repetidas-tag {
+    background: var(--amarilla);
+    color: #000;
+    font-size: 0.6rem;
+    padding: 0 4px;
+    border-radius: 3px;
+    margin-left: 4px;
+} 
 @media (min-width: 480px) {
     .grilla-cartas { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; }
 }
